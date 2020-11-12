@@ -1,332 +1,100 @@
 /* only small desktops */
 /* tablets */
 /* only small tablets */
- @media only screen and (min-width: 992px) and (max-width: 1199px) {
-     nav.navbar.bootsnav ul.nav > li > a{
-         padding-top: 10px;
-		 padding-bottom: 10px;
-		 padding-left: 10px;
-		 padding-right: 30px;
-    }
+@media only screen and (min-width: 992px) and (max-width: 1180px) {
+	.footer-area h3{
+		font-size: 18px;
+	}
 }
- @media (min-width: 768px) and (max-width: 991px) {
-     nav.navbar.bootsnav .navbar-header{
-         width: 100%;
-    }
-     .navbar-light .navbar-toggler{
-         border-color: #b0b435;
-         color: #010101;
-         border-radius: 0px;
-         margin-right: 7px;
-         padding-top: 6px;
-         padding-top: 6px;
-         float: left;
-         margin-top: 20px;
-    }
-     nav.navbar.bootsnav ul.nav > li > a{
-         padding: 5px 15px;
-    }
-     nav.navbar.bootsnav .navbar-nav{
-         padding: 0px;
-         margin: 0px;
-    }
-     .custom-select-box{
-         display: none;
-    }
-     .attr-nav{
-         top: 10px;
-    }
-     nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu{
-         position: initial !important;
-         top: 0px;
-    }
-     nav.bootsnav .megamenu-content .col-menu{
-         -ms-flex: 0 0 100%;
-         flex: 0 0 100%;
-         max-width: 100%;
-    }
-     .col-menu .title{
-         font-size: 16px;
-    }
-     .product-item-filter p{
-         float: none;
-    }
-     .product-item-filter{
-         margin: 30px 0px;
-    }
-     .product-categorie-box{
-         margin: 30px 0px;
-    }
-     .toolbar-sorter-right .bootstrap-select.form-control:not([class*="col-"]){
-         width: 70%;
-    }
-     .add-comp a{
-         margin-bottom: 30px;
-    }
-     .add-to-btn .share-bar{
-         float: none;
-    }
-     .contact-info-left{
-         margin-bottom: 30px;
-    }
-     .right-phone-box{
-         display: none;
-    }
+@media (min-width: 768px) and (max-width: 991px) {
+	.navbar-light .navbar-brand{
+		margin-left: 15px;
+	}
+	.navbar-light .navbar-toggler{
+		margin-right: 15px;
+		border-radius: 0px;
+	}
+	.navbar-expand-lg .navbar-nav .dropdown-menu{
+		box-shadow: none;
+	}
+	.carousel-control-prev{
+		left: -60px;
+	}
+	.carousel-control-next{
+		right: -60px;
+	}
+	.why-text h4{
+		font-size: 18px;
+	}
+	.why-text p{
+		margin: 0px;
+	}
 }
+
 /* mobile or only mobile */
- @media (max-width: 767px) {
-     nav.navbar.bootsnav .navbar-header{
-         width: 80%;
-    }
-     .navbar-light .navbar-toggler{
-         border-color: #b0b435;
-         color: #010101;
-         border-radius: 0px;
-         margin-right: 7px;
-         padding-top: 6px;
-         padding-bottom: 6px;
-         float: left;
-         margin-top: 28px;
-    }
-     nav.navbar.bootsnav ul.nav > li > a{
-         padding: 5px 15px;
-    }
-     nav.navbar.bootsnav .navbar-nav{
-         padding: 0px;
-         margin: 0px;
-    }
-     .cover-slides h1{
-         font-size: 28px;
-    }
-     .cover-slides p{
-         font-size: 16px;
-    }
-     .cover-slides p a{
-         font-size: 18px;
-    }
-     .offer-box li i{
-         font-size: 18px;
-    }
-     .offer-box li{
-         font-size: 12px;
-    }
-     .custom-select-box{
-         display: none;
-    }
-     .right-phone-box, .our-link{
-         float: none;
-         text-align: center;
-    }
-     .filter-button-group button{
-         font-size: 14px;
-         padding: 5px 18px;
-		 margin-bottom: 3px;
-    }
-     .title-blog h3{
-         font-size: 16px;
-    }
-     .footer-widget{
-         margin-bottom: 30px;
-    }
-     .footer-link{
-         margin-bottom: 30px;
-    }
-     nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu{
-         position: initial !important;
-         top: 0px;
-    }
-     .col-menu .title{
-         font-size: 16px;
-    }
-     nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu > li > a:hover{
-         color: #b0b435;
-    }
-     .hover-team{
-         margin-bottom: 30px;
-    }
-     .product-categori{
-         margin-bottom: 30px;
-    }
-     .product-item-filter .toolbar-sorter-right{
-         width: 100%;
-    }
-     .product-item-filter p{
-         float: none;
-    }
-     .product-item-filter{
-         margin: 30px 0px;
-    }
-     .product-categorie-box{
-         margin: 30px 0px;
-    }
-     .toolbar-sorter-right .bootstrap-select.form-control:not([class*="col-"]){
-         width: 70%;
-    }
-     .why-text.full-width h4{
-         font-size: 20px;
-    }
-     .coupon-box{
-         margin-bottom: 30px;
-    }
-     .update-box input[type="submit"]{
-         margin-right: 0px;
-    }
-     .single-product-slider{
-         margin-bottom: 30px;
-    }
-     .single-product-details h2{
-         font-size: 18px;
-    }
-     .add-comp a{
-         margin-bottom: 30px;
-    }
-     .add-to-btn .share-bar{
-         float: none;
-    }
-     .contact-info-left{
-         margin-bottom: 30px;
-    }
-     .attr-nav{
-         top: 15px;
-    }
-     .right-phone-box{
-         display: none;
-    }
-	.text-slid-box{
-		display: none;
+@media (max-width: 767px) {
+	.navbar-light .navbar-brand{
+		margin-left: 15px;
 	}
-	.login-box{
-		float: none;
-		text-align: center;
-		margin: 0 auto;
+	.navbar-light .navbar-toggler{
+		margin-right: 15px;
+		border-radius: 0px;
 	}
-	.offer-box-products{
+	.navbar-expand-lg .navbar-nav .dropdown-menu{
+		box-shadow: none;
+	}
+	.cover-slides h1{
+		font-size: 22px;
+	}
+	.cover-slides p {
+		font-size: 14px;
+	}
+	.slides-navigation a{
+		height: 42px;
+		width: 38px;
+		line-height: 33px;
+	}
+	.inner-column{
+		margin-top: 15px;
+	}
+	.inner-column h1{
+		font-size: 22px;
+	}
+	.filter-button-group{
+		margin: 10px 0px;
+	}
+	
+	.contact-imfo-box .col-md-4{
+		margin-bottom: 15px;
+	}
+	.carousel-control-prev{
+		left: 0px;
+	}
+	.carousel-control-next{
+		right: 0px;
+	}
+	.blog-box-inner .blog-detail{
+		overflow: hidden;
+	}
+	.blog-sidebar{
+		margin-top: 50px;
+	}
+	.top-navbar .navbar{
+		border-radius: 0px 0px 50px 50px;
+	}
+	
+}
+@media only screen and (min-width: 280px) and (max-width: 599px) {
+	
+	.why-text p{
+		margin-bottom: 0px;
+		margin-top: 0px;
+	}
+	.inner-column{
 		margin-bottom: 30px;
 	}
-}
- @media only screen and (min-width: 280px) and (max-width: 599px) {
-     .navbar-light .navbar-toggler{
-         border-color: #b0b435;
-         color: #010101;
-         border-radius: 0px;
-         margin-right: 7px;
-         padding-top: 6px;
-		 padding-bottom: 6px;
-    }
-     nav.navbar.bootsnav ul.nav > li > a{
-         padding: 5px 15px;
-    }
-     nav.navbar.bootsnav .navbar-nav{
-         padding: 0px;
-         margin: 0px;
-    }
-     .cover-slides h1{
-         font-size: 28px;
-    }
-     .cover-slides p{
-         font-size: 16px;
-    }
-     .cover-slides p a{
-         font-size: 18px;
-    }
-     .offer-box li i{
-         font-size: 11px;
-    }
-     .offer-box li{
-         font-size: 9px;
-    }
-     .custom-select-box{
-         display: none;
-    }
-     .right-phone-box, .our-link{
-         float: none;
-         text-align: center;
-    }
-.     .filter-button-group button{
-         font-size: 14px;
-         padding: 5px 18px;
-		 margin-bottom: 3px;
-    }
-     .title-blog h3{
-         font-size: 16px;
-    }
-     .footer-widget{
-         margin-bottom: 30px;
-    }
-     .footer-link{
-         margin-bottom: 30px;
-    }
-     nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu{
-         position: initial !important;
-         top: 0px;
-    }
-     .col-menu .title{
-         font-size: 16px;
-    }
-     nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu > li > a:hover{
-         color: #b0b435;
-    }
-     .hover-team{
-         margin-bottom: 30px;
-    }
-     .product-categori{
-         margin-bottom: 30px;
-    }
-     .product-item-filter .toolbar-sorter-right{
-         width: 100%;
-    }
-     .product-item-filter p{
-         float: none;
-    }
-     .product-item-filter{
-         margin: 30px 0px;
-    }
-     .product-categorie-box{
-         margin: 30px 0px;
-    }
-     .toolbar-sorter-right .bootstrap-select.form-control:not([class*="col-"]){
-         width: 70%;
-    }
-     .why-text.full-width h4{
-         font-size: 20px;
-    }
-     .coupon-box{
-         margin-bottom: 30px;
-    }
-     .update-box input[type="submit"]{
-         margin-right: 0px;
-    }
-     .single-product-slider{
-         margin-bottom: 30px;
-    }
-     .single-product-details h2{
-         font-size: 18px;
-    }
-     .add-comp a{
-         margin-bottom: 30px;
-    }
-     .add-to-btn .share-bar{
-         float: none;
-    }
-     .contact-info-left{
-         margin-bottom: 30px;
-    }
-     .right-phone-box{
-         display: none;
-    }
-	.text-slid-box{
-		display: none;
-	}
-	.login-box{
-		float: none;
-		text-align: center;
-		margin: 0 auto;
-	}
-	.offer-box-products{
-		margin-bottom: 30px;
-	}
-	.side-menu p{
-		display: none;
+	.inner-menu-box .nav-pills .nav-link{
+		font-size: 12px;
+		padding: 5px;
 	}
 }
- 

@@ -16,12 +16,21 @@ if (empty($_POST["email"])) {
     $email = $_POST["email"];
 }
 
-// Subject
-if (empty($_POST["subject"])) {
+// MSG Guest
+if (empty($_POST["guest"])) {
     $errorMSG .= "Subject is required ";
 } else {
-    $subject = $_POST["guest"];
+    $guest = $_POST["guest"];
 }
+
+
+// MSG Event
+if (empty($_POST["event"])) {
+    $errorMSG .= "Subject is required ";
+} else {
+    $event = $_POST["event"];
+}
+
 
 // MESSAGE
 if (empty($_POST["message"])) {

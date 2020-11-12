@@ -46,9 +46,9 @@
 }
 .slides-pagination a {
   border: 2px solid #222;
-  border-radius: 0px;
-  width: 30px;
-  height: 30px;
+  border-radius: 15px;
+  width: 12px;
+  height: 45px;
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
@@ -59,7 +59,6 @@
   margin: 2px;
   overflow: hidden;
   text-indent: -99999px;
-  text-align: center;
 }
 .slides-pagination a.current {
   background: #222;
