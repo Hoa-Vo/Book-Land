@@ -24,8 +24,8 @@ body {
   font-size: 1.4rem;
   overflow-x: hidden;
   font-weight: 300;
-  background-image: url("https://cdn.pixabay.com/photo/2016/11/21/14/12/books-1845614_1280.jpg");
-  background-size: contain;
+  background-image: url("../images/log-res-bg.jpg");
+  background-size: cover;
 }
 
 img {
@@ -98,12 +98,9 @@ button {
   font-size: 14px;
   padding: 15px;
   text-transform: uppercase;
-  background-color: transparent;
-}
-.signup-form > .btn--gradient {
-  background-image: linear-gradient(to bottom, #ff1d75, #f8902f);
-  width: 100%;
+  background-color: #d65106;
   color: white;
+  width: 100%;
 }
 
 .tab {
