@@ -44,7 +44,7 @@ exports.list = () =>{
             id: '2511272688974',
             title: 'Cứu Tinh Xứ Cát',
             cover_image_name: '2511272688974',
-            basePrice: 49.500,
+            basePrice: 49500,
             author: 'Victor Slipentruc',
             publisher: 'NXB Công An Nhân Dân'
         },
@@ -150,7 +150,7 @@ exports.list = () =>{
             cover_image_name: '5831472434926',
             basePrice: 168000,
             author: 'Richard Dawkins',
-            publisher: '	Omega Plus'
+            publisher: 'Omega Plus'
         },
         {
             id: '8289566653178',
@@ -159,7 +159,7 @@ exports.list = () =>{
             basePrice: 70000,
             author: 'Gustave Le Bon',
             publisher: 'Omega Plus'
-        },
+        }
 
 
     ]
