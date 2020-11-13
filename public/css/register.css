@@ -25,7 +25,7 @@ body {
   overflow-x: hidden;
   font-weight: 300;
   background-image: url("https://cdn.pixabay.com/photo/2016/11/21/14/12/books-1845614_1280.jpg");
-  background-size: cover;
+  background-size: contain;
 }
 
 img {
