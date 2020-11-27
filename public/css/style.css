@@ -805,8 +805,8 @@ ul.cart-list > li.total > .btn:hover {
 .shop-cat-box img {
   margin: -10px 0 0 -10px;
   max-width: none;
-  height: 400px;
-  width: -webkit-calc(100% + 10px);
+  height: 500px;
+  width: -webkit-calc(100%+10px);
   width: calc(100% + 10px);
   opacity: 0.9;
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
