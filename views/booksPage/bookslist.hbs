@@ -5,32 +5,32 @@
 				<div class="product-categori">
 					<div class="search-product">
 						<form action="#">
-							<input class="form-control" placeholder="Search here..." type="text">
+							<input class="form-control" placeholder="Tìm kiếm..." type="text">
 							<button type="submit"> <i class="fa fa-search"></i> </button>
 						</form>
 					</div>
 					<div class="filter-sidebar-left">
 						<div class="title-left">
-							<h3>Categories</h3>
+							<h3>Thể loại</h3>
 						</div>
 						<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men"
 							data-children=".sub-men">
 							<div class="list-group-collapse sub-men">
 								<a class="list-group-item list-group-item-action" href="#sub-men1"
-									data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">All <small
+									data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Tất cả <small
 										class="text-muted">(100)</small>
 								</a>
 								<div class="collapse show" id="sub-men1" data-parent="#list-group-men">
 									<div class="list-group">
-										<a href="#" class="list-group-item list-group-item-action active">Science
+										<a href="#" class="list-group-item list-group-item-action active">Khoa học
 											<small class="text-muted">(50)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Fantasy<small
+										<a href="#" class="list-group-item list-group-item-action">Viễn tưởng<small
 												class="text-muted">(10)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Horror
+										<a href="#" class="list-group-item list-group-item-action">Kinh dị
 											<small class="text-muted">(10)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Adventure
+										<a href="#" class="list-group-item list-group-item-action">Phiêu lưu
 											<small class="text-muted">(10)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Contemporary
+										<a href="#" class="list-group-item list-group-item-action">Lãng mạn
 											<small class="text-muted">(20)</small></a>
 									</div>
 								</div>
@@ -39,20 +39,20 @@
 					</div>
 					<div class="filter-price-left">
 						<div class="title-left">
-							<h3>Price</h3>
+							<h3>Giá</h3>
 						</div>
 						<div class="price-box-slider">
 							<div id="slider-range"></div>
 							<p>
 								<input type="text" id="amount" readonly
 									style="border:0; color:#fbb714; font-weight:bold;">
-								<button class="btn hvr-hover" type="submit">Filter</button>
+								<button class="btn hvr-hover" type="submit">Lọc</button>
 							</p>
 						</div>
 					</div>
 					<div class="filter-brand-left">
 						<div class="title-left">
-							<h3>Publisher</h3>
+							<h3>Nhà xuất bản</h3>
 						</div>
 						<div class="brand-box">
 							<ul>
@@ -108,16 +108,16 @@
 					<div class="product-item-filter row">
 						<div class="col-12 col-sm-8 text-center text-sm-left">
 							<div class="toolbar-sorter-right">
-								<span>Sort by </span>
+								<span>Sắp xếp</span>
 								<select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-									<option data-display="Select">Nothing</option>
-									<option value="1">Popularity</option>
-									<option value="2">High Price → High Price</option>
-									<option value="3">Low Price → High Price</option>
-									<option value="4">Best Selling</option>
+									<option data-display="Select">Mới nhất</option>
+									<option value="1">Phổ biến nhất</option>
+									<option value="2">Giá thấp đến cao</option>
+									<option value="3">Giáo cao đến thấp</option>
+									<option value="4">Bán chạy nhất</option>
 								</select>
 							</div>
-							<p>Showing all 4 results</p>
+							<p>Xêm tất cả 4 kết quả</p>
 						</div>
 						<div class="col-12 col-sm-4 text-center text-sm-right">
 							<ul class="nav nav-tabs ml-auto">
@@ -140,25 +140,22 @@
 										<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
 											<div class="products-single fix">
 												<div class="box-img-hover">
-													<div class="type-lb">
-														<p class="sale">Sale</p>
-													</div>
 													<img src="images/booksImage/{{image_link}}.jpg"
 														class="img-fluid book-image" alt="Image">
 													<div class="mask-icon">
 														<ul>
 															<li><a href="/bookslist/{{_id}}" data-toggle="tooltip"
-																	data-placement="right" title="View"><i
+																	data-placement="right" title="Xem"><i
 																		class="fas fa-eye"></i></a></li>
 															<li><a href="#" data-toggle="tooltip" data-placement="right"
-																	title="Compare"><i class="fas fa-sync-alt"></i></a>
+																	title="So sánh"><i class="fas fa-sync-alt"></i></a>
 															</li>
 															<li><a href="#" data-toggle="tooltip" data-placement="right"
-																	title="Add to Wishlist"><i
+																	title="Thêm vào yêu thích"><i
 																		class="far fa-heart"></i></a>
 															</li>
 														</ul>
-														<a class="cart" href="#">Add to Cart</a>
+														<a class="cart" href="#">Thêm vào giỏ hàng</a>
 													</div>
 												</div>
 												<div class="why-text">
@@ -177,9 +174,6 @@
 											<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
 												<div class="products-single fix">
 													<div class="box-img-hover">
-														<div class="type-lb">
-															<p class="new">New</p>
-														</div>
 														<img src="images/booksImage/{{image_link}}.jpg"
 															class="img-fluid book-image" alt="Image">
 														<div class="mask-icon">
@@ -230,4 +224,3 @@
 		</div>
 	</div>
 </div>
-End Shop Page

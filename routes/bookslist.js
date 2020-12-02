@@ -5,4 +5,7 @@ const booksDetailController = require("../controllers/booksDetailController");
 // Get booklist page
 router.get("/", booksListController.listing);
 router.get("/:id", booksDetailController.listing);
+router.delete("/", (req, res, next) => {
+  console.log(req.query.ID);
+});
 module.exports = router;
