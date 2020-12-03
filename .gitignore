@@ -117,4 +117,5 @@ dist
 #pass DB
 pass/
 vscode/
+idea/
 .env
