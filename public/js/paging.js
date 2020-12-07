@@ -2,6 +2,7 @@ let booksPerPage = 3;
 let totalBook;
 let currentPage = 1;
 let maxPage=0;
+let maxButtonPerPage=5;
 let pageNumberBar;
 let allBtn="";
 $(document).ready(async () => {
@@ -71,9 +72,9 @@ async function fetchData (currentPage,booksPerPage,isPrevNextClick){
       if(isPrevNextClick) {
         let btnArr;
         if(isPrevNextClick==2) {
-          btnArr = listOfButtonNext(currentPage, 5, maxPage);
+          btnArr = listOfButtonNext(currentPage, maxButtonPerPage, maxPage);
         }else{
-          btnArr = listOfButtonPrev(currentPage, 5, maxPage);
+          btnArr = listOfButtonPrev(currentPage, maxButtonPerPage, maxPage);
         }
         pageNumberBar="empty";
         if(btnArr.length) {
@@ -81,7 +82,11 @@ async function fetchData (currentPage,booksPerPage,isPrevNextClick){
         }
       }
       if(!pageNumberBar){
-        btnArr=[1,2,3,4,5];
+        let btnArr=[];
+        let condition=maxPage<maxButtonPerPage?maxPage:maxButtonPerPage;
+        for(let i=1;i<=condition;i++){
+          btnArr.push(i);
+        }
         updatePagination(btnArr);
       }
       $("#book-list").html(content);
