@@ -1,6 +1,7 @@
 const { db } = require("../database/db");
 const { ObjectID } = require("mongodb");
 const fs= require("fs");
+const path = require("path"); 
 exports.list = async () => {
   const bookCollection = await db().collection("Books");
   const books = await bookCollection.find({}).toArray();
@@ -38,7 +39,7 @@ exports.getAllCategory  = async() =>
   }
 
  
-  return allCategories; 
+  return allCategories;
 }
 
 
@@ -50,13 +51,64 @@ exports.listByCategory = async categoryId =>
  
   return books; 
 }
+
+// get user by ID 
+exports.getUserById = async id  => 
+{
+  const userCollection = await db().collection("registeredUser"); 
+  const user = await userCollection.findOne({_id: ObjectID(id)}); 
+  return user; 
+}
 exports.saveImage= async (file,imageName) =>{
-  const oldPath = file.bookImage.path;
-  const imageType = file.bookImage.name.split('.').pop();
-  const imagePath = `./public/images/booksImage/${imageName}.${imageType}`;
+  
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);
 }
+
+
+
+exports.editAvatar =  async userObject => 
+{
+    const userCollection = await db().collection("registeredUser"); 
+    const id = userObject.id; 
+    let success = false; 
+
+    let existsUser = await userCollection.findOne({_id: ObjectID(id)});
+    if(existsUser === null || existsUser === undefined)
+    {
+      console.log(`Cant find user with id ${id}`); 
+      success = false; 
+    }
+    else{
+      userCollection.updateOne(
+        {_id: ObjectID(id)}, 
+        {
+          $set: {
+            avatar_image: userObject.avatar_image
+          }
+        }
+      );
+      success = true; 
+    }
+   return success;
+}
+
+exports.saveAvatar = async file => 
+{
+  const oldPath = file.avatarImageInput.path;
+  const imageName = file.avatarImageInput.path.split("\\").pop();
+
+  const imageType = file.avatarImageInput.name.split('.').pop();
+  const imagePath = `./public/images/userImage/${imageName}.${imageType}`;
+  
+
+  let rawData = fs.readFileSync(oldPath);
+  fs.writeFileSync(imagePath,rawData); 
+
+  return `${imageName}.${imageType}`;
+
+}
+
 exports.paging = async (page,pageLimit)=>{
   const currentPage = parseInt(page);
   const limit = parseInt(pageLimit);
