@@ -12,6 +12,19 @@ exports.get = async id => {
   return book;
 };
 
+exports.searchBook = async bookName => {
+  const bookCollection = await db().collection("Books");
+  //const books = await bookCollection.find({}).toArray();
+  const books = await bookCollection.find({ title: { $regex: bookName, $options: "i" } }).toArray();
+  console.log(books);
+  if (books == null) console.log("Không tìm thấy");
+  else {
+    console.log("Tìm thấy");
+    console.log();
+  }
+  return books;
+};
+
 exports.getTotalBooksInDB = async () => {
   const bookCollection = await db().collection("Books");
   const result = await bookCollection.find({}).count();
@@ -49,23 +62,30 @@ exports.saveImage = async (file, imageName) => {
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);
 };
-exports.paging = async (page, pageLimit,category) => {
+exports.paging = async (page, pageLimit, category, searchText) => {
   const currentPage = parseInt(page);
   const limit = parseInt(pageLimit);
   const bookCollection = await db().collection("Books");
   let totalBook;
   let books;
-  if(category) {
-    books = await bookCollection.find({category_id: category}).skip(limit * currentPage - limit).limit(limit).toArray();
+  if (category) {
+    books = await bookCollection
+      .find({ category_id: category })
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
     totalBook = books.length;
   }
-  // else if(searchText){
-  //   books=await bookCollection.find({ title: { $regex:searchText, $options: "i" } }).toArray();
-  //   totalBook = books.length;
-  // }
-  else{
-    books = await bookCollection.find({}).skip(limit * currentPage - limit).limit(limit).toArray();
-    totalBook = await  bookCollection.count();
+  if (searchText) {
+    books = await bookCollection.find({ title: { $regex: searchText, $options: "i" } }).toArray();
+    totalBook = books.length;
+  } else {
+    books = await bookCollection
+      .find({})
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+    totalBook = await bookCollection.count();
   }
-  return {books,totalBook};
+  return { books, totalBook };
 };
