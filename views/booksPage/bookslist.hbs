@@ -16,22 +16,17 @@
 						<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men"
 							data-children=".sub-men">
 							<div class="list-group-collapse sub-men">
-								<a class="list-group-item list-group-item-action" href="#sub-men1"
+								<a class="list-group-item list-group-item-action" href="/bookslist/"
 									data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Tất cả <small
-										class="text-muted">(100)</small>
+										class="text-muted">({{totalBooks}})</small>
 								</a>
 								<div class="collapse show" id="sub-men1" data-parent="#list-group-men">
 									<div class="list-group">
-										<a href="/bookslist?categoryID=1" class="list-group-item list-group-item-action active">Khoa học
-											<small class="text-muted">(50)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Viễn tưởng<small
-												class="text-muted">(10)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Kinh dị
-											<small class="text-muted">(10)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Phiêu lưu
-											<small class="text-muted">(10)</small></a>
-										<a href="#" class="list-group-item list-group-item-action">Lãng mạn
-											<small class="text-muted">(20)</small></a>
+										{{#each categories}}
+											<a href="/bookslist?categoryID={{_id}}" class="list-group-item list-group-item-action active">{{name}}
+											<small class="text-muted">({{count}})</small></a>
+										{{/each}}
+										
 									</div>
 								</div>
 							</div>

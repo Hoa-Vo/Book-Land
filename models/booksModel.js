@@ -12,17 +12,32 @@ exports.get = async id => {
   return book;
 };
 
+exports.getTotalBooksInDB = async() => 
+{
+  const bookCollection = await db().collection("Books");
+  const result =  await bookCollection.find({}).count();
+  return result;
+}
+
 exports.getCategoryNameById = async id => 
 {
   const categoriesCollection = await db().collection("Category");
   const result = categoriesCollection.findOne({_id: ObjectID(id)});
-  return result; 
+  return result;
 }
 
 exports.getAllCategory  = async() => 
 {
   const categoriesCollection = await db().collection("Category");
+  const bookCollection = await db().collection("Books");
   const allCategories = await categoriesCollection.find({}).toArray(); 
+  for(i=0; i < allCategories.length; i++)
+  {
+     let currentID = allCategories[i]._id.toString(); 
+     allCategories[i].count = await bookCollection.find({category_id: currentID}).count();
+  }
+
+ 
   return allCategories; 
 }
 
