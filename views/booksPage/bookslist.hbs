@@ -8,6 +8,7 @@
 					<div class="search-product">
 						<form action="/bookslist/search" method="GET">
 							<input class="form-control" name="bookName" placeholder="Tìm kiếm..." type="text">
+							<input id="searchText" type="hidden" value="{{bookName}}">
 							<button type="submit"> <i class="fa fa-search"></i> </button>
 						</form>
 					</div>
@@ -25,10 +26,10 @@
 								<div class="collapse show" id="sub-men1" data-parent="#list-group-men">
 									<div class="list-group">
 										{{#each categories}}
-											<a href="/bookslist?categoryID={{_id}}" class="list-group-item list-group-item-action active">{{name}}
-											<small class="text-muted">({{count}})</small></a>
+											<a href="/bookslist?categoryID={{_id}}"
+												class="list-group-item list-group-item-action active">{{name}}
+												<small class="text-muted">({{count}})</small></a>
 										{{/each}}
-										
 									</div>
 								</div>
 							</div>

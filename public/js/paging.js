@@ -37,12 +37,15 @@ function setPage(num) {
 }
 async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   $("#book-list").html("<div id='loading'>Loading...</div>");
+  const searchText = document.getElementById("searchText").value;
+  console.log(searchText);
   $.ajax({
     url: "/bookslist/page",
     type: "GET",
     data: {
       page: currentPage,
       pagelimit: booksPerPage,
+      searchText: searchText,
     },
     success: function (res) {
       let content = "";
