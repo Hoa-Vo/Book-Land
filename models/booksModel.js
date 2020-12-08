@@ -94,7 +94,7 @@ exports.editAvatar = async userObject => {
 
 exports.saveAvatar = async file => {
   const oldPath = file.avatarImageInput.path;
-  const imageName = file.avatarImageInput.path.split("/").pop();
+  const imageName = file.avatarImageInput.path.split(path.sep).pop();
 
   const imageType = file.avatarImageInput.name.split(".").pop();
 
