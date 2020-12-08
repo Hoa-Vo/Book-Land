@@ -65,7 +65,7 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
           "<a href=`/bookslist/' data-toggle='tooltip' data-placement='right' title='Xem'>" +
           "<i class='fas fa-eye'></i></a></li><li><a href='#' data-toggle='tooltip' data-placement='right' title='So sánh'>" +
           "<i class='fas fa-sync-alt'></i></a></li><li><a href='#' data-toggle='tooltip' data-placement='right' title='Thêm vào yêu thích'>" +
-          "<iclass='far fa-heart'></i></a></li></ul><a class='cart' href='#'>Thêm vào giỏ hàng</a></div></div><div class='why-text'>" +
+          "<i class='far fa-heart'></i></a></li></ul><a class='cart' href='#'>Thêm vào giỏ hàng</a></div></div><div class='why-text'>" +
           "<h4>" +
           book.title +
           "</h4><h5>" +
