@@ -7,12 +7,12 @@
             <div class="col-md-4">
                 <div class="profile-img">
                     <!-- Avatar -->
-                    <img id = "previewImg" src="images/userImage/{{avatar_image}}"
-                        alt="" />
-                    <div class="file btn btn-lg btn-primary">
+                    <img id="previewImg" src="images/userImage/{{avatar_image}}" alt="" />
+                    <div style="cursor: pointer;" class="file btn btn-lg btn-primary">
                         Đổi ảnh
-                        <input  onchange="previewImage(event)" type="file" name="avatarImageInput" />
-                        <input type="hidden" name = "IdToChangeAvatar" value="{{id}}"/>
+                        <input style="cursor: pointer; height: 100%" onchange="previewImage(event)" type="file"
+                            name="avatarImageInput" />
+                        <input type="hidden" name="IdToChangeAvatar" value="{{id}}" />
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Chỉnh sửa" />
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Lưu avatar" />
             </div>
         </div>
         <div class="row">
