@@ -75,8 +75,7 @@ exports.paging = async (page, pageLimit, category, searchText) => {
       .limit(limit)
       .toArray();
     totalBook = books.length;
-  }
-  if (searchText) {
+  } else if (searchText) {
     books = await bookCollection.find({ title: { $regex: searchText, $options: "i" } }).toArray();
     totalBook = books.length;
   } else {
