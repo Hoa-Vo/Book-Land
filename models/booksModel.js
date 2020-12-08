@@ -57,3 +57,11 @@ exports.saveImage= async (file,imageName) =>{
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);
 }
+exports.paging = async (page,pageLimit)=>{
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  const totalBook = await  bookCollection.count();
+  const books = await bookCollection.find({}).skip(limit*currentPage-limit).limit(limit).toArray();
+  return {books,totalBook};
+}
