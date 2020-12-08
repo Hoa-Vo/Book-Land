@@ -12,6 +12,20 @@ exports.get = async id => {
   return book;
 };
 
+
+exports.searchBook= async bookName=>{
+  const bookCollection = await db().collection("Books");
+  //const books = await bookCollection.find({}).toArray();
+  const books=await bookCollection.find({ title: { $regex:bookName, $options: "i" } }).toArray();
+  console.log(books);
+  if (books==null) console.log("Không tìm thấy");
+  else {
+    console.log("Tìm thấy");
+    console.log();
+  }
+  return books;
+}
+
 exports.getTotalBooksInDB = async() => 
 {
   const bookCollection = await db().collection("Books");
@@ -37,7 +51,7 @@ exports.getAllCategory  = async() =>
      allCategories[i].count = await bookCollection.find({category_id: currentID}).count();
   }
 
- 
+  
   return allCategories; 
 }
 
