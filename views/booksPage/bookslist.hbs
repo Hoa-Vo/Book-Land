@@ -137,26 +137,59 @@
 				</div>
 			</div>
 			<div class="button-bar">
-				<nav id="btn-list" aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item">
-							<a id="prevBtn" class="page-link page-handler" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-								<span class="sr-only">Previous</span>
-							</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<a id="nextBtn" class="page-link page-handler" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							<span class="sr-only">Next</span>
-						</a>
-						</li>
+				<nav aria-label="Page navigation example">
+					<ul id="btn-list" class="pagination">
 					</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
 </div>
-</div>
 <script src="js/paging.js"></script>
+<script id="products" type="text/x-handlebars-template">
+\{{#each this}}
+	<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+		<div class="products-single fix">
+			<div class="box-img-hover">
+				<img src="images/booksImage/\{{image_link}}" class="img-fluid book-image" alt="Image">
+				<div class="mask-icon">
+					<ul>
+						<li><a href="/bookslist/\{{_id}}" data-toggle="tooltip" data-placement="right" title="Xem"><i
+									class="fas fa-eye"></i></a></li>
+						<li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i
+									class="fas fa-sync-alt"></i></a>
+						</li>
+						<li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào yêu thích"><i
+									class="far fa-heart"></i></a>
+						</li>
+					</ul>
+					<a class="cart" href="#">Thêm vào giỏ hàng</a>
+				</div>
+			</div>
+			<div class="why-text">
+				<h4>\{{title}}</h4>
+				<h5>\{{basePrice}} VND</h5>
+			</div>
+		</div>
+	</div>
+\{{/each}}
+</script>
+<script id="paging-hbs" type="text/x-handlebars-template">
+	<li id="prevBtn" class="page-item disabled" >
+		<a   class="page-link " onclick="prevBtnClick()" aria-label="Previous">
+			<span aria-hidden="true">&laquo;</span>
+			<span class="sr-only">Previous</span>
+		</a>
+	</li>
+	\{{#each this}}
+		<li id="page-\{{num}}" onclick="setPage(this.textContent)" class="page-item"><a class="page-link">\{{num}}</a></li>
+	\{{/each}}
+	<li id="nextBtn" class="page-item">
+		<a " class="page-link" onclick="nextBtnClick()" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span>
+			<span class="sr-only">Next</span>
+		</a>
+	</li>
+</script>
+</div>
 </div>

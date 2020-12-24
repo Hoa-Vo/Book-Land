@@ -57,24 +57,8 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
       if (maxPage === 0) {
         maxPage = Math.ceil(totalBook / booksPerPage);
       }
+      console.log(res.data);
       console.log(maxPage);
-      res.data.books.forEach(book => {
-        image = `<img src='images/booksImage/${book.image_link}'class='img-fluid book-image' alt='Image'>`;
-        content +=
-          "<div class='col-sm-6 col-md-6 col-lg-4 col-xl-4'>" +
-          "<div class='products-single fix'><div class='box-img-hover'>" +
-          image +
-          "<div class='mask-icon'><ul><li>" +
-          `<a href='/bookslist/${book._id}' data-toggle='tooltip' data-placement='right' title='Xem'>` +
-          "<i class='fas fa-eye'></i></a></li><li><a href='#' data-toggle='tooltip' data-placement='right' title='So sánh'>" +
-          "<i class='fas fa-sync-alt'></i></a></li><li><a href='#' data-toggle='tooltip' data-placement='right' title='Thêm vào yêu thích'>" +
-          "<i class='far fa-heart'></i></a></li></ul><a class='cart' href='#'>Thêm vào giỏ hàng</a></div></div><div class='why-text'>" +
-          "<h4>" +
-          book.title +
-          "</h4><h5>" +
-          book.basePrice +
-          "VND</h5></div></div></div>";
-      });
       if (isPrevNextClick) {
         let btnArr;
         if (isPrevNextClick == 2) {
@@ -95,24 +79,25 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
         }
         updatePagination(btnArr);
       }
-      $("#book-list").html(content);
+      updateBookList(res.data.books);
       inThisPage(currentPage);
     },
     error: function (jqXHR, textStatus, err) {},
   });
 }
 function updatePagination(btnArr) {
-  console.log(maxPage);
   console.log(btnArr);
-  allBtn = "";
-  pageNumberBar =
-    " <li class='page-item'> <a id='prevBtn' onclick='prevBtnClick()' class='page-link' aria-label='Previous'> <span aria-hidden='true'>&laquo;</span> <span class='sr-only'>Previous</span> </a> </li>";
-  for (let i = 0; i < btnArr.length; i++) {
-    if (btnArr[i] <= maxPage)
-      allBtn += `<li  id='page-${btnArr[i]}' class='page-item'><a onclick='setPage(this.textContent)' class='page-link'>${btnArr[i]}</a></li>`;
-  }
-  allBtn +=
-    "<li class='page-item'> <a id='nextBtn' onclick='nextBtnClick()' class='page-link' aria-label='Next'> <span aria-hidden='true'>&raquo;</span> <span class='sr-only'>Next</span> </a> </li>";
-  pageNumberBar += allBtn;
-  $(".pagination").html(pageNumberBar);
+  let content = [];
+  btnArr.forEach(element => {
+    const temp = { num: `${element}` };
+    content.push(temp);
+  });
+  const source = $("#paging-hbs").html();
+  const template = Handlebars.compile(source);
+  $("#btn-list").html(template(content));
+}
+function updateBookList(books) {
+  const source = $("#products").html();
+  const template = Handlebars.compile(source);
+  $("#book-list").html(template(books));
 }
