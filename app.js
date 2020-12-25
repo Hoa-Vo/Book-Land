@@ -44,5 +44,10 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+ 
+const PORT=5000;
+app.listen(PORT,()=>{
+  console.log('Listening at port= %PORT%');
+})
 
 module.exports = app;

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="css/bookDetailInfo.css">
 <link rel="stylesheet" href="css/comment.css">
+<script src="js/comment.js"></script>
 <div class="container">
     <div class="card">
         <div class="container-fliud">
@@ -21,12 +22,12 @@
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                     </div>
-                    <span class="review-no">41 reviews</span>
+                    <span class="review-no">41 đánh giá</span>
                 </div>
-                <p class="product-description"><b>Author:</b> {{author}}</p>
-                <p class="product-description"><b>Publisher:</b> {{publisher}}</p>
-                <p class="product-description"><b>Price:</b> {{basePrice}} VND</p>
-                <p class="product-description"><b>Quantity</b> </p>
+                <p class="product-description"><b>Tác giả:</b> {{author}}</p>
+                <p class="product-description"><b>Nhà xuất bản:</b> {{publisher}}</p>
+                <p class="product-description"><b>Giá tiền:</b> {{basePrice}} VND</p>
+                <p class="product-description"><b>Số lượng</b> </p>
                 <div class="def-number-input number-input safari_only mb-0">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                         class="minus">-</button>
@@ -35,8 +36,8 @@
                         class="plus">+</button>
                 </div>
                 <div class="action">
-                    <button class="add-to-cart btn btn-default" type="button">buy now</button>
-                    <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                    <button class="add-to-cart btn btn-default" type="button">Mua ngay</button>
+                    <button class="add-to-cart btn btn-default" type="button">Thêm vào giỏ hàng</button>
                     <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
                 </div>
             </div>
@@ -45,15 +46,15 @@
             <ul class="nav tabs-primary nav-justified" id="advancedTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active show" id="description-tab" data-toggle="tab" href="#description"
-                        role="tab" aria-controls="description" aria-selected="true">Description</a>
+                        role="tab" aria-controls="description" aria-selected="true">Mô tả</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
-                        aria-selected="false">Information</a>
+                        aria-selected="false">Thông tin chi tiết</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
-                        aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+                        aria-controls="reviews" aria-selected="false">Đánh giá (1)</a>
                 </li>
             </ul>
             <div class="tab-content" id="advancedTabContent">
@@ -136,8 +137,8 @@
                         </div>
                     </div>
                     <hr>
-                    <h5 class="mt-4">Add a review</h5>
-                    <p>Your email address will not be published.</p>
+                    <h5 class="mt-4">Gửi đánh giá</h5>
+                    <p>Email của bạn sẽ được bảo mật</p>
                     <div class="my-3">
                         <ul class="rating mb-0">
                             <li>
@@ -168,24 +169,26 @@
                         </ul>
                     </div>
                     <div>
-                        <!-- Your review -->
-                        <div class="md-form md-outline">
-                            <label for="form76">Your review</label>
-                            <textarea id="form76" class="md-textarea form-control pr-6" rows="4"></textarea>
-                        </div>
-                        <!-- Name -->
-                        <div class="md-form md-outline">
-                            <label for="form75">Name</label>
-                            <input type="text" id="form75" class="form-control pr-6">
-                        </div>
-                        <!-- Email -->
-                        <div class="md-form md-outline">
-                            <label for="form77">Email</label>
-                            <input type="email" id="form77" class="form-control pr-6">
-                        </div>
-                        <div class="text-right pb-2">
-                            <button class="btn btn-primary">Add a review</button>
-                        </div>
+                        <form method="POST" onsubmit ="return doPost(this);">
+                            <!-- Your review -->
+                            <div class="md-form md-outline">
+                                <label for="form76">Suy nghĩ</label>
+                                <textarea id="form76" class="md-textarea form-control pr-6" placeholder="Suy nghĩ của bạn"rows="4"></textarea>
+                            </div>
+                            <!-- Name -->
+                            <div class="md-form md-outline">
+                                <label for="form75">Họ tên</label>
+                                <input type="text" id="form75" class="form-control pr-6" placeholder="Họ tên của bạn">
+                            </div>
+                            <!-- Email -->
+                            <div class="md-form md-outline">
+                                <label for="form77">Email</label>
+                                <input type="email" id="form77" class="form-control pr-6" placeholder="Email của bạn">
+                            </div>
+                            <div class="text-right pb-2">
+                                <input type="submit" value="Gửi" class="btn btn-primary"></input>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
