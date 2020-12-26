@@ -58,12 +58,7 @@ exports.listByCategory = async categoryId => {
   return books;
 };
 
-// get user by ID
-exports.getUserById = async id => {
-  const userCollection = await db().collection("registeredUser");
-  const user = await userCollection.findOne({ _id: ObjectID(id) });
-  return user;
-};
+
 exports.saveImage = async (file, imageName) => {
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);

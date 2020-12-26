@@ -11,6 +11,15 @@ exports.getUserById = async id => {
     const user = await userCollection.findOne({ _id: ObjectID(id) });
     return user;
 };
+
+// get user by username
+exports.getUserByUsername = async name => 
+{
+    const userCollection = await db().collection("registeredUser");
+    const user = await userCollection.findOne({ name: name}); 
+    console.log(`Inside get user by name (model): ${user}`);
+    return user;
+}
 // list all user
 exports.listAll = async () => 
 {
@@ -36,6 +45,10 @@ exports.addNewUser = async function(newUsername,plainNewPassword,newEmail)
        
         bcrypt.hash(plainNewPassword,3,(err,hashResult) => 
         {
+            if(err)
+            {
+                console.log(`Hash error: ${err}}`); 
+            }
             userpasswordCollecton.insertOne({_id: item.insertedId, password: hashResult});
         })
     });
@@ -44,6 +57,20 @@ exports.addNewUser = async function(newUsername,plainNewPassword,newEmail)
    
     return true;
 };
+
+// check valid password with existed ID
+exports.checkValidPassword = async (id, plainPassword) => 
+{
+    const userpasswordCollection = await db().collection("User-hashPassword");
+    const foundUser = await userpasswordCollection.findOne({_id: ObjectID(id)}); 
+    console.log("hashed passs: ") ; 
+    console.log(foundUser.password); 
+
+    return bcrypt.compareSync(plainPassword,foundUser.password); 
+}
+
+
+
 
 
 
