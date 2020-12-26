@@ -19,5 +19,25 @@ exports.listAll = async () =>
     return users; 
 }
 
+// try register
+exports.addNewUser = async function(newUsername,newPassword,newEmail)
+{
+    const userCollection = await db().collection("registeredUser");
+    const userpasswordCollecton = await db().collection("User-hashPassword");
+    let newID; 
+    await userCollection.insertOne({name: newUsername, age: 10,email: newEmail}, (err,item) => 
+    {
+        if(err)
+        {
+            console.log(err); 
+        }
+        userpasswordCollecton.insertOne({_id: item.insertedId, password: newPassword});
+    });
+    
+   
+   
+    return true;
+};
+
 
 
