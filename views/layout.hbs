@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="css/custom.css">
 	<script src="https://kit.fontawesome.com/21d91c27a8.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/cart.js"></script>
 </head>
 
@@ -75,7 +76,7 @@
 						<li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
 						<li class="side-menu"><a href="#">
 								<i class="fa fa-shopping-bag"></i>
-								<span class="badge">3</span>
+								<span id="total-items" class="badge"></span>
 							</a></li>
 					</ul>
 				</div>
@@ -85,26 +86,7 @@
 			<div class="side">
 				<a href="#" class="close-side"><i class="fa fa-times"></i></a>
 				<li class="cart-box">
-					<ul class="cart-list">
-						<li>
-							<a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-							<h6><a href="#">Delica omtantur </a></h6>
-							<p>1x - <span class="price">$80.00</span></p>
-						</li>
-						<li>
-							<a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-							<h6><a href="#">Omnes ocurreret</a></h6>
-							<p>1x - <span class="price">$60.00</span></p>
-						</li>
-						<li>
-							<a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-							<h6><a href="#">Agam facilisis</a></h6>
-							<p>1x - <span class="price">$40.00</span></p>
-						</li>
-						<li class="total">
-							<a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-							<span class="float-right"><strong>Total</strong>: $180.00</span>
-						</li>
+					<ul id="cart-list" class="cart-list">
 					</ul>
 				</li>
 			</div>
@@ -197,7 +179,6 @@
 	<!-- End copyright  -->
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 	<!-- ALL JS FILES -->
-	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<!-- ALL PLUGINS -->
@@ -212,6 +193,19 @@
 	<script src="js/form-validator.min.js"></script>
 	<script src="js/contact-form-script.js"></script>
 	<script src="js/custom.js"></script>
+	<script id="cart" type="text/x-handlebars-template">
+		\{{#each this}}
+	        <li>
+				<a href="#" class="photo"><img src="images/booksImage/\{{image_link}}" class="cart-thumb" alt="" /></a>
+				<h6><a href="/bookslist/\{{_id}}">\{{title}} </a></h6>
+				<p>\{{quantity}}x - <span class="price">\{{totalPrice}} VND</span></p>
+			</li>
+		\{{/each}}
+		<li class="total">
+			<a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+			<span id="total-money" class="float-right"><strong>Total</strong></span>
+		</li>
+	</script>
 </body>
 
 </html>

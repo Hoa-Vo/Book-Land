@@ -132,3 +132,18 @@ exports.paging = async (page, pageLimit, category, searchText) => {
   }
   return { books, totalBook };
 };
+exports.getCartInfo= async (data)=>{
+  console.log(data);
+  let arrID = [];
+  for(let i=0;i<data.length;i++){
+    arrID.push(ObjectID(data[i].id));
+  }
+  const bookCollection = await db().collection("Books");
+  const books = await  bookCollection.find({ _id : { $in : arrID } } ).toArray();
+  for(let i=0;i<books.length;i++){
+    books[i].quantity=data[i].quantity;
+    books[i].totalPrice=data[i].quantity*books[i].basePrice;
+  }
+  console.log(books);
+  return books;
+}
