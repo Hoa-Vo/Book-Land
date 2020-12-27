@@ -2,7 +2,8 @@ const accountModel = require("../models/accountModel");
 const formidable = require("formidable");
 
 exports.get = async (req, res, next) => {
-  const user = await accountModel.getUserById("5fcf16ab08038320605dd7a3"); 
+  const id = req.user._id; 
+  const user = await accountModel.getUserById(id); 
   console.log(user); 
   res.render("userAccount/account", {id: user._id ,name: user.name, email: user.email, avatar_image: user.avatar_image});
 };

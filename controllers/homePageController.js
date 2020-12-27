@@ -7,7 +7,7 @@ exports.renderHomePage = async (req, res, next) => {
     console.log(`req.user: ${req.user._id}`); 
     isSignedIn =  true; 
     userToShow = await accountModel.getUserById(req.user._id); 
-    console.log(userToShow); 
+    console.log(userToShow);
   }
 
   
