@@ -23,20 +23,21 @@
                     </div>
                     <span class="review-no">41 reviews</span>
                 </div>
-                <p class="product-description"><b>Author:</b> {{author}}</p>
-                <p class="product-description"><b>Publisher:</b> {{publisher}}</p>
-                <p class="product-description"><b>Price:</b> {{basePrice}} VND</p>
-                <p class="product-description"><b>Quantity</b> </p>
-                <div class="def-number-input number-input safari_only mb-0">
+                <p class="product-description"><b>Tác giả:</b> {{author}}</p>
+                <p class="product-description"><b>NXB:</b> {{publisher}}</p>
+                <p class="product-description"><b>Giá:</b> {{basePrice}} VND</p>
+                <p class="product-description"><b>Số lượng</b> </p>
+                <div style="display: flex; align-items: center;" class="def-number-input number-input safari_only mb-0">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                         class="minus">-</button>
-                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                    <input style="margin: 0 5px" class="quantity" min="1" name="quantity" value="1" type="number">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                         class="plus">+</button>
                 </div>
                 <div class="action">
-                    <button class="add-to-cart btn btn-default" type="button">buy now</button>
-                    <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                    <button class="add-to-cart btn btn-default" type="button">mua</button>
+                    <button onclick="addToCart(`{{id}}`)" class="add-to-cart btn btn-default" type="button">thêm vào
+                        giỏ hàng</button>
                     <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
                 </div>
             </div>
@@ -45,15 +46,15 @@
             <ul class="nav tabs-primary nav-justified" id="advancedTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active show" id="description-tab" data-toggle="tab" href="#description"
-                        role="tab" aria-controls="description" aria-selected="true">Description</a>
+                        role="tab" aria-controls="description" aria-selected="true">Mô tả</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
-                        aria-selected="false">Information</a>
+                        aria-selected="false">Thông tin</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
-                        aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+                        aria-controls="reviews" aria-selected="false">Đánh giá (1)</a>
                 </li>
             </ul>
             <div class="tab-content" id="advancedTabContent">

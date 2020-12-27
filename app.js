@@ -14,6 +14,7 @@ const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
 const booksListRouter = require("./routes/bookslist");
 const accountRouter = require("./routes/account");
+const cartRouter = require("./routes/cart");
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -47,6 +48,7 @@ app.get("/logout", (req,res) =>
    req.logOut();
    res.redirect("/");
 } )
+app.use("/cart", cartRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
