@@ -74,14 +74,17 @@ function updateCartApi(data) {
     },
     success: function (res) {
       console.log(res);
-      if (res == "empty") {
-        $("#cart-list").html(`<li>Empty</li><li class="total">
-			<a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+      if (res === "empty") {
+        $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
+			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
 			<span class="float-right"><strong>Total: </strong> 0 VND</span>
 		</li>`);
         $("#total-items").html("0");
-        $("#cart-table").html("<div>Empty</div>");
+        $(".cart-exist").css("display", "none");
+        $("#empty-cart").css("display", "block");
       } else {
+        $("#empty-cart").css("display", "none");
+        $(".cart-exist").css("display", "auto");
         updateCartHtml(res);
         $("#total-items").html(res.length);
       }

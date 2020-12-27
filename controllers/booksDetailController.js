@@ -5,6 +5,7 @@ exports.listing = async (req, res, next) => {
   const book = await booksModel.get(req.params.id);
   // Pass data to view to book detail
   res.render("bookDetailsPage/booksDetail", {
+    id: book._id,
     title: book.title,
     basePrice: book.basePrice,
     publisher: book.publisher,

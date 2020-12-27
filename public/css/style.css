@@ -634,6 +634,7 @@ ul.cart-list p .price {
   transition-duration: 0.3s;
   border-radius: 0;
   box-shadow: none;
+  color: white;
 }
 .hvr-hover::after {
   content: "";
@@ -2446,4 +2447,8 @@ ul.cart-list > li.total > .btn:hover {
 .table-responsive .table th {
   vertical-align: middle;
   white-space: nowrap;
+}
+.logo-brand {
+  display: flex;
+  align-items: center;
 }

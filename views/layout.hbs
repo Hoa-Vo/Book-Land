@@ -42,7 +42,10 @@
 						aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
 						<i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand" href="/"><img src="images/logo.png" class="logo" alt=""></a>
+					<a class="navbar-brand logo-brand" href="/"><img style="width:50px; margin-right: 10px"
+							src="images/open-book.png" class="logo" alt="">
+						<p>BOOKLAND</p>
+					</a>
 				</div>
 				<!-- End Header Navigation -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -196,9 +199,14 @@
 	<script id="cart" type="text/x-handlebars-template">
 		\{{#each this}}
 	        <li>
-				<a href="#" class="photo"><img src="images/booksImage/\{{image_link}}" class="cart-thumb" alt="" /></a>
-				<h6><a href="/bookslist/\{{_id}}">\{{title}} </a></h6>
-				<p>\{{quantity}}x - <span class="price">\{{totalPrice}} VND</span></p>
+				<div style="display: flex;">					
+					<a href="#" class="photo"><img src="images/booksImage/\{{image_link}}" class="cart-thumb" alt="" /></a>
+					<div style="margin-left:8px;">
+						<h6><a href="/bookslist/\{{_id}}">\{{title}} </a></h6>
+						<p>\{{quantity}}x - <span class="price">\{{totalPrice}} VND</span></p>
+					</div>
+				
+				</div>
 			</li>
 		\{{/each}}
 		<li class="total">
