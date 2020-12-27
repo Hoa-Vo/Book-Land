@@ -98,7 +98,6 @@ function removeItemFromCart(_id) {
     data = JSON.parse(books);
     for (let i = 0; i < data.length; i++) {
       if (data[i].id === _id) {
-        console.log(data.indexOf(data[i]));
         data.splice(data.indexOf(data[i]), 1);
       }
     }
@@ -109,7 +108,9 @@ function removeItemFromCart(_id) {
 }
 
 function updateItemFromCart(_id, value) {
-  if (value !== "" && isNaN(value) === false) {
+  if (value === "0") {
+    removeItemFromCart(_id);
+  } else if (value !== "" && isNaN(value) === false) {
     let books = localStorage.getItem("books");
     if (books !== null) {
       let data = [];

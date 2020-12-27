@@ -36,12 +36,3 @@ exports.listing = async (req, res, next) => {
     currentCategory: currentCategory,
   });
 };
-exports.paging = async (req, res, next) => {
-  const data = await booksListModel.paging(
-    req.query.page,
-    req.query.pagelimit,
-    req.query.categoryId,
-    req.query.searchText
-  );
-  res.send({ data });
-};

@@ -42,7 +42,7 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   const searchText = document.getElementById("searchText").value;
   console.log(searchText);
   $.ajax({
-    url: "/bookslist/page",
+    url: "./api/paging",
     type: "GET",
     data: {
       page: currentPage,
@@ -90,7 +90,9 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
         $("#nextBtn").removeClass("disabled");
       }
     },
-    error: function (jqXHR, textStatus, err) {},
+    error: function (jqXHR, textStatus, err) {
+      console.log(err);
+    },
   });
 }
 function updatePagination(btnArr) {
