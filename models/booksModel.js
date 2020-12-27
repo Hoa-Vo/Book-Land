@@ -132,3 +132,33 @@ exports.paging = async (page, pageLimit, category, searchText) => {
   }
   return { books, totalBook };
 };
+
+exports.insertComment= async commentObj =>
+{
+  const commentCollection=await db().collection("CommentsBook");
+  let success=true;
+  let commentAdded=commentCollection.insertOne(commentObj);
+  if(commentAdded==null || commentAdded==undefined){
+    success=false;
+  }
+  return success;
+}
+
+exports.fetchAllComments= async (bookId)=>
+{
+  const commentCollection=await db().collection("CommentsBook");
+  let succes=true;
+  let commentsList=commentCollection.find({bookId:bookId}).sort({ _id: -1 }).toArray();
+  if(commentsList==null || commentsList==undefined){
+    success=false;
+  }
+  return commentsList;
+}
+
+exports.commentCount= async (bookId)=>
+{
+  const commentCollection=await db().collection("CommentsBook");
+  let succes=true;
+  let result=await db().collection("CommentsBook").find({bookId:bookId}).count();
+  return result;
+}
