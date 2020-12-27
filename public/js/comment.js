@@ -1,41 +1,23 @@
 const { load } = require("dotenv/types");
 
-$(document).ready(async () => {
-    
+$(document).ready(function()  {
+    loadAllComments();
   });
 
-function doPost(){
+  async function doPost(){
     const yourname=document.getElementById("YourName").value;
     const youremail=document.getElementById('YourEmail').value;
     const yourthoughts =document.getElementById("YourThoughts").value;
     const bookID=document.getElementById("bookId").textContent;
     const url='/bookslist/'+bookID+'/comment';
-        $.ajax({
-            url: url,
-            method: 'POST',
-            data:
-            {
-                bookId: bookID,
-                name: yourname,
-                email:youremail,
-                content: yourthoughts,
-            },
-            success: function(reponse)
-            {
-                let list =reponse;
-                updateCommentsList(list);
-            },
-            error: function(error)
-            {
-                alert("Lỗi khi thêm đánh giá");
-            }});
+        
     if(yourname=="" ||youremail==""|| yourthoughts=="")
     {
         //alert  missing information
     }
     else{
         const url='/bookslist/'+bookID+'/comment';
-        $.ajax({
+        await $.ajax({
             url: url,
             method: 'POST',
             data:
@@ -47,8 +29,7 @@ function doPost(){
             },
             success: function(reponse)
             {
-                let list =reponse;
-                updateCommentsList(list);
+                loadAllComments();
             },
             error: function(error)
             {
@@ -56,6 +37,7 @@ function doPost(){
             }   
         });
     }
+    return false;
 }
 
 function updateCommentsList(list) {
@@ -64,11 +46,11 @@ function updateCommentsList(list) {
     $("#comments-list").html(template(list));
   }
 
-async function loadAllComment()
+async function loadAllComments()
 {
     const bookId= document.getElementById("bookId").textContent;
     const url="/bookslist/"+bookId+"/allcomments";
-    $.ajax({
+    await $.ajax({
         url: url,
         method: "GET",
         data:{
@@ -84,4 +66,4 @@ async function loadAllComment()
         }
     })
 }
-loadAllComment();
+

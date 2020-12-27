@@ -14,8 +14,8 @@ exports.ReceivedComments =async (req,res,next)=>
   if(book!=undefined || check ==false)
   {
     const commentsToShow= await booksModel.fetchAllComments(commentobj.bookId);
-    console.log(commentsToShow);
-    res.send(202 ,commentsToShow);
+    
+    res.status(202).send(commentsToShow);
   }
   else res.send(204).end();
 }
@@ -24,7 +24,7 @@ exports.getAllComments = async (req,res,next)=>
 {
   const bookId=req.query.bookId;
   const commentsToShow=await booksModel.fetchAllComments(bookId);
-  console.log(bookId);
+
     res.status(202).send(commentsToShow);
 }
 
