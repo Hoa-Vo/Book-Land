@@ -81,6 +81,14 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
       }
       updateBookList(res.data.books);
       inThisPage(currentPage);
+      if (currentPage === 1) {
+        $("#prevBtn").addClass("disabled");
+      } else if (currentPage === maxPage) {
+        $("#nextBtn").addClass("disabled");
+      } else {
+        $("#prevBtn").removeClass("disabled");
+        $("#nextBtn").removeClass("disabled");
+      }
     },
     error: function (jqXHR, textStatus, err) {},
   });
