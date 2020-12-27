@@ -46,7 +46,6 @@ $(document).ready(() => {
 function updateCartHtml(books) {
   try {
     const source = $("#cart").html();
-
     const template = Handlebars.compile(source);
     $("#cart-list").html(template(books));
     let totalMoney = 0;
@@ -106,5 +105,29 @@ function removeItemFromCart(_id) {
     console.log(data);
     window.localStorage.setItem("books", JSON.stringify(data));
     updateCartApi(data);
+  }
+}
+
+function updateItemFromCart(_id, value) {
+  if (value !== "" && isNaN(value) === false) {
+    let books = localStorage.getItem("books");
+    if (books !== null) {
+      let data = [];
+      data = JSON.parse(books);
+      data = updateQuantity(_id, value, data);
+      console.log(data);
+      window.localStorage.setItem("books", JSON.stringify(data));
+      updateCartApi(data);
+    }
+  } else {
+    alert("Giá trị phải là số nguyên");
+  }
+}
+function updateQuantity(id, value, books) {
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].id == id) {
+      books[i].quantity = value;
+      return books;
+    }
   }
 }
