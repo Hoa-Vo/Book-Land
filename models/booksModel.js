@@ -58,7 +58,6 @@ exports.listByCategory = async categoryId => {
   return books;
 };
 
-
 exports.saveImage = async (file, imageName) => {
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);
@@ -127,18 +126,24 @@ exports.paging = async (page, pageLimit, category, searchText) => {
   }
   return { books, totalBook };
 };
-exports.getCartInfo= async (data)=>{
-  console.log(data);
+exports.getCartInfo = async data => {
   let arrID = [];
-  for(let i=0;i<data.length;i++){
+  for (let i = 0; i < data.length; i++) {
     arrID.push(ObjectID(data[i].id));
   }
   const bookCollection = await db().collection("Books");
-  const books = await  bookCollection.find({ _id : { $in : arrID } } ).toArray();
-  for(let i=0;i<books.length;i++){
-    books[i].quantity=data[i].quantity;
-    books[i].totalPrice=data[i].quantity*books[i].basePrice;
+  const books = await bookCollection.find({ _id: { $in: arrID } }).toArray();
+  for (let i = 0; i < books.length; i++) {
+    const quantity = getQuantityAtIndex(data, books[i]._id.toString());
+    books[i].quantity = quantity;
+    books[i].totalPrice = quantity * books[i].basePrice;
   }
-  console.log(books);
   return books;
-}
+};
+const getQuantityAtIndex = (data, id) => {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id === id) {
+      return data[i].quantity;
+    }
+  }
+};

@@ -6,12 +6,12 @@
                     <table class="table cart-exist">
                         <thead>
                             <tr>
-                                <th>Images</th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Remove</th>
+                                <th>Ảnh</th>
+                                <th>Tên sách</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody id="cart-table">
@@ -92,10 +92,10 @@
             <td class="price-pr">
                 <p>\{{basePrice}} VND</p>
             </td>
-            <td class="quantity-box"><input onchange="updateItemFromCart(`\{{_id}}`,this.value)" onfocusout="updateItemFromCart(`\{{_id}}`,this.value)" type="number" size="4" value="\{{quantity}}" min="1" step="1" class="c-input-text qty text">
+            <td class="quantity-box"><input onchange="updateItemFromCart(`\{{_id}}`,this.value)" onfocusout="updateItemFromCart(`\{{_id}}`,this.value)" onkeypress="return isNumberKey(event)" type="number" size="4" value="\{{quantity}}" min="1" step="1" class="c-input-text qty text">
             </td>
             <td class="total-pr">
-                <p>\{{totalPrice}}</p>
+                <p>\{{totalPrice}} VND</p>
             </td>
             <td class="remove-pr">
                 <a onclick="removeItemFromCart(`\{{_id}}`)">

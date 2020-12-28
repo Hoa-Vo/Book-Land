@@ -15,4 +15,22 @@ exports.getUserCartInfo = async (req, res, next) => {
 };
 exports.addBookToCart = async (req, res, next) => {
   const cartInfo = await cartModel.addBookToUserCart(req.query.userID, req.query.bookID);
+  res.json(cartInfo);
+};
+exports.delBookFromCart = async (req, res, next) => {
+  const cartInfo = await cartModel.delBookFromUserCart(req.query.userID, req.query.bookID);
+  res.json(cartInfo);
+};
+exports.updateBookFromCart = async (req, res, next) => {
+  const cartInfo = await cartModel.updateBookFromUserCart(
+    req.query.userID,
+    req.query.bookID,
+    req.query.quantity
+  );
+  if (cartInfo.length>0) {
+    res.json(cartInfo);
+  }
+  else{
+    res.send("empty");
+  }
 };
