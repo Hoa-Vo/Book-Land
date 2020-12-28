@@ -1,32 +1,37 @@
+let pTagContent;
+let userID;
 function addToCart(_id) {
-  let books = localStorage.getItem("books");
-  if (books !== null) {
-    let data = [];
-    data = JSON.parse(books);
-    let temp = [];
-    temp = checkIsExistInCart(data, _id);
-    if (temp) {
-      data = temp;
+  if (userID === "") {
+    let books = localStorage.getItem("books");
+    if (books !== null) {
+      let data = [];
+      data = JSON.parse(books);
+      let temp = [];
+      temp = checkIsExistInCart(data, _id);
+      if (temp) {
+        data = temp;
+      } else {
+        const book = {
+          id: _id,
+          quantity: 1,
+        };
+        data.push(book);
+      }
+      window.localStorage.setItem("books", JSON.stringify(data));
+      updateCartApi(data);
     } else {
+      let data = [];
       const book = {
         id: _id,
         quantity: 1,
       };
       data.push(book);
+      window.localStorage.setItem("books", JSON.stringify(data));
+      updateCartApi(data);
     }
-    window.localStorage.setItem("books", JSON.stringify(data));
-    updateCartApi(data);
   } else {
-    let data = [];
-    const book = {
-      id: _id,
-      quantity: 1,
-    };
-    data.push(book);
-    window.localStorage.setItem("books", JSON.stringify(data));
-    updateCartApi(data);
+    addBookToUserCart(_id);
   }
-  console.log(localStorage.getItem("books"));
 }
 function checkIsExistInCart(books, id) {
   for (let i = 0; i < books.length; i++) {
@@ -38,14 +43,15 @@ function checkIsExistInCart(books, id) {
   return null;
 }
 $(document).ready(() => {
-  let pTagContent = $("#user-info").html();
-  let userID = pTagContent.split(">")[1].split("<")[0];
+  pTagContent = $("#user-info").html();
+  userID = pTagContent.split(">")[1].split("<")[0];
   if (userID === "") {
     let books = localStorage.getItem("books");
     let data = [];
     data = JSON.parse(books);
     updateCartApi(data);
   } else {
+    localStorage.clear();
     getUserCartInfoApi(userID);
   }
 });
@@ -146,6 +152,35 @@ function getUserCartInfoApi(userID) {
     type: "GET",
     data: {
       userID: userID,
+    },
+    success: function (res) {
+      console.log(res);
+      if (res === "empty") {
+        $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
+			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
+			<span class="float-right"><strong>Total: </strong> 0 VND</span>
+		</li>`);
+        $("#total-items").html("0");
+        $(".cart-exist").css("display", "none");
+        $("#empty-cart").css("display", "block");
+      } else {
+        $("#empty-cart").css("display", "none");
+        $(".cart-exist").css("display", "auto");
+        updateCartHtml(res);
+        $("#total-items").html(res.length);
+      }
+    },
+    error: function (jqXHR, textStatus, err) {},
+  });
+}
+function addBookToUserCart(_id) {
+  console.log(userID);
+  $.ajax({
+    url: "/api/add-book-to-cart/user",
+    type: "GET",
+    data: {
+      userID: userID,
+      bookID: _id,
     },
     success: function (res) {
       console.log(res);

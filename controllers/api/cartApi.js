@@ -13,3 +13,6 @@ exports.getUserCartInfo = async (req, res, next) => {
   const cartInfo = await cartModel.getUserCart(req.query.userID);
   res.json(cartInfo);
 };
+exports.addBookToCart = async (req, res, next) => {
+  const cartInfo = await cartModel.addBookToUserCart(req.query.userID, req.query.bookID);
+};
