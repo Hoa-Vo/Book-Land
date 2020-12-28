@@ -43,10 +43,11 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/bookslist", booksListRouter);
 app.use("/account", accountRouter);
-app.get("/logout", (req, res) => {
-  req.logOut();
-  res.redirect("/");
-});
+app.get("/logout", (req,res) => 
+{
+   req.logOut();
+   res.redirect("/");
+} )
 app.use("/cart", cartRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
