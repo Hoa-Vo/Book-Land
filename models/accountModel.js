@@ -34,14 +34,14 @@ exports.addNewUser = async function(newUsername,plainNewPassword,newEmail)
     const userCollection = await db().collection("registeredUser");
     const userpasswordCollecton = await db().collection("User-hashPassword");
     let newPassword; 
-    
     console.log(newPassword);
-    await userCollection.insertOne({name: newUsername, age: 10,email: newEmail}, (err,item) => 
+    await userCollection.insertOne({name: newUsername, age: 10,email: newEmail, avatar_image: "notfound.jpg",isVerified: false}, (err,item) => 
     {
         if(err)
         {
             console.log(err); 
         }
+        
        
         bcrypt.hash(plainNewPassword,3,(err,hashResult) => 
         {
@@ -52,22 +52,10 @@ exports.addNewUser = async function(newUsername,plainNewPassword,newEmail)
             userpasswordCollecton.insertOne({_id: item.insertedId, password: hashResult});
         })
     });
-    
-   
-   
     return true;
 };
 
-// check valid password with existed ID
-exports.checkValidPassword = async (id, plainPassword) => 
-{
-    const userpasswordCollection = await db().collection("User-hashPassword");
-    const foundUser = await userpasswordCollection.findOne({_id: ObjectID(id)}); 
-    console.log("hashed passs: ") ; 
-    console.log(foundUser.password); 
 
-    return bcrypt.compareSync(plainPassword,foundUser.password); 
-}
 
 
 
