@@ -3,7 +3,7 @@ const accountModel = require("../models/accountModel");
 
 exports.listing = async (req, res, next) => {
   // get req category
-  const totalBooks = booksListModel.getTotalBooksInDB();
+  const totalBooks = await booksListModel.getTotalBooksInDB();
   console.log(totalBooks);
   const receivedCategoryID = req.query.categoryID;
   let currentCategory = null;
