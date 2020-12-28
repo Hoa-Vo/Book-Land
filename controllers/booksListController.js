@@ -1,4 +1,5 @@
 const booksListModel = require("../models/booksModel");
+const accountModel = require("../models/accountModel");
 
 exports.listing = async (req, res, next) => {
   // get req category
@@ -24,6 +25,14 @@ exports.listing = async (req, res, next) => {
     currentCategory = "Tất cả";
     booksToShow = await booksListModel.list();
   }
+  let userToShow = null ;
+  if(req.user)
+  {
+    console.log(`req.user: ${req.user._id}`); 
+    isSignedIn =  true; 
+    userToShow = await accountModel.getUserById(req.user._id); 
+    console.log(userToShow);
+  }
 
   const categoriesListToShowInMenu = await booksListModel.getAllCategory();
   // Pass data to view to display list of books
@@ -34,6 +43,7 @@ exports.listing = async (req, res, next) => {
     books: booksToShow,
     categories: categoriesListToShowInMenu,
     currentCategory: currentCategory,
+    userToShow: userToShow
   });
 };
 exports.paging = async (req, res, next) => {
