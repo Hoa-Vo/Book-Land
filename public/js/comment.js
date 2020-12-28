@@ -1,19 +1,24 @@
-const { load } = require("dotenv/types");
+let list=[];
 
-$(document).ready(function()  {
-    loadAllComments();
-  });
+window.onload=function(){
+    $(document).ready(function()  {
+        loadAllComments();
+    });
+}
 
-  async function doPost(){
+async function doPost(){
     const yourname=document.getElementById("YourName").value;
     const youremail=document.getElementById('YourEmail').value;
     const yourthoughts =document.getElementById("YourThoughts").value;
     const bookID=document.getElementById("bookId").textContent;
     const url='/bookslist/'+bookID+'/comment';
-        
+    $( "#comment-form" ).click(function( event ) {
+        event.preventDefault();
+        });
     if(yourname=="" ||youremail==""|| yourthoughts=="")
     {
         //alert  missing information
+        validateInput();
     }
     else{
         const url='/bookslist/'+bookID+'/comment';
@@ -30,21 +35,18 @@ $(document).ready(function()  {
             success: function(reponse)
             {
                 loadAllComments();
+                refreshCommentPost();
+                return false;
             },
             error: function(error)
             {
                 alert("Lỗi khi thêm đánh giá");
+                return false;
             }   
         });
     }
-    return false;
-}
 
-function updateCommentsList(list) {
-    const source = $("#commentsList").html();
-    const template = Handlebars.compile(source);
-    $("#comments-list").html(template(list));
-  }
+}
 
 async function loadAllComments()
 {
@@ -58,12 +60,33 @@ async function loadAllComments()
         },
         success: function(response)
         {
-            updateCommentsList(response);
+            
+            updateCommentsList(response.commentlist,response.count);
         },
         error:function()
         {
             alert("Lỗi tải comment");
         }
     })
+}
+
+function validateInput()
+{
+
+}
+
+function updateCommentsList(list,count) {
+    const source = $("#commentsList").html();
+    const template = Handlebars.compile(source);
+    $("#comments-list").html(template(list));
+    document.getElementById("comment-count-3").textContent=count;
+    document.getElementById("comment-count-2").textContent=count;
+    document.getElementById("comment-count-1").textContent=count;
+}
+function refreshCommentPost()
+{
+    document.getElementById("YourName").value="";
+    document.getElementById('YourEmail').value="";
+    document.getElementById("YourThoughts").value="";
 }
 

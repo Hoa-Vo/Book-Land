@@ -14,18 +14,21 @@ exports.ReceivedComments =async (req,res,next)=>
   if(book!=undefined || check ==false)
   {
     const commentsToShow= await booksModel.fetchAllComments(commentobj.bookId);
-    
-    res.status(202).send(commentsToShow);
+    const commentcount=await booksModel.commentCount(commentobj.bookId);
+    res.status(200).send({count: commentcount,commentlist: commentsToShow});
   }
-  else res.send(204).end();
+  else res.status(204).end();
 }
 
 exports.getAllComments = async (req,res,next)=>
 {
   const bookId=req.query.bookId;
   const commentsToShow=await booksModel.fetchAllComments(bookId);
-
-    res.status(202).send(commentsToShow);
+  if(commentsToShow!=undefined || commentsToShow!=null){
+    const commentcount=await booksModel.commentCount(bookId);
+    res.status(200).send({count: commentcount,commentlist: commentsToShow});
+  }
+  else res.status(204).end();
 }
 
 function dateGenerator(offset)
