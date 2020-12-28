@@ -66,18 +66,19 @@
 						<li class="nav-item"><a class="nav-link" href="/service">Dịch vụ</a></li>
 						<li class="dropdown">
 							{{#if userToShow}}
-							<a href="/account" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">{{userToShow.name}}</a>
-							<ul class="dropdown-menu">
-								<li><a href="/account">Thông tin tài khoản</a></li>
-								<li><a href="/logout">Đăng xuất</a></li>
-							</ul>
-							
+								<a href="/account" class="nav-link dropdown-toggle arrow"
+									data-toggle="dropdown">{{userToShow.name}}</a>
+								<ul class="dropdown-menu">
+									<li><a href="/account">Thông tin tài khoản</a></li>
+									<li><a href="/logout">Đăng xuất</a></li>
+								</ul>
 							{{else}}
-								<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Đăng kí/Đăng nhập</a>
-							<ul class="dropdown-menu">
-								<li><a href="/register">Đăng kí</a></li>
-								<li><a href="/login">Đăng nhập</a></li>
-							</ul>
+								<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Đăng kí/Đăng
+									nhập</a>
+								<ul class="dropdown-menu">
+									<li><a href="/register">Đăng kí</a></li>
+									<li><a href="/login">Đăng nhập</a></li>
+								</ul>
 							{{/if}}
 						</li>
 					</ul>
@@ -223,6 +224,9 @@
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
 			<span id="total-money" class="float-right"><strong>Total</strong></span>
 		</li>
+	</script>
+	<script id="user-info" type="text/x-handlebars-template">
+		<p>{{userToShow._id}}</p>
 	</script>
 </body>
 

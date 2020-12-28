@@ -38,10 +38,16 @@ function checkIsExistInCart(books, id) {
   return null;
 }
 $(document).ready(() => {
-  let books = localStorage.getItem("books");
-  let data = [];
-  data = JSON.parse(books);
-  updateCartApi(data);
+  let pTagContent = $("#user-info").html();
+  let userID = pTagContent.split(">")[1].split("<")[0];
+  if (userID === "") {
+    let books = localStorage.getItem("books");
+    let data = [];
+    data = JSON.parse(books);
+    updateCartApi(data);
+  } else {
+    getUserCartInfoApi(userID);
+  }
 });
 function updateCartHtml(books) {
   try {
@@ -131,4 +137,33 @@ function updateQuantity(id, value, books) {
       return books;
     }
   }
+}
+
+function getUserCartInfoApi(userID) {
+  console.log(userID);
+  $.ajax({
+    url: "/api/get-cart/user",
+    type: "GET",
+    data: {
+      userID: userID,
+    },
+    success: function (res) {
+      console.log(res);
+      if (res === "empty") {
+        $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
+			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
+			<span class="float-right"><strong>Total: </strong> 0 VND</span>
+		</li>`);
+        $("#total-items").html("0");
+        $(".cart-exist").css("display", "none");
+        $("#empty-cart").css("display", "block");
+      } else {
+        $("#empty-cart").css("display", "none");
+        $(".cart-exist").css("display", "auto");
+        updateCartHtml(res);
+        $("#total-items").html(res.length);
+      }
+    },
+    error: function (jqXHR, textStatus, err) {},
+  });
 }
