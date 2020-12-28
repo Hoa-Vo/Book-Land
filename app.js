@@ -4,8 +4,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const passport = require("./middleware/passport/index");
-const session = require('express-session');
-const flash = require('connect-flash');
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const app = express();
 
@@ -27,16 +27,16 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  require("express-session")({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
