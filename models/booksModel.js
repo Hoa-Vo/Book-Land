@@ -58,7 +58,6 @@ exports.listByCategory = async categoryId => {
   return books;
 };
 
-
 exports.saveImage = async (file, imageName) => {
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);
@@ -127,18 +126,45 @@ exports.paging = async (page, pageLimit, category, searchText) => {
   }
   return { books, totalBook };
 };
-exports.getCartInfo= async (data)=>{
+exports.getCartInfo = async data => {
   console.log(data);
   let arrID = [];
-  for(let i=0;i<data.length;i++){
+  for (let i = 0; i < data.length; i++) {
     arrID.push(ObjectID(data[i].id));
   }
   const bookCollection = await db().collection("Books");
-  const books = await  bookCollection.find({ _id : { $in : arrID } } ).toArray();
-  for(let i=0;i<books.length;i++){
-    books[i].quantity=data[i].quantity;
-    books[i].totalPrice=data[i].quantity*books[i].basePrice;
+  const books = await bookCollection.find({ _id: { $in: arrID } }).toArray();
+  for (let i = 0; i < books.length; i++) {
+    books[i].quantity = data[i].quantity;
+    books[i].totalPrice = data[i].quantity * books[i].basePrice;
   }
   console.log(books);
   return books;
-}
+};
+
+exports.insertComment = async commentObj => {
+  const commentCollection = await db().collection("CommentsBook");
+  let success = true;
+  let commentAdded = commentCollection.insertOne(commentObj);
+  if (commentAdded == null || commentAdded == undefined) {
+    success = false;
+  }
+  return success;
+};
+
+exports.fetchAllComments = async bookId => {
+  const commentCollection = await db().collection("CommentsBook");
+  let succes = true;
+  let commentsList = commentCollection.find({ bookId: bookId }).sort({ _id: -1 }).toArray();
+  if (commentsList == null || commentsList == undefined) {
+    success = false;
+  }
+  return commentsList;
+};
+
+exports.commentCount = async bookId => {
+  const commentCollection = await db().collection("CommentsBook");
+  let succes = true;
+  let result = await db().collection("CommentsBook").find({ bookId: bookId }).count();
+  return result;
+};

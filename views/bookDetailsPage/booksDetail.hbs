@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="css/bookDetailInfo.css">
 <link rel="stylesheet" href="css/comment.css">
+<script src="js/comment.js"></script>
 <div class="container">
     <div class="card">
         <div class="container-fliud">
+            <p id="bookId" style="display: none;">{{id}}</p>
             <div class="preview col-md-6">
                 <div class="preview-pic tab-content">
                     <div class="tab-pane active bookimage" id="pic-1"><img class="book-img"
@@ -21,13 +23,13 @@
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                     </div>
-                    <span class="review-no">41 reviews</span>
+                    <span class="review-no"><span id="comment-count-1"></span> bình luận</span>
                 </div>
                 <p class="product-description"><b>Tác giả:</b> {{author}}</p>
-                <p class="product-description"><b>NXB:</b> {{publisher}}</p>
-                <p class="product-description"><b>Giá:</b> {{basePrice}} VND</p>
+                <p class="product-description"><b>Nhà xuất bản:</b> {{publisher}}</p>
+                <p class="product-description"><b>Giá tiền:</b> {{basePrice}} VND</p>
                 <p class="product-description"><b>Số lượng</b> </p>
-                <div style="display: flex; align-items: center;" class="def-number-input number-input safari_only mb-0">
+                <div class="def-number-input number-input safari_only mb-0">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                         class="minus">-</button>
                     <input style="margin: 0 5px" class="quantity" min="1" name="quantity" value="1" type="number">
@@ -35,9 +37,8 @@
                         class="plus">+</button>
                 </div>
                 <div class="action">
-                    <button class="add-to-cart btn btn-default" type="button">mua</button>
-                    <button onclick="addToCart(`{{id}}`)" class="add-to-cart btn btn-default" type="button">thêm vào
-                        giỏ hàng</button>
+                    <button class="add-to-cart btn btn-default" type="button">Mua ngay</button>
+                    <button class="add-to-cart btn btn-default" type="button">Thêm vào giỏ hàng</button>
                     <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
                 </div>
             </div>
@@ -50,11 +51,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
-                        aria-selected="false">Thông tin</a>
+                        aria-selected="false">Thông tin chi tiết</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
-                        aria-controls="reviews" aria-selected="false">Đánh giá (1)</a>
+                    <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews"
+                        onclick="return loadAllComments();" role="tab" aria-controls="reviews"
+                        aria-selected="false">Bình luận (<span id="comment-count-2"></span>)</a>
                 </li>
             </ul>
             <div class="tab-content" id="advancedTabContent">
@@ -101,95 +103,81 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                    <h5><span>1</span> review for <span>Fantasy T-shirt</span></h5>
-                    <div class="media mt-3 mb-4">
-                        <div class="media-body">
-                            <div class="user-rate-info">
-                                <img class="user-avatar"
-                                    src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
-                                    alt="Generic placeholder image">
-                                <div class="d-sm-flex justify-content-between" style="margin-left: 1rem;">
-                                    <p class="mt-1 mb-2">
-                                        <strong>Marthasteward </strong>
-                                        <span>– </span><span>January 28, 2020</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="mb-0">Nice one, love it!</p>
-                            <ul class="rating mb-sm-0">
-                                <li>
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </li>
-                                <li>
-                                    <i class="far fa-star fa-sm text-primary"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <hr>
-                    <h5 class="mt-4">Add a review</h5>
-                    <p>Your email address will not be published.</p>
-                    <div class="my-3">
-                        <ul class="rating mb-0">
-                            <li>
-                                <a href="#!">
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <i class="fas fa-star fa-sm text-primary"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <i class="far fa-star fa-sm text-primary"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
+                <h5 class="mt-4">Gửi bình luận</h5>
+                <p>Email của bạn sẽ được bảo mật</p>
+                <hr>
+                <div>
+                    <form id="comment-form" onsubmit="return doPost();">
                         <!-- Your review -->
                         <div class="md-form md-outline">
-                            <label for="form76">Your review</label>
-                            <textarea id="form76" class="md-textarea form-control pr-6" rows="4"></textarea>
+                            <label for="form76">Suy nghĩ</label>
+                            <textarea id="YourThoughts" id="form76" class="md-textarea form-control pr-6"
+                                placeholder="Suy nghĩ của bạn" rows="4"></textarea>
                         </div>
                         <!-- Name -->
                         <div class="md-form md-outline">
-                            <label for="form75">Name</label>
-                            <input type="text" id="form75" class="form-control pr-6">
+                            <label for="form75">Họ tên</label>
+                            <input id="YourName" type="text" id="form75" class="form-control pr-6"
+                                placeholder="Họ tên của bạn">
                         </div>
                         <!-- Email -->
                         <div class="md-form md-outline">
                             <label for="form77">Email</label>
-                            <input type="email" id="form77" class="form-control pr-6">
+                            <input id="YourEmail" type="email" id="form77" class="form-control pr-6"
+                                placeholder="Email của bạn">
+                        </div>
+                        <div class="alert alert-success" role="alert" style="display: none;">
+                            This is a success alert—check it out!
+                        </div>
+                        <div class="alert alert-danger" role="alert" style="display: none;">
+                            This is a danger alert—check it out!
                         </div>
                         <div class="text-right pb-2">
-                            <button class="btn btn-primary">Add a review</button>
+                            <input type="submit" onclick="return doPost()" value="Gửi" class="btn btn-primary"></input>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                    <h5><span id="comment-count-3"></span> bình luận cho <span>{{title}}</span></h5>
+                    <div class="media mt-3 mb-4">
+                        <div class="media-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <ul id="comments-list" class="media-list"></ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <hr>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="js/comment.js"></script>
+<script id="commentsList" type="text/x-handlebars-template">
+
+    \{{#each this}}
+        <li class="media" >
+            <a class="pull-left" href="#">
+            <img class="media-object img-circle" src="http://bootdey.com/img/Content/user_1.jpg" alt="profile">
+            </a>
+            <div class="media-body">
+                <div class="well well-lg">
+                    <h4 class="media-heading text-uppercase reviews">\{{name}} 
+                        
+                    </h4>
+                    <h6 class="text-muted time">\{{createdDate}}</h6>
+                    <p class="media-comment">
+                        \{{content}}
+                    </p>
+                    
+                </div>              
+            </div>
+            
+        </li>
+        <br/><br/>
+    \{{/each}}
+
+</script>
