@@ -8,5 +8,5 @@ exports.renderCartPage = async (req, res, next) => {
     userToShow = await accountModel.getUserById(req.user._id);
     console.log(userToShow);
   }
-  res.render("./cartPage/cart",{userToShow: userToShow});
+  res.render("./cartPage/cart", { userToShow: userToShow });
 };
