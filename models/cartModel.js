@@ -4,17 +4,17 @@ const bookModel = require("./booksModel");
 
 exports.getUserCart = async id => {
   const cartCollection = await db().collection("UserCart");
-  const userCart = await cartCollection.findOne({ userId: id });
+  const userCart = await cartCollection.findOne({ userId: ObjectID(id) });
   if (userCart) {
     const books = userCart.books;
     const booksInfo = await bookModel.getCartInfo(books);
     return booksInfo;
   } else {
     await cartCollection.insertOne({
-      userId: id,
+      userId: ObjectID(id),
       books: [{}],
     });
-    const userCart = await cartCollection.findOne({ userId: id });
+    const userCart = await cartCollection.findOne({ userId: ObjectID(id) });
     const books = userCart.books;
     const booksInfo = await bookModel.getCartInfo(books);
     return booksInfo;
@@ -23,28 +23,31 @@ exports.getUserCart = async id => {
 
 exports.addBookToUserCart = async (userId, bookId) => {
   const cartCollection = await db().collection("UserCart");
-  const userCart = await cartCollection.findOne({ userId: userId });
-  const isExistInCart = userCart.books.find(element => element.id === bookId);
+  const userCart = await cartCollection.findOne({ userId: ObjectID(userId) });
+  const isExistInCart = userCart.books.find(element => element.id === ObjectID(bookId));
   if (isExistInCart) {
     await cartCollection.update(
-      { userId: userId, "books.id": bookId },
+      { userId: ObjectID(userId), "books.id": ObjectID(bookId) },
       { $inc: { "books.$.quantity": 1 } }
     );
   } else {
     await cartCollection.update(
-      { userId: userId },
-      { $push: { books: { id: bookId, quantity: 1 } } }
+      { userId: ObjectID(userId) },
+      { $push: { books: { id: ObjectID(bookId), quantity: 1 } } }
     );
   }
-  const userCartAfterUpdate = await cartCollection.findOne({ userId: userId });
+  const userCartAfterUpdate = await cartCollection.findOne({ userId: ObjectID(userId) });
   const books = userCartAfterUpdate.books;
   const booksInfo = await bookModel.getCartInfo(books);
   return booksInfo;
 };
 exports.delBookFromUserCart = async (userId, bookId) => {
   const cartCollection = await db().collection("UserCart");
-  await cartCollection.update({ userId: userId }, { $pull: { books: { id: bookId } } });
-  const userCartAfterUpdate = await cartCollection.findOne({ userId: userId });
+  await cartCollection.update(
+    { userId: ObjectID(userId) },
+    { $pull: { books: { id: ObjectID(bookId) } } }
+  );
+  const userCartAfterUpdate = await cartCollection.findOne({ userId: ObjectID(userId) });
   const books = userCartAfterUpdate.books;
   const booksInfo = await bookModel.getCartInfo(books);
   return booksInfo;
@@ -52,18 +55,21 @@ exports.delBookFromUserCart = async (userId, bookId) => {
 exports.updateBookFromUserCart = async (userId, bookId, quantity) => {
   if (quantity === "0") {
     const cartCollection = await db().collection("UserCart");
-    await cartCollection.update({ userId: userId }, { $pull: { books: { id: bookId } } });
-    const userCartAfterUpdate = await cartCollection.findOne({ userId: userId });
+    await cartCollection.update(
+      { userId: ObjectID(userId) },
+      { $pull: { books: { id: ObjectID(bookId) } } }
+    );
+    const userCartAfterUpdate = await cartCollection.findOne({ userId: ObjectID(userId) });
     const books = userCartAfterUpdate.books;
     const booksInfo = await bookModel.getCartInfo(books);
     return booksInfo;
   } else {
     const cartCollection = await db().collection("UserCart");
     await cartCollection.update(
-      { userId: userId, "books.id": bookId },
+      { userId: ObjectID(userId), "books.id": ObjectID(bookId) },
       { $set: { "books.$.quantity": parseInt(quantity) } }
     );
-    const userCartAfterUpdate = await cartCollection.findOne({ userId: userId });
+    const userCartAfterUpdate = await cartCollection.findOne({ userId: ObjectID(userId) });
     const books = userCartAfterUpdate.books;
     console.log(books);
     const booksInfo = await bookModel.getCartInfo(books);

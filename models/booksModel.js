@@ -134,7 +134,7 @@ exports.getCartInfo = async data => {
   const bookCollection = await db().collection("Books");
   const books = await bookCollection.find({ _id: { $in: arrID } }).toArray();
   for (let i = 0; i < books.length; i++) {
-    const quantity = getQuantityAtIndex(data, books[i]._id.toString());
+    const quantity = getQuantityAtIndex(data, books[i]._id);
     books[i].quantity = quantity;
     books[i].totalPrice = quantity * books[i].basePrice;
   }
@@ -142,7 +142,7 @@ exports.getCartInfo = async data => {
 };
 const getQuantityAtIndex = (data, id) => {
   for (let i = 0; i < data.length; i++) {
-    if (data[i].id === id) {
+    if (data[i].id.toString() === id.toString()) {
       return data[i].quantity;
     }
   }

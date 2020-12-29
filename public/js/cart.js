@@ -64,7 +64,7 @@ function updateCartHtml(books) {
     for (let i = 0; i < books.length; i++) {
       totalMoney += books[i].totalPrice;
     }
-    $("#total-money").html(`<strong>Total: </strong> ${totalMoney}VND`);
+    $("#total-money").html(`<strong>Tổng cộng: </strong>${totalMoney}VND`);
   } catch (err) {
     console.log(err);
   }
