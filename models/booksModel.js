@@ -166,6 +166,7 @@ exports.fetchCommentsByPage=async(bookId,pageLimit,page)=>
       .limit(limit)
       .toArray();
   return commentList;
+}
 exports.getCartInfo= async (data)=>{
   console.log(data);
   let arrID = [];

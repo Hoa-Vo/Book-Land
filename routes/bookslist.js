@@ -4,7 +4,6 @@ const booksListController = require("../controllers/booksListController");
 const booksDetailController = require("../controllers/booksDetailController");
 const searchSpecifiedBookController=require("../controllers/searchSpecifiedBookController");
 const commentController =require("../controllers/commentsController");
-const searchSpecifiedBookController = require("../controllers/searchSpecifiedBookController");
 const pagingApi = require("../controllers/api/pagingApi");
 // Get booklist page
 router.get("/", booksListController.listing);
