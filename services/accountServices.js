@@ -3,17 +3,16 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const nodemailer = require('nodemailer');
 const { db } = require("../database/db");
 const { ObjectID } = require("mongodb");
-const fs = require("fs");
-const path = require("path");
 const bcrypt = require("bcrypt"); 
+require("dotenv/config");
 
 exports.sendVerifyEmail = async userid => {
 
     let transport = nodemailer.createTransport(smtpTransport({
         service: 'gmail',
         auth: {
-            user: 'bookland.hcmus@gmail.com', 
-            pass: 'bookland@1234'
+            user: process.env.MAIL_NAME, 
+            pass: process.env.MAIL_PASSWORD, 
         }
     }));
 
@@ -21,10 +20,10 @@ exports.sendVerifyEmail = async userid => {
     console.log(user);
     const emailToSend = user.email; 
     let mailOptions = {
-        from: 'bookland.hcmus@gmail.com',
+        from: process.env.MAIL_NAME,
         to: emailToSend,
-        subject: 'Test from Nodejs 2',
-        html: `<p> Xin hãy xác nhận tài khoản của bạn qua đường dẫn <a href = "localhost:3000/verifyemail/${userid}">Link</a> <p>`
+        subject: '[No reply] Xác nhận tài khoản BookLand của bạn',
+        html: `<p> Xin hãy xác nhận tài khoản của bạn qua đường dẫn localhost:3000/verify/${userid}<p>`
     }; 
 
     //console.log("Inside mail serviceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -58,4 +57,9 @@ exports.registerNewuser = async (newUsername,plainNewPassword,newEmail) =>
     let newuser = await accountModel.getUserByUsername(newUsername); 
     this.sendVerifyEmail(newuser._id);
     
+}
+
+exports.vefifyEmail = async (id) =>
+{
+    await accountModel.changeVerifyStatus(id,true); 
 }

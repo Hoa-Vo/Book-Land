@@ -28,7 +28,7 @@ exports.listAll = async () =>
     return users; 
 }
 
-// try register
+// try add new user
 exports.addNewUser = async function(newUsername,plainNewPassword,newEmail)
 {
     const userCollection = await db().collection("registeredUser");
@@ -54,6 +54,18 @@ exports.addNewUser = async function(newUsername,plainNewPassword,newEmail)
     });
     return true;
 };
+
+// toogle verify (to true)
+
+exports.changeVerifyStatus = async (id, newVerifyStatus) => 
+{
+    const userCollection = await db().collection("registeredUser");
+    await userCollection.updateOne(
+        {"_id": ObjectID(id)},
+        {$set: {"isVerified": newVerifyStatus}}
+    );
+
+}
 
 
 
