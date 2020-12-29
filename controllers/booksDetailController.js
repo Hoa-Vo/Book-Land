@@ -3,8 +3,7 @@ const booksModel = require("../models/booksModel");
 exports.listing = async (req, res, next) => {
   // Get books from model
   const book = await booksModel.get(req.params.id);
-  const comments=await booksModel.fetchAllComments(req.params.id);
-  const commentCount=await booksModel.commentCount(req.params.id);
+  
   // Pass data to view to book detail
   res.render("bookDetailsPage/booksDetail", {
     id:book._id,
@@ -13,7 +12,5 @@ exports.listing = async (req, res, next) => {
     publisher: book.publisher,
     author: book.author,
     imageLink: book.image_link,
-    comments:comments,
-    commentcount:commentCount,
   });
 };
