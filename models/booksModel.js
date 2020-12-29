@@ -147,18 +147,28 @@ exports.insertComment= async commentObj =>
 exports.fetchAllComments= async (bookId)=>
 {
   const commentCollection=await db().collection("CommentsBook");
-  let succes=true;
   let commentsList=commentCollection.find({bookId:bookId}).sort({ _id: -1 }).toArray();
-  if(commentsList==null || commentsList==undefined){
-    success=false;
-  }
+
   return commentsList;
 }
 
 exports.commentCount= async (bookId)=>
 {
   const commentCollection=await db().collection("CommentsBook");
-  let succes=true;
   let result=await db().collection("CommentsBook").find({bookId:bookId}).count();
   return result;
+}
+
+exports.fetchCommentsByPage=async(bookId,pageLimit,page)=>
+{
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const commentsCollection = await db().collection("CommentsBook");
+  var commentList = await commentsCollection
+      .find({bookId:bookId})
+      .sort({_id:-1})
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+  return commentList;
 }

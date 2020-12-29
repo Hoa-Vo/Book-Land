@@ -1,6 +1,6 @@
 const booksModel = require("../models/booksModel");
 
-exports.ReceivedComments =async (req,res,next)=>
+exports.receiveComment =async (req,res,next)=>
 {
   const book = await booksModel.get(req.body.bookId);
   let commentobj={
@@ -13,17 +13,19 @@ exports.ReceivedComments =async (req,res,next)=>
   let check= booksModel.insertComment(commentobj);
   if(book!=undefined || check ==false)
   {
-    const commentsToShow= await booksModel.fetchAllComments(commentobj.bookId);
+    
     const commentcount=await booksModel.commentCount(commentobj.bookId);
-    res.status(200).send({count: commentcount,commentlist: commentsToShow});
+    res.status(200).send({count: commentcount});
   }
   else res.status(204).end();
 }
 
-exports.getAllComments = async (req,res,next)=>
+exports.fetchCommentByPage = async (req,res,next)=>
 {
   const bookId=req.query.bookId;
-  const commentsToShow=await booksModel.fetchAllComments(bookId);
+  const pageLimit=req.query.pageLimit;
+  const page=req.query.page;
+  const commentsToShow=await booksModel.fetchCommentsByPage(bookId,pageLimit,page);
   if(commentsToShow!=undefined || commentsToShow!=null){
     const commentcount=await booksModel.commentCount(bookId);
     res.status(200).send({count: commentcount,commentlist: commentsToShow});
