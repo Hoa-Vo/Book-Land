@@ -5,9 +5,20 @@ const bookModel = require("./booksModel");
 exports.getUserCart = async id => {
   const cartCollection = await db().collection("UserCart");
   const userCart = await cartCollection.findOne({ userId: id });
-  const books = userCart.books;
-  const booksInfo = await bookModel.getCartInfo(books);
-  return booksInfo;
+  if (userCart) {
+    const books = userCart.books;
+    const booksInfo = await bookModel.getCartInfo(books);
+    return booksInfo;
+  } else {
+    await cartCollection.insertOne({
+      userId: id,
+      books: [{}],
+    });
+    const userCart = await cartCollection.findOne({ userId: id });
+    const books = userCart.books;
+    const booksInfo = await bookModel.getCartInfo(books);
+    return booksInfo;
+  }
 };
 
 exports.addBookToUserCart = async (userId, bookId) => {
@@ -32,9 +43,7 @@ exports.addBookToUserCart = async (userId, bookId) => {
 };
 exports.delBookFromUserCart = async (userId, bookId) => {
   const cartCollection = await db().collection("UserCart");
-
   await cartCollection.update({ userId: userId }, { $pull: { books: { id: bookId } } });
-
   const userCartAfterUpdate = await cartCollection.findOne({ userId: userId });
   const books = userCartAfterUpdate.books;
   const booksInfo = await bookModel.getCartInfo(books);
