@@ -58,12 +58,7 @@ exports.listByCategory = async categoryId => {
   return books;
 };
 
-// get user by ID
-exports.getUserById = async id => {
-  const userCollection = await db().collection("registeredUser");
-  const user = await userCollection.findOne({ _id: ObjectID(id) });
-  return user;
-};
+
 exports.saveImage = async (file, imageName) => {
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);
@@ -171,4 +166,18 @@ exports.fetchCommentsByPage=async(bookId,pageLimit,page)=>
       .limit(limit)
       .toArray();
   return commentList;
+exports.getCartInfo= async (data)=>{
+  console.log(data);
+  let arrID = [];
+  for(let i=0;i<data.length;i++){
+    arrID.push(ObjectID(data[i].id));
+  }
+  const bookCollection = await db().collection("Books");
+  const books = await  bookCollection.find({ _id : { $in : arrID } } ).toArray();
+  for(let i=0;i<books.length;i++){
+    books[i].quantity=data[i].quantity;
+    books[i].totalPrice=data[i].quantity*books[i].basePrice;
+  }
+  console.log(books);
+  return books;
 }

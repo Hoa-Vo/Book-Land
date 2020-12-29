@@ -42,7 +42,7 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   const searchText = document.getElementById("searchText").value;
   console.log(searchText);
   $.ajax({
-    url: "/bookslist/page",
+    url: "./api/paging",
     type: "GET",
     data: {
       page: currentPage,
@@ -81,8 +81,18 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
       }
       updateBookList(res.data.books);
       inThisPage(currentPage);
+      if (currentPage === 1) {
+        $("#prevBtn").addClass("disabled");
+      } else if (currentPage === maxPage) {
+        $("#nextBtn").addClass("disabled");
+      } else {
+        $("#prevBtn").removeClass("disabled");
+        $("#nextBtn").removeClass("disabled");
+      }
     },
-    error: function (jqXHR, textStatus, err) {},
+    error: function (jqXHR, textStatus, err) {
+      console.log(err);
+    },
   });
 }
 function updatePagination(btnArr) {
