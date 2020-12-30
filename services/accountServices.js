@@ -63,3 +63,10 @@ exports.vefifyEmail = async (id) =>
 {
     await accountModel.changeVerifyStatus(id,true); 
 }
+
+exports.checkExistsUsername = async (inputUsername) => 
+{
+    let result = await accountModel.isExistsUsername(inputUsername); 
+
+    return result;
+}

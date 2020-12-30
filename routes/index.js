@@ -4,6 +4,5 @@ const homePageController = require("../controllers/homePageController");
 const cartApi = require("../controllers/api/cartApi");
 /* GET home page. */
 router.get("/", homePageController.renderHomePage);
-router.get("/api/get-cart", cartApi.getCartInfo);
-router.get("/api/get-cart/user", cartApi.getUserCartInfo);
+
 module.exports = router;

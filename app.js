@@ -16,6 +16,7 @@ const booksListRouter = require("./routes/bookslist");
 const accountRouter = require("./routes/account");
 const cartRouter = require("./routes/cart");
 const verifyRouter = require("./routes/verify"); 
+const apiRouter = require("./routes/api"); 
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -51,6 +52,7 @@ app.get("/logout", (req,res) =>
 } )
 app.use("/cart", cartRouter);
 app.use("/verify", verifyRouter);
+app.use("/api", apiRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

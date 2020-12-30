@@ -67,6 +67,21 @@ exports.changeVerifyStatus = async (id, newVerifyStatus) =>
 
 }
 
+exports.isExistsUsername = async (inputUsername) => 
+{
+    const userCollection = await db().collection("registeredUser");
+    let userDocument = await userCollection.findOne(
+        {"name": inputUsername}
+    );
+    if(userDocument)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 
 
 
