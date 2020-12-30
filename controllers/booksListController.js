@@ -16,8 +16,6 @@ exports.listing = async (req, res, next) => {
     return;
   }
   if (receivedCategoryID != undefined) {
-    // Apply filter
-
     booksToShow = await booksListModel.listByCategory(receivedCategoryID);
     currentCategory = await booksListModel.getCategoryNameById(receivedCategoryID);
     currentCategory = currentCategory.name;
@@ -31,10 +29,8 @@ exports.listing = async (req, res, next) => {
     userToShow = await accountModel.getUserById(req.user._id);
     console.log(userToShow);
   }
-
   const categoriesListToShowInMenu = await booksListModel.getAllCategory();
   // Pass data to view to display list of books
-
   res.render("booksPage/bookslist", {
     totalBooks: totalBooks,
     currentCategoryId: receivedCategoryID,

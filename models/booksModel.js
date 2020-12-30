@@ -16,7 +16,9 @@ exports.get = async id => {
 exports.searchBook = async bookName => {
   const bookCollection = await db().collection("Books");
   //const books = await bookCollection.find({}).toArray();
-  const books = await bookCollection.find({ title: { $regex: bookName, $options: "i" } }).toArray();
+  const books = await bookCollection
+    .find({ title: { $regex: bookName, $options: "i" }, is_deleted: false })
+    .toArray();
   console.log(books);
   if (books == null) console.log("Không tìm thấy");
   else {
@@ -28,7 +30,7 @@ exports.searchBook = async bookName => {
 
 exports.getTotalBooksInDB = async () => {
   const bookCollection = await db().collection("Books");
-  const result = await bookCollection.find({}).count();
+  const result = await bookCollection.find({ is_deleted: false }).count();
   return result;
 };
 
@@ -44,7 +46,9 @@ exports.getAllCategory = async () => {
   const allCategories = await categoriesCollection.find({}).toArray();
   for (i = 0; i < allCategories.length; i++) {
     let currentID = allCategories[i]._id.toString();
-    allCategories[i].count = await bookCollection.find({ category_id: currentID }).count();
+    allCategories[i].count = await bookCollection
+      .find({ category_id: currentID, is_deleted: false })
+      .count();
   }
 
   return allCategories;
@@ -53,7 +57,7 @@ exports.getAllCategory = async () => {
 // list by categoryID
 exports.listByCategory = async categoryId => {
   const bookCollection = await db().collection("Books");
-  const books = await bookCollection.find({ category_id: categoryId }).toArray();
+  const books = await bookCollection.find({ category_id: categoryId, is_deleted: false }).toArray();
 
   return books;
 };
