@@ -1,9 +1,8 @@
-const accountServices = require("../services/accountServices"); 
+const accountServices = require("../services/accountServices");
 
-exports.verifyEndpoint = async (req,res,next) =>
-{
-    const id = req.params.id; 
-    await accountServices.vefifyEmail(id); 
-    console.log("OK verified email with id: " + id);
-    res.redirect("/");
-}
+exports.verifyEndpoint = async (req, res, next) => {
+  const id = req.params.id;
+  await accountServices.vefifyEmail(id);
+  console.log("OK verified email with id: " + id);
+  res.redirect("/");
+};
