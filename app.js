@@ -16,8 +16,6 @@ const booksListRouter = require("./routes/bookslist");
 const accountRouter = require("./routes/account");
 const cartRouter = require("./routes/cart");
 const checkOutRouter = require("./routes/checkout");
-const cartApiRouter = require("./routes/api/cartApi");
-const pagingApiRouter = require("./routes/api/pagingApi");
 const verifyRouter = require("./routes/verify");
 const apiRouter = require("./routes/api");
 require("./database/db");
@@ -54,7 +52,6 @@ app.get("/logout", (req, res) => {
 });
 app.use("/cart", cartRouter);
 app.use("/checkout", checkOutRouter);
-app.use("/api/paging", pagingApiRouter);
 app.use("/cart", cartRouter);
 app.use("/verify", verifyRouter);
 app.use("/api", apiRouter);
