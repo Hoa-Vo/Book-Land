@@ -71,7 +71,6 @@ exports.updateBookFromUserCart = async (userId, bookId, quantity) => {
     );
     const userCartAfterUpdate = await cartCollection.findOne({ userId: ObjectID(userId) });
     const books = userCartAfterUpdate.books;
-    console.log(books);
     const booksInfo = await bookModel.getCartInfo(books);
     return booksInfo;
   }

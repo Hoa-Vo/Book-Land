@@ -13,7 +13,7 @@ function checkRepassword() {
 
 function checkExistedEmail() {
   $.ajax({
-    url: "api/checkExistEmail/",
+    url: "api/checkExistEmail",
     type: "GET",
     data: document.getElementById("email-box").value,
     succcess: function (res) {
@@ -28,7 +28,6 @@ function checkExistedEmail() {
 function checkExistedUsername() {
   console.log("Inside checkuser");
   const name = document.getElementById("username-box").value;
-  console.log(document.getElementById("username-box").value);
   $.ajax({
     url: `api/checkExistedUsername/`,
     type: "GET",
@@ -37,9 +36,7 @@ function checkExistedUsername() {
     },
     statusCode: {
       404: function () {},
-      202: function (res) {
-        console.log(res);
-      },
+      202: function (res) {},
     },
     error: function (jqXHR, textStatus, err) {
       console.log(err);

@@ -10,7 +10,7 @@ router.get("/", booksListController.listing);
 router.post("/:id/send-comment", commentController.receiveComment);
 router.get("/:id/comment-paging", commentController.fetchCommentByPage);
 router.get("/search", searchSpecifiedBookController.get);
-router.get("/:id", booksDetailController.listing);
+router.get("/:id", booksDetailController.get);
 router.delete("/", (req, res, next) => {
   console.log(req.query.ID);
 });

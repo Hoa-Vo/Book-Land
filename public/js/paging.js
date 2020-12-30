@@ -38,9 +38,9 @@ function setPage(num) {
 async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   $("#book-list").html("<div id='loading'>Đang tải...</div>");
   const category_id = document.getElementById("category_id").textContent;
-  console.log(category_id);
+
   const searchText = document.getElementById("searchText").value;
-  console.log(searchText);
+
   $.ajax({
     url: "/api/paging/",
     type: "GET",
@@ -114,7 +114,6 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   });
 }
 function updatePagination(btnArr) {
-  console.log(btnArr);
   let content = [];
   btnArr.forEach(element => {
     const temp = { num: `${element}` };

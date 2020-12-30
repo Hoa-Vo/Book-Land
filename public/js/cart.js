@@ -86,13 +86,12 @@ function isNumberKey(evt) {
 }
 function updateCartApi(data) {
   $.ajax({
-    url: "api/get-cart",
+    url: "/api/get-cart",
     type: "GET",
     data: {
       cart: data,
     },
     success: function (res) {
-      console.log(res);
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
@@ -122,7 +121,6 @@ function removeItemFromCart(_id) {
           data.splice(data.indexOf(data[i]), 1);
         }
       }
-      console.log(data);
       window.localStorage.setItem("books", JSON.stringify(data));
       updateCartApi(data);
     }
@@ -141,7 +139,6 @@ function updateItemFromCart(_id, value) {
         let data = [];
         data = JSON.parse(books);
         data = updateQuantity(_id, value, data);
-        console.log(data);
         window.localStorage.setItem("books", JSON.stringify(data));
         updateCartApi(data);
       }
@@ -166,15 +163,13 @@ function updateQuantity(id, value, books) {
 }
 
 function getUserCartInfoApi(userID) {
-  console.log(userID);
   $.ajax({
-    url: "api/get-cart/user",
+    url: "/api/get-cart/user",
     type: "GET",
     data: {
       userID: userID,
     },
     success: function (res) {
-      console.log(res);
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
@@ -194,16 +189,14 @@ function getUserCartInfoApi(userID) {
   });
 }
 function addBookToUserCart(_id) {
-  console.log(userID);
   $.ajax({
-    url: "api/add-book-to-cart/user",
+    url: "/api/add-book-to-cart/user",
     type: "GET",
     data: {
       userID: userID,
       bookID: _id,
     },
     success: function (res) {
-      console.log(res);
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
@@ -223,16 +216,14 @@ function addBookToUserCart(_id) {
   });
 }
 function removeBookFromUserCart(_id) {
-  console.log(userID);
   $.ajax({
-    url: "api/del-book-from-cart/user",
+    url: "/api/del-book-from-cart/user",
     type: "GET",
     data: {
       userID: userID,
       bookID: _id,
     },
     success: function (res) {
-      console.log(res);
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
@@ -252,9 +243,8 @@ function removeBookFromUserCart(_id) {
   });
 }
 function updateItemFromUserCart(_id, value) {
-  console.log(userID);
   $.ajax({
-    url: "api/update-book-from-cart/user",
+    url: "/api/update-book-from-cart/user",
     type: "GET",
     data: {
       userID: userID,
@@ -262,7 +252,6 @@ function updateItemFromUserCart(_id, value) {
       quantity: value,
     },
     success: function (res) {
-      console.log(res);
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>

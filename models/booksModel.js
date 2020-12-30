@@ -19,11 +19,10 @@ exports.searchBook = async bookName => {
   const books = await bookCollection
     .find({ title: { $regex: bookName, $options: "i" }, is_deleted: false })
     .toArray();
-  console.log(books);
+
   if (books == null) console.log("Không tìm thấy");
   else {
     console.log("Tìm thấy");
-    console.log();
   }
   return books;
 };
@@ -162,8 +161,9 @@ exports.getCartInfo = async data => {
   const bookCollection = await db().collection("Books");
   const books = await bookCollection.find({ _id: { $in: arrID } }).toArray();
   for (let i = 0; i < books.length; i++) {
-    books[i].quantity = data[i].quantity;
-    books[i].totalPrice = data[i].quantity * books[i].basePrice;
+    const quantity = getQuantityAtIndex(data, books[i]._id);
+    books[i].quantity = quantity;
+    books[i].totalPrice = quantity * books[i].basePrice;
   }
   return books;
 };
