@@ -42,7 +42,7 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   const searchText = document.getElementById("searchText").value;
   console.log(searchText);
   $.ajax({
-    url: "./api/paging",
+    url: "/api/paging/",
     type: "GET",
     data: {
       page: currentPage,

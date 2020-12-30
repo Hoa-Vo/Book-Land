@@ -17,6 +17,7 @@ const accountRouter = require("./routes/account");
 const cartRouter = require("./routes/cart");
 const checkOutRouter = require("./routes/checkout");
 const cartApiRouter = require("./routes/api/cartApi");
+const pagingApiRouter = require("./routes/api/pagingApi");
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -52,7 +53,7 @@ app.get("/logout", (req, res) => {
 app.use("/api/cart", cartApiRouter);
 app.use("/cart", cartRouter);
 app.use("/checkout", checkOutRouter);
-
+app.use("/api/paging", pagingApiRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
