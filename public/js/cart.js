@@ -86,7 +86,7 @@ function isNumberKey(evt) {
 }
 function updateCartApi(data) {
   $.ajax({
-    url: "/api/get-cart",
+    url: "/api/cart/get-cart",
     type: "GET",
     data: {
       cart: data,
@@ -168,7 +168,7 @@ function updateQuantity(id, value, books) {
 function getUserCartInfoApi(userID) {
   console.log(userID);
   $.ajax({
-    url: "/api/get-cart/user",
+    url: "/api/cart/get-cart/user",
     type: "GET",
     data: {
       userID: userID,
@@ -196,7 +196,7 @@ function getUserCartInfoApi(userID) {
 function addBookToUserCart(_id) {
   console.log(userID);
   $.ajax({
-    url: "/api/add-book-to-cart/user",
+    url: "/api/cart/add-book-to-cart/user",
     type: "GET",
     data: {
       userID: userID,
@@ -225,7 +225,7 @@ function addBookToUserCart(_id) {
 function removeBookFromUserCart(_id) {
   console.log(userID);
   $.ajax({
-    url: "/api/del-book-from-cart/user",
+    url: "/api/cart/del-book-from-cart/user",
     type: "GET",
     data: {
       userID: userID,
@@ -254,7 +254,7 @@ function removeBookFromUserCart(_id) {
 function updateItemFromUserCart(_id, value) {
   console.log(userID);
   $.ajax({
-    url: "/api/update-book-from-cart/user",
+    url: "/api/cart/update-book-from-cart/user",
     type: "GET",
     data: {
       userID: userID,
