@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 exports.list = async () => {
   const bookCollection = await db().collection("Books");
-  const books = await bookCollection.find({}).toArray();
+  const books = await bookCollection.find({ is_deleted: false }).toArray();
   return books;
 };
 exports.get = async id => {
@@ -108,17 +108,19 @@ exports.paging = async (page, pageLimit, category, searchText) => {
   let books;
   if (category) {
     books = await bookCollection
-      .find({ category_id: category })
+      .find({ category_id: category, is_deleted: false })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
     totalBook = books.length;
   } else if (searchText) {
-    books = await bookCollection.find({ title: { $regex: searchText, $options: "i" } }).toArray();
+    books = await bookCollection
+      .find({ title: { $regex: searchText, $options: "i" }, is_deleted: false })
+      .toArray();
     totalBook = books.length;
   } else {
     books = await bookCollection
-      .find({})
+      .find({ is_deleted: false })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
