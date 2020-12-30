@@ -50,8 +50,10 @@ exports.checkValidPassword = async (id, plainPassword) => {
 exports.registerNewuser = async (newUsername, plainNewPassword, newEmail) => {
   console.log(newUsername, plainNewPassword, newEmail);
   let res = await accountModel.addNewUser(newUsername, plainNewPassword, newEmail);
-  let newuser = await accountModel.getUserByUsername(newUsername);
-  this.sendVerifyEmail(newuser._id);
+  console.log("ressssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+  console.log(res)
+  //let newuser = await accountModel.getUserByUsername(newUsername);
+  this.sendVerifyEmail(res);
 };
 
 exports.vefifyEmail = async id => {
