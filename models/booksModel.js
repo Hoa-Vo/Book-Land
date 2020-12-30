@@ -154,43 +154,7 @@ const getQuantityAtIndex = (data, id) => {
   }
 };
 
-exports.insertComment = async commentObj => {
-  const commentCollection = await db().collection("CommentsBook");
-  let success = true;
-  let commentAdded = commentCollection.insertOne(commentObj);
-  if (commentAdded == null || commentAdded == undefined) {
-    success = false;
-  }
-  return success;
-};
-
-exports.fetchAllComments = async bookId => {
-  const commentCollection = await db().collection("CommentsBook");
-  let commentsList = commentCollection.find({ bookId: bookId }).sort({ _id: -1 }).toArray();
-
-  return commentsList;
-};
-
-exports.commentCount = async bookId => {
-  const commentCollection = await db().collection("CommentsBook");
-  let result = await db().collection("CommentsBook").find({ bookId: bookId }).count();
-  return result;
-};
-
-exports.fetchCommentsByPage = async (bookId, pageLimit, page) => {
-  const currentPage = parseInt(page);
-  const limit = parseInt(pageLimit);
-  const commentsCollection = await db().collection("CommentsBook");
-  var commentList = await commentsCollection
-    .find({ bookId: bookId })
-    .sort({ _id: -1 })
-    .skip(limit * currentPage - limit)
-    .limit(limit)
-    .toArray();
-  return commentList;
-};
 exports.getCartInfo = async data => {
-  console.log(data);
   let arrID = [];
   for (let i = 0; i < data.length; i++) {
     arrID.push(ObjectID(data[i].id));
@@ -201,6 +165,5 @@ exports.getCartInfo = async data => {
     books[i].quantity = data[i].quantity;
     books[i].totalPrice = data[i].quantity * books[i].basePrice;
   }
-  console.log(books);
   return books;
 };
