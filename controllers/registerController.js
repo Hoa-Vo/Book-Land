@@ -7,6 +7,7 @@ exports.renderRegisterPage = (req, res, next) => {
 
 exports.registerNewUser = async (req,res,next) => {
    console.log("To register controller");
+   console.log(req.body);
    await accountServices.registerNewuser
    (req.body.username,req.body.password,req.body.email); 
    res.redirect("/login");
