@@ -203,8 +203,10 @@ function setPageNumber()
 
 function refresh_comment_post()
 {
-    document.getElementById("YourName").value="";
-    document.getElementById('YourEmail').value="";
+    if(isSingedIn==false){
+        document.getElementById("YourName").value="";
+        document.getElementById('YourEmail').value="";
+    }
     document.getElementById("YourThoughts").value="";
 }
 
