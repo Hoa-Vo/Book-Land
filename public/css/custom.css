@@ -36,3 +36,13 @@
 .btn-div {
   width: 100%;
 }
+.checkout-book-info {
+  display: flex;
+}
+.checkout-book-image {
+  height: 100px;
+  margin-left: 20px;
+}
+.checkout-div {
+  justify-content: space-between;
+}
