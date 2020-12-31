@@ -20,7 +20,7 @@
 							data-children=".sub-men">
 							<div class="list-group-collapse sub-men">
 								<a href="/bookslist/" class="list-group-item" aria-expanded="true"
-									aria-controls="sub-men1">Tất cả <small class="text-muted"></small>
+									aria-controls="sub-men1">Tất cả <small class="text-muted">({{totalBooks}})</small>
 								</a>
 								<div class="collapse show" id="sub-men1" data-parent="#list-group-men">
 									<p id="category_id" style="display: none;">{{currentCategoryId}}</p>
@@ -122,7 +122,7 @@
 								<li>
 									<a class="nav-link active" href="#grid-view" data-toggle="tab"> <i
 											class="fa fa-th"></i> </a>
-								</li>     
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -136,11 +136,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="button-bar">
-				<nav aria-label="Page navigation example">
-					<ul id="btn-list" class="pagination">
-					</ul>
-				</nav>
+			<div class="row btn-div">
+				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12"></div>
+				<div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12">
+					<div class="button-bar">
+						<nav aria-label="Page navigation example">
+							<ul id="btn-list" class="pagination">
+							</ul>
+						</nav>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -151,7 +156,7 @@
 	<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
 		<div class="products-single fix">
 			<div class="box-img-hover">
-				<img src="images/booksImage/\{{image_link}}" class="img-fluid book-image" alt="Image">
+				<img src="\{{image_link}}" class="img-fluid book-image" alt="Image">
 				<div class="mask-icon">
 					<ul>
 						<li><a href="/bookslist/\{{_id}}" data-toggle="tooltip" data-placement="right" title="Xem"><i

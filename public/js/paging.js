@@ -36,13 +36,13 @@ function setPage(num) {
   fetchData(currentPage, booksPerPage, 0);
 }
 async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
-  $("#book-list").html("<div id='loading'>Loading...</div>");
+  $("#book-list").html("<div id='loading'>Đang tải...</div>");
   const category_id = document.getElementById("category_id").textContent;
-  console.log(category_id);
+
   const searchText = document.getElementById("searchText").value;
-  console.log(searchText);
+
   $.ajax({
-    url: "./api/paging",
+    url: "/api/paging/",
     type: "GET",
     data: {
       page: currentPage,
@@ -57,37 +57,55 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
       if (maxPage === 0) {
         maxPage = Math.ceil(totalBook / booksPerPage);
       }
-      console.log(res.data);
-      console.log(maxPage);
-      if (isPrevNextClick) {
-        let btnArr;
-        if (isPrevNextClick == 2) {
-          btnArr = listOfButtonNext(currentPage, maxButtonPerPage, maxPage);
-        } else {
-          btnArr = listOfButtonPrev(currentPage, maxButtonPerPage, maxPage);
+      if (res.data.books.length > 0) {
+        if (isPrevNextClick) {
+          let btnArr;
+          if (isPrevNextClick == 2) {
+            btnArr = listOfButtonNext(currentPage, maxButtonPerPage, maxPage);
+          } else {
+            btnArr = listOfButtonPrev(currentPage, maxButtonPerPage, maxPage);
+          }
+          pageNumberBar = "empty";
+          if (btnArr.length) {
+            updatePagination(btnArr);
+          }
         }
-        pageNumberBar = "empty";
-        if (btnArr.length) {
+        if (!pageNumberBar) {
+          let btnArr = [];
+          let condition = maxPage < maxButtonPerPage ? maxPage : maxButtonPerPage;
+          for (let i = 1; i <= condition; i++) {
+            btnArr.push(i);
+          }
           updatePagination(btnArr);
         }
-      }
-      if (!pageNumberBar) {
-        let btnArr = [];
-        let condition = maxPage < maxButtonPerPage ? maxPage : maxButtonPerPage;
-        for (let i = 1; i <= condition; i++) {
-          btnArr.push(i);
+        updateBookList(res.data.books);
+        if (category_id) {
+          history.pushState(
+            {},
+            "",
+            `?categoryID=${category_id}&page=${currentPage}&pagelimit=${booksPerPage}`
+          );
+        } else if (searchText) {
+          history.pushState(
+            {},
+            "",
+            `search/?bookName=${searchText}&page=${currentPage}&pagelimit=${booksPerPage}`
+          );
+        } else {
+          history.pushState({}, "", `?page=${currentPage}&pagelimit=${booksPerPage}`);
         }
-        updatePagination(btnArr);
-      }
-      updateBookList(res.data.books);
-      inThisPage(currentPage);
-      if (currentPage === 1) {
-        $("#prevBtn").addClass("disabled");
-      } else if (currentPage === maxPage) {
-        $("#nextBtn").addClass("disabled");
+
+        inThisPage(currentPage);
+        if (currentPage === 1) {
+          $("#prevBtn").addClass("disabled");
+        } else if (currentPage === maxPage) {
+          $("#nextBtn").addClass("disabled");
+        } else {
+          $("#prevBtn").removeClass("disabled");
+          $("#nextBtn").removeClass("disabled");
+        }
       } else {
-        $("#prevBtn").removeClass("disabled");
-        $("#nextBtn").removeClass("disabled");
+        $("#book-list").html("<div id='loading'>Không tìm thấy cuốn sách nào</div>");
       }
     },
     error: function (jqXHR, textStatus, err) {
@@ -96,7 +114,6 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   });
 }
 function updatePagination(btnArr) {
-  console.log(btnArr);
   let content = [];
   btnArr.forEach(element => {
     const temp = { num: `${element}` };

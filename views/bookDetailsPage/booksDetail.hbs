@@ -5,14 +5,13 @@
 <div class="container">
     <div class="card">
         <div class="container-fliud">
-            <p id="bookId"  style="display: none;">{{id}}</p>
-            <p id="user-name"  style="display: none;">{{userToShow.name}}</p>
-            <p id="user-id"  style="display: none;">{{userToShow._id}}</p>
+            <p id="bookId" style="display: none;">{{id}}</p>
+            <p id="user-name" style="display: none;">{{userToShow.name}}</p>
+            <p id="user-id" style="display: none;">{{userToShow._id}}</p>
             <p id="user-email" style="display: none;">{{userToShow.email}}</p>
             <div class="preview col-md-6">
                 <div class="preview-pic tab-content">
-                    <div class="tab-pane active bookimage" id="pic-1"><img class="book-img"
-                            src="images/booksImage/{{imageLink}}" />
+                    <div class="tab-pane active bookimage" id="pic-1"><img class="book-img" src="{{imageLink}}" />
                     </div>
                 </div>
             </div>
@@ -58,8 +57,9 @@
                         aria-selected="false">Thông tin chi tiết</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" onclick="return load_comment_paging();" role="tab"
-                        aria-controls="reviews" aria-selected="false">Bình luận (<span id="comment-count-2"></span>)</a>
+                    <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews"
+                        onclick="return load_comment_paging();" role="tab" aria-controls="reviews"
+                        aria-selected="false">Bình luận (<span id="comment-count-2"></span>)</a>
                 </li>
             </ul>
             <div class="tab-content" id="advancedTabContent">
@@ -106,31 +106,31 @@
                         </tbody>
                     </table>
                 </div>
-                
                 <hr>
                 <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                     <div>
-                        <form id="comment-form" onsubmit ="return insert_comment();">
+                        <form id="comment-form" onsubmit="return insert_comment();">
                             <div id="comment-frame">
                             </div>
                             <br>
                             <div id="alert-success" class="alert alert-success" role="alert" style="display: none;">
                             </div>
-                            <div id="alert-danger" class="alert alert-danger" role="alert" style="display: none;" >
+                            <div id="alert-danger" class="alert alert-danger" role="alert" style="display: none;">
                             </div>
                             <div class="text-right pb-2">
-                                <input type="submit" onclick="return insert_comment();" value="Gửi" class="btn btn-primary"></input>
+                                <input type="submit" onclick="return insert_comment();" value="Gửi"
+                                    class="btn btn-primary"></input>
                             </div>
                         </form>
                     </div>
-                    <h5><span id ="comment-count-3"></span> bình luận cho  <span>{{title}}</span></h5>
+                    <h5><span id="comment-count-3"></span> bình luận cho <span>{{title}}</span></h5>
                     <div class="media mt-3 mb-4">
                         <div class="media-body">
-                             <div class="tab-content">
-                                <div class="tab-pane active" >                
+                            <div class="tab-content">
+                                <div class="tab-pane active">
                                     <ul id="comments-list" class="media-list"></ul>
                                 </div>
-                             </div>
+                            </div>
                         </div>
                     </div>
                     <div class="button-bar">
@@ -140,7 +140,6 @@
                         </nav>
                     </div>
                     <hr>
-                    
                 </div>
             </div>
         </div>
@@ -172,7 +171,6 @@
     \{{/each}}
 
 </script>
-
 <script id="paging-list" type="text/x-handlebars-template">
 	<li id="prevBtn" class="page-item " >
 		<a   class="page-link " onclick="prevBtnClick()" aria-label="Previous">
@@ -190,25 +188,24 @@
 		</a>
 	</li>
 </script>
-
 <script id="comment-loged-in" type="text/x-handlebars-template">
-   
-    <!-- Your review -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object img-circle" src="http://bootdey.com/img/Content/user_1.jpg" alt="profile">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading text-uppercase reviews">\{{name}}</h4>
-        </div>
-    </div>
-    <br/>
-    <div class="md-form md-outline">
-        <label for="form76">Suy nghĩ</label>
-        <textarea id="YourThoughts" id="form76" class="md-textarea form-control pr-6" placeholder="Suy nghĩ của bạn"rows="4"></textarea>
-    </div>                  
-</script>
 
+    <!-- Your review -->
+<div class="media">
+    <a class="pull-left" href="#">
+        <img class="media-object img-circle" src="http://bootdey.com/img/Content/user_1.jpg" alt="profile">
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading text-uppercase reviews">\{{name}}</h4>
+    </div>
+</div>
+<br />
+<div class="md-form md-outline">
+    <label for="form76">Suy nghĩ</label>
+    <textarea id="YourThoughts" id="form76" class="md-textarea form-control pr-6" placeholder="Suy nghĩ của bạn"
+        rows="4"></textarea>
+</div>
+</script>
 <script id="comment-anonymous" type="text/x-handlebars-template">
     <h5 class="mt-4">Gửi bình luận</h5>
     <p>Email của bạn sẽ được bảo mật</p>

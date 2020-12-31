@@ -15,6 +15,9 @@ const registerRouter = require("./routes/register");
 const booksListRouter = require("./routes/bookslist");
 const accountRouter = require("./routes/account");
 const cartRouter = require("./routes/cart");
+const checkOutRouter = require("./routes/checkout");
+const verifyRouter = require("./routes/verify");
+const apiRouter = require("./routes/api");
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -43,12 +46,15 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/bookslist", booksListRouter);
 app.use("/account", accountRouter);
-app.get("/logout", (req,res) => 
-{
-   req.logOut();
-   res.redirect("/");
-} )
+app.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/");
+});
 app.use("/cart", cartRouter);
+app.use("/checkout", checkOutRouter);
+app.use("/cart", cartRouter);
+app.use("/verify", verifyRouter);
+app.use("/api", apiRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -64,10 +70,10 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
- 
-const PORT=5000;
-app.listen(PORT,()=>{
-  console.log('Listening at port= %PORT%');
-})
+
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log("Listening at port= %PORT%");
+});
 
 module.exports = app;

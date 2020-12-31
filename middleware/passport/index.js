@@ -1,7 +1,8 @@
 const flash = require('connect-flash');
 const passport = require("passport");
 const localstrategy = require("passport-local").Strategy;
-const accountModel = require("../../models/accountModel"); 
+const accountModel = require("../../models/accountModel");
+const accoutServices = require("../../services/accountServices") 
 
 passport.use(new localstrategy (
     async function(username,password,done)
@@ -19,7 +20,7 @@ passport.use(new localstrategy (
       console.log("type of id: "); 
       console.log(typeof idToCheckPassword);
       console.log(`Inside strategy execution: id: ${idToCheckPassword}`); 
-      const passwordCheck = await accountModel.checkValidPassword(idToCheckPassword,password); 
+      const passwordCheck = await accoutServices.checkValidPassword(idToCheckPassword,password); 
       console.log(`Inside strategy execution: passcheck: ${passwordCheck}`); 
  
       if(!passwordCheck)

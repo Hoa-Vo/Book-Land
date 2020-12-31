@@ -3,7 +3,7 @@
 <!-- Basic -->
 
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -211,18 +211,18 @@
 		\{{#each this}}
 	        <li>
 				<div style="display: flex;">					
-					<a href="#" class="photo"><img src="images/booksImage/\{{image_link}}" class="cart-thumb" alt="" /></a>
+					<a href="#" class="photo"><img src="\{{image_link}}" class="cart-thumb" alt="" /></a>
 					<div style="margin-left:8px;">
 						<h6><a href="/bookslist/\{{_id}}">\{{title}} </a></h6>
-						<p>\{{quantity}}x - <span class="price">\{{totalPrice}} VND</span></p>
+						<p>\{{quantity}} x - <span class="price">\{{totalPrice}} VND</span></p>
 					</div>
 				
 				</div>
 			</li>
 		\{{/each}}
-		<li class="total">
-			<a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-			<span id="total-money" class="float-right"><strong>Total</strong></span>
+		<li style="display: flex;" class="total">
+			<a style="margin-right: 10px;" href="/cart" class="btn btn-default hvr-hover btn-cart">Xem</a>
+			<span id="total-money" class="float-right"><strong>Tổng cộng</strong></span>
 		</li>
 	</script>
 	<script id="user-info" type="text/x-handlebars-template">

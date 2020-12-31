@@ -3,6 +3,8 @@
 }
 .button-bar {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .page-link {
   color: black;
@@ -10,7 +12,7 @@
   width: 50px;
   text-align: center;
 }
-#loading{
+#loading {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -20,14 +22,17 @@
 }
 .pagination {
   display: -ms-flexbox;
-  display: flex!important;
+  display: flex !important;
   padding-left: 0;
   list-style: none;
   border-radius: 0.25rem;
 }
-#book-list{
+#book-list {
   height: 100vh;
 }
-#btn-list{
+#btn-list {
   float: right;
+}
+.btn-div {
+  width: 100%;
 }
