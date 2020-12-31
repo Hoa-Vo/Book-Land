@@ -63,3 +63,13 @@ exports.isExistsUsername = async inputUsername => {
     return false;
   }
 };
+
+exports.isExistsEmail = async inputEmail => {
+  const userCollection = await db().collection("registeredUser");
+  let userDocument = await userCollection.findOne({ email: inputEmail });
+  if(userDocument)
+  {
+    return true; 
+  }
+  return false;
+}

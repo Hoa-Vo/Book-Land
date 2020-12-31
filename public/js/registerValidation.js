@@ -36,7 +36,19 @@ function checkExistedUsername() {
     },
     statusCode: {
       404: function () {},
-      202: function (res) {},
+      202: function (res) {
+        let notifyElement = document.getElementById("usercheck-notify"); 
+        console.log(res);
+        if(res)
+        {
+          notifyElement.innerHTML = "&#10060 Tên người dùng đã tồn tại, chọn tên khác";
+          notifyElement.style = "color: red"; 
+        }
+        else{
+          notifyElement.innerHTML = "&#9989 Bạn có thể dùng tên này";
+          notifyElement.style = "color: #006400"; 
+        }
+      },
     },
     error: function (jqXHR, textStatus, err) {
       console.log(err);

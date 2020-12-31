@@ -65,3 +65,9 @@ exports.checkExistsUsername = async inputUsername => {
 
   return result;
 };
+
+exports.checkExistsEmail = async inputEmail => 
+{
+  let result = await accountModel.isExistsEmail(inputEmail); 
+  return result; 
+}
