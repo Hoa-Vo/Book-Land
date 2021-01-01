@@ -104,6 +104,7 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
           $("#prevBtn").removeClass("disabled");
           $("#nextBtn").removeClass("disabled");
         }
+        $("html, body").animate({ scrollTop: 0 }, 600);
       } else {
         $("#book-list").html("<div id='loading'>Không tìm thấy cuốn sách nào</div>");
       }

@@ -43,7 +43,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="address">Địa chỉ</label>
-                            <input type="text" class="form-control" id="address" placeholder="" required>
+                            <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ nhận hàng"
+                                required>
                             <div class="invalid-feedback"> Please enter your shipping address. </div>
                         </div>
                         <hr class="mb-4">
@@ -53,7 +54,9 @@
                             </label>
                         </div>
                         <hr class="mb-4">
-                        <div class="title"> <span>Phương thức thanh toán</span> </div>
+                        <div class="title-left">
+                            <h3>Phương thức thanh toán</h3>
+                        </div>
                         <div class="d-block my-3">
                             <div class="custom-control custom-radio">
                                 <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
@@ -116,28 +119,28 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="shipping-method-box">
                             <div class="title-left">
-                                <h3>Shipping Method</h3>
+                                <h3>Phương thức vận chuyển</h3>
                             </div>
                             <div class="mb-4">
                                 <div class="custom-control custom-radio">
                                     <input id="shippingOption1" name="shipping-option" class="custom-control-input"
                                         checked="checked" type="radio">
-                                    <label class="custom-control-label" for="shippingOption1">Standard Delivery</label>
-                                    <span class="float-right font-weight-bold">FREE</span>
+                                    <label class="custom-control-label" for="shippingOption1">Bình thường</label>
+                                    <span class="float-right font-weight-bold">Miễn phí</span>
                                 </div>
-                                <div class="ml-4 mb-2 small">(3-7 business days)</div>
+                                <div class="ml-4 mb-2 small">(3-7 ngày)</div>
                                 <div class="custom-control custom-radio">
                                     <input id="shippingOption2" name="shipping-option" class="custom-control-input"
                                         type="radio">
-                                    <label class="custom-control-label" for="shippingOption2">Express Delivery</label>
-                                    <span class="float-right font-weight-bold">$10.00</span>
+                                    <label class="custom-control-label" for="shippingOption2">Express</label>
+                                    <span class="float-right font-weight-bold">200000 VND</span>
                                 </div>
-                                <div class="ml-4 mb-2 small">(2-4 business days)</div>
+                                <div class="ml-4 mb-2 small">(2-4 ngày)</div>
                                 <div class="custom-control custom-radio">
                                     <input id="shippingOption3" name="shipping-option" class="custom-control-input"
                                         type="radio">
-                                    <label class="custom-control-label" for="shippingOption3">Next Business day</label>
-                                    <span class="float-right font-weight-bold">$20.00</span>
+                                    <label class="custom-control-label" for="shippingOption3">Hỏa tốc</label>
+                                    <span class="float-right font-weight-bold">50000 VND</span>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +148,7 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="odr-box">
                             <div class="title-left">
-                                <h3>Shopping cart</h3>
+                                <h3>Sản phẩm</h3>
                             </div>
                             <div id="info-list" class="rounded p-2 bg-light">
                             </div>
@@ -154,44 +157,45 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="order-box">
                             <div class="title-left">
-                                <h3>Your order</h3>
+                                <h3>Đơn hàng của bạn</h3>
                             </div>
                             <div class="d-flex">
-                                <div class="font-weight-bold">Product</div>
-                                <div class="ml-auto font-weight-bold">Total</div>
+                                <div class="font-weight-bold">Các chi phí</div>
+                                <div class="ml-auto font-weight-bold">Số tiền</div>
                             </div>
                             <hr class="my-1">
                             <div class="d-flex">
-                                <h4>Sub Total</h4>
+                                <h4>Tổng cộng</h4>
                                 <div class="ml-auto font-weight-bold"> $ 440 </div>
                             </div>
                             <div class="d-flex">
-                                <h4>Discount</h4>
+                                <h4>Giảm giá</h4>
                                 <div class="ml-auto font-weight-bold"> $ 40 </div>
                             </div>
                             <hr class="my-1">
                             <div class="d-flex">
-                                <h4>Coupon Discount</h4>
+                                <h4>Áp dụng mã giảm giá</h4>
                                 <div class="ml-auto font-weight-bold"> $ 10 </div>
                             </div>
                             <div class="d-flex">
-                                <h4>Tax</h4>
+                                <h4>Thuế</h4>
                                 <div class="ml-auto font-weight-bold"> $ 2 </div>
                             </div>
                             <div class="d-flex">
-                                <h4>Shipping Cost</h4>
-                                <div class="ml-auto font-weight-bold"> Free </div>
+                                <h4>Phí vận chuyển</h4>
+                                <div class="ml-auto font-weight-bold"> Miễn phí </div>
                             </div>
                             <hr>
                             <div class="d-flex gr-total">
-                                <h5>Grand Total</h5>
+                                <h5>Số tiền phải thanh toán</h5>
                                 <div class="ml-auto h5"> $ 388 </div>
                             </div>
                             <hr>
                         </div>
                     </div>
-                    <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Place
-                            Order</a> </div>
+                    <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Tiến
+                            hành thanh toán
+                        </a> </div>
                 </div>
             </div>
         </div>
@@ -204,7 +208,7 @@
     
         <div class="checkout-book-info">
             <div class="media-body"> <a href="bookslist/\{{_id}}">\{{title}}</a>
-                <div class="small text-muted">Giá: \{{basePrice}} VND <span class="mx-2">|</span>SL:
+                <div class="small text-muted">Giá: \{{basePrice}} VND <span class="mx-2">|</span>Số lượng:
                 \{{quantity}}
                     <span class="mx-2">|</span> Tổng cộng: \{{totalPrice}} VND
                 </div>

@@ -1,0 +1,1 @@
+ $("#cart-list").html(template(books));
