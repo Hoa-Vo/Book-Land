@@ -93,7 +93,7 @@ function checkExistedEmail() {
           202: function (res) {
             if(res)
             {
-              OKemail = false;
+              OKemail = false  ;
               updateStatusRegisterButton(); 
               notifyElement.innerHTML = "&#10005 Email này đã được đăng kí, bạn có muốn <a href = '/login'>đăng nhập</a>";
               notifyElement.style = "color: red"; 
