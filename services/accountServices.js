@@ -47,7 +47,7 @@ exports.sendVerifyEmail = async userid => {
 exports.sendResetPasswordEmail = async userid => {
   const user = await accountModel.getUserById(userid); 
   console.log(`User to send reset password: ${user.name}`); 
-  sendEmail(user.email, "[No-reply] Bookland: lấy lại mật khẩu của bạn", `<p> Vào liên kết sau để reset mật khẩu cho tài khoản ${user.name}của bạn: 
+  sendEmail(user.email, "[No-reply] Bookland: Lấy lại mật khẩu của bạn", `<p> Vào liên kết sau để reset mật khẩu cho tài khoản ${user.name}của bạn: 
   localhost:3000/forgotPassword/${userid} </p>`); 
 }
 
