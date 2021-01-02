@@ -33,17 +33,17 @@
         </div>
         <span id = "emailcheck-notify"></span>
         <div class="wrap-input100 validate-input" data-validate="Password is required">
-          <input id="password-box" class="input100" type="password" name="password">
+          <input onkeyup="checkPassword()" id="password-box" class="input100" type="password" name="password">
           <span class="focus-input100"></span>
           <span class="label-input100">Mật khẩu</span>
         </div>
-        <span id= "passwordcheck-notify">zzz</span>
+        <span id= "passwordcheck-notify"></span>
         <div class="wrap-input100 validate-input" data-validate="Password is required">
-          <input id="repassword-box" class="input100" type="password" name="repassword">
+          <input onkeyup="checkRepassword()" id="repassword-box" class="input100" type="password" name="repassword">
           <span class="focus-input100"></span>
           <span class="label-input100">Xác nhận mật khẩu</span>
         </div>
-        <span id= "repasswordcheck-notify">zzz</span>
+        <span id= "repasswordcheck-notify"></span>
         <div class="container-login100-form-btn">
           <button disabled="true" style="background-color: black;" id="register-button" type="submit" class="login100-form-btn">
             Đăng kí
