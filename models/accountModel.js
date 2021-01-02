@@ -18,6 +18,13 @@ exports.getUserByUsername = async name => {
   const user = await userCollection.findOne({ name: name });
   return user;
 };
+// get user by email
+exports.getUserByEmail = async email => 
+{
+  const userCollection = await db().collection("registeredUser");
+  const user = await userCollection.findOne({ email: email });
+  return user; 
+}
 // list all user
 exports.listAll = async () => {
   const userCollection = await db().collection("registeredUser");
