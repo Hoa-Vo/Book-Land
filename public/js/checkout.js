@@ -53,6 +53,7 @@ function cityChange() {
       city: value,
     },
     success: function (res) {
+      res.allDistrict.sort((a, b) => (a.name > b.name ? 1 : -1));
       $("#district").prop("disabled", false);
       const districtSource = $("#district-info").html();
       const template = Handlebars.compile(districtSource);
@@ -75,7 +76,7 @@ function districtChange() {
 function findDistrict(value) {
   for (let i = 0; i < allDistrict.length; i++) {
     if (allDistrict[i].name === value) {
-      return allDistrict[i].sub_district;
+      return allDistrict[i].sub_district.sort();
     }
   }
 }
