@@ -1,5 +1,8 @@
+let allDistrict;
 $(document).ready(() => {
+  $(".loader").css("display", "flex");
   upDateCheckoutInfo();
+  updateCombobox();
 });
 function upDateCheckoutInfo() {
   pTagContent = $("#user-info").html();
@@ -26,4 +29,53 @@ function updateCheckOutHtml(books) {
   console.log(totalMoney);
   $("#total-money-pay").html(`${totalMoney} VND`);
   $("#money-pay").html(`${totalMoney} VND`);
+}
+function checkOutInfoIsValid() {}
+function updateCombobox() {
+  $.ajax({
+    url: "/api/get-city",
+    type: "GET",
+    success: function (res) {
+      const citySource = $("#city-info").html();
+      const template = Handlebars.compile(citySource);
+      $("#city").html(template(res.allCityName));
+      $(".loader").css("display", "none");
+    },
+  });
+}
+function cityChange() {
+  $(".loader").css("display", "flex");
+  const value = $("#city").find(":selected").text();
+  $.ajax({
+    url: "/api/get-district",
+    type: "GET",
+    data: {
+      city: value,
+    },
+    success: function (res) {
+      $("#district").prop("disabled", false);
+      const districtSource = $("#district-info").html();
+      const template = Handlebars.compile(districtSource);
+      $("#district").html(template(res.allDistrict));
+      allDistrict = res.allDistrict;
+      $(".loader").css("display", "none");
+    },
+  });
+}
+function districtChange() {
+  $(".loader").css("display", "flex");
+  const value = $("#district").find(":selected").text();
+  const subDistrictArr = findDistrict(value);
+  $("#sub-district").prop("disabled", false);
+  const subDistrictSource = $("#sub-district-info").html();
+  const template = Handlebars.compile(subDistrictSource);
+  $("#sub-district").html(template(subDistrictArr));
+  $(".loader").css("display", "none");
+}
+function findDistrict(value) {
+  for (let i = 0; i < allDistrict.length; i++) {
+    if (allDistrict[i].name === value) {
+      return allDistrict[i].sub_district;
+    }
+  }
 }

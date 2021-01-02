@@ -17,26 +17,24 @@
                         </div>
                         <div class="row">
                             <div class="col-md-5 mb-3">
-                                <label for="country">Tỉnh/Thành phố</label>
-                                <select class="wide w-100" id="country">
-                                    <option value="Choose..." data-display="Select">Chọn...</option>
-                                    <option value="United States">Hồ Chí Minh</option>
+                                <label for="city">Tỉnh/Thành phố</label>
+                                <select onchange="cityChange()" class="wide w-100 combo-box" id="city">
+                                    <option value="" disabled selected hidden>Vui lòng chọn tỉnh/thành phố
+                                    </option>
                                 </select>
                                 <div class="invalid-feedback"> Please select a valid country. </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="state">Quận/Huyện</label>
-                                <select class="wide w-100" id="state">
-                                    <option data-display="Select">Chọn...</option>
-                                    <option>Quận 1</option>
+                                <label for="district">Quận/Huyện</label>
+                                <select onchange="districtChange()" disabled class="wide w-100 combo-box" id="district">
+                                    <option value="" disabled selected hidden>Vui lòng chọn quận/huyện</option>
                                 </select>
                                 <div class="invalid-feedback"> Please provide a valid state. </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="state">Phường/Xã</label>
-                                <select class="wide w-100" id="state">
-                                    <option data-display="Select">Chọn...</option>
-                                    <option>Phường 7</option>
+                                <label for="sub-district">Phường/Xã</label>
+                                <select disabled class="wide w-100 combo-box" id="sub-district">
+                                    <option value="" disabled selected hidden>Vui lòng chọn phường/xã</option>
                                 </select>
                                 <div class="invalid-feedback"> Please provide a valid state. </div>
                             </div>
@@ -193,7 +191,8 @@
                             <hr>
                         </div>
                     </div>
-                    <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Tiến
+                    <div class="col-12 d-flex shopping-box"> <a onclick="checkOutInfoIsValid()"
+                            class="ml-auto btn hvr-hover">Tiến
                             hành thanh toán
                         </a> </div>
                 </div>
@@ -214,9 +213,30 @@
                 </div>
             </div>
         </div>
-    <div  ><img class="checkout-book-image" src="\{{image_link}}"></div>
+        <div><img class="checkout-book-image" src="\{{image_link}}"></div>
     
-</div>
-\{{/each}}
+    </div>
+    \{{/each}}
+</script>
+<script id="city-info" type="text/x-handlebars-template">
+    <option value="" disabled selected hidden>Vui lòng chọn tỉnh/thành phố
+    </option>
+    \{{#each this}}
+      <option>\{{name}}</option>
+    \{{/each}}
+</script>
+<script id="district-info" type="text/x-handlebars-template">
+    <option value="" disabled selected hidden>Vui lòng chọn quận/huyện
+    </option>
+    \{{#each this}}
+      <option>\{{name}}</option>
+    \{{/each}}
+</script>
+<script id="sub-district-info" type="text/x-handlebars-template">
+    <option value="" disabled selected hidden>Vui lòng chọn phường/xã
+    </option>
+    \{{#each this}}
+      <option>\{{this}}</option>
+    \{{/each}}
 </script>
 <!-- End Cart -->

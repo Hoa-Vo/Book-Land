@@ -85,6 +85,7 @@ function isNumberKey(evt) {
   return true;
 }
 function updateCartApi(data) {
+  $(".loader").css("display", "flex");
   $.ajax({
     url: "/api/get-cart",
     type: "GET",
@@ -100,11 +101,13 @@ function updateCartApi(data) {
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
         $("#empty-cart").css("display", "block");
+        $(".loader").css("display", "none");
       } else {
         $("#empty-cart").css("display", "none");
         $(".cart-exist").css("display", "auto");
         updateCartHtml(res);
         $("#total-items").html(res.length);
+        $(".loader").css("display", "none");
       }
     },
     error: function (jqXHR, textStatus, err) {},
@@ -163,6 +166,7 @@ function updateQuantity(id, value, books) {
 }
 
 function getUserCartInfoApi(userID) {
+  $(".loader").css("display", "flex");
   $.ajax({
     url: "/api/get-cart/user",
     type: "GET",
@@ -178,17 +182,20 @@ function getUserCartInfoApi(userID) {
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
         $("#empty-cart").css("display", "block");
+        $(".loader").css("display", "none");
       } else {
         $("#empty-cart").css("display", "none");
         $(".cart-exist").css("display", "auto");
         updateCartHtml(res);
         $("#total-items").html(res.length);
+        $(".loader").css("display", "none");
       }
     },
     error: function (jqXHR, textStatus, err) {},
   });
 }
 function addBookToUserCart(_id) {
+  $(".loader").css("display", "flex");
   $.ajax({
     url: "/api/add-book-to-cart/user",
     type: "GET",
@@ -205,17 +212,20 @@ function addBookToUserCart(_id) {
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
         $("#empty-cart").css("display", "block");
+        $(".loader").css("display", "none");
       } else {
         $("#empty-cart").css("display", "none");
         $(".cart-exist").css("display", "auto");
         updateCartHtml(res);
         $("#total-items").html(res.length);
+        $(".loader").css("display", "none");
       }
     },
     error: function (jqXHR, textStatus, err) {},
   });
 }
 function removeBookFromUserCart(_id) {
+  $(".loader").css("display", "flex");
   $.ajax({
     url: "/api/del-book-from-cart/user",
     type: "GET",
@@ -232,17 +242,20 @@ function removeBookFromUserCart(_id) {
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
         $("#empty-cart").css("display", "block");
+        $(".loader").css("display", "none");
       } else {
         $("#empty-cart").css("display", "none");
         $(".cart-exist").css("display", "auto");
         updateCartHtml(res);
         $("#total-items").html(res.length);
+        $(".loader").css("display", "none");
       }
     },
     error: function (jqXHR, textStatus, err) {},
   });
 }
 function updateItemFromUserCart(_id, value) {
+  $(".loader").css("display", "flex");
   $.ajax({
     url: "/api/update-book-from-cart/user",
     type: "GET",
@@ -260,11 +273,13 @@ function updateItemFromUserCart(_id, value) {
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
         $("#empty-cart").css("display", "block");
+        $(".loader").css("display", "none");
       } else {
         $("#empty-cart").css("display", "none");
         $(".cart-exist").css("display", "auto");
         updateCartHtml(res);
         $("#total-items").html(res.length);
+        $(".loader").css("display", "none");
       }
     },
     error: function (jqXHR, textStatus, err) {},
