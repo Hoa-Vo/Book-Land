@@ -30,7 +30,27 @@ function updateCheckOutHtml(books) {
   $("#total-money-pay").html(`${totalMoney} VND`);
   $("#money-pay").html(`${totalMoney} VND`);
 }
-function checkOutInfoIsValid() {}
+function checkOutInfoIsValid() {
+  const cityValue = $("#city").find(":selected").text();
+  const districtValue = $("#district").find(":selected").text();
+  const subDistrictValue = $("#sub-district").find(":selected").text();
+  if (
+    cityValue === "Vui lòng chọn tỉnh/thành phố" ||
+    districtValue === "Vui lòng chọn quận/huyện" ||
+    subDistrictValue === "Vui lòng chọn phường/xã"
+  ) {
+    $("html, body").animate({ scrollTop: 0 }, 500);
+    if (cityValue === "Vui lòng chọn tỉnh/thành phố") {
+      $(".city-invalid").css("display", "block");
+    }
+    if (districtValue === "Vui lòng chọn quận/huyện") {
+      $(".district-invalid").css("display", "block");
+    }
+    if (subDistrictValue === "Vui lòng chọn phường/xã") {
+      $(".sub-district-invalid").css("display", "block");
+    }
+  }
+}
 function updateCombobox() {
   $.ajax({
     url: "/api/get-city",
@@ -45,6 +65,7 @@ function updateCombobox() {
 }
 function cityChange() {
   $(".loader").css("display", "flex");
+  $(".city-invalid").css("display", "none");
   const value = $("#city").find(":selected").text();
   $.ajax({
     url: "/api/get-district",
@@ -65,6 +86,7 @@ function cityChange() {
 }
 function districtChange() {
   $(".loader").css("display", "flex");
+  $(".district-invalid").css("display", "none");
   const value = $("#district").find(":selected").text();
   const subDistrictArr = findDistrict(value);
   $("#sub-district").prop("disabled", false);

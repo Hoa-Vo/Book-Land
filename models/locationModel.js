@@ -12,6 +12,5 @@ exports.getCity = async () => {
 exports.getDistrict = async cityName => {
   const cityCollection = await db().collection("Location");
   const city = await cityCollection.findOne({ "city.name": cityName });
-  console.log(city);
   return city.city.district;
 };

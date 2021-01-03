@@ -19,24 +19,23 @@
                             <div class="col-md-5 mb-3">
                                 <label for="city">Tỉnh/Thành phố</label>
                                 <select onchange="cityChange()" class="wide w-100 combo-box" id="city">
-                                    <option value="" disabled selected hidden>Vui lòng chọn tỉnh/thành phố
-                                    </option>
+                                    <option value="" disabled selected hidden>Vui lòng chọn tỉnh/thành phố</option>
                                 </select>
-                                <div class="invalid-feedback"> Please select a valid country. </div>
+                                <div class="invalid-feedback city-invalid"> Trường này không được trống </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="district">Quận/Huyện</label>
                                 <select onchange="districtChange()" disabled class="wide w-100 combo-box" id="district">
                                     <option value="" disabled selected hidden>Vui lòng chọn quận/huyện</option>
                                 </select>
-                                <div class="invalid-feedback"> Please provide a valid state. </div>
+                                <div class="invalid-feedback district-invalid"> Trường này không được trống </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="sub-district">Phường/Xã</label>
                                 <select disabled class="wide w-100 combo-box" id="sub-district">
                                     <option value="" disabled selected hidden>Vui lòng chọn phường/xã</option>
                                 </select>
-                                <div class="invalid-feedback"> Please provide a valid state. </div>
+                                <div class="invalid-feedback sub-district-invalid"> Trường này không được trống </div>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -219,22 +218,19 @@
     \{{/each}}
 </script>
 <script id="city-info" type="text/x-handlebars-template">
-    <option value="" disabled selected hidden>Vui lòng chọn tỉnh/thành phố
-    </option>
+    <option value="" disabled selected hidden>Vui lòng chọn tỉnh/thành phố</option>
     \{{#each this}}
       <option>\{{name}}</option>
     \{{/each}}
 </script>
 <script id="district-info" type="text/x-handlebars-template">
-    <option value="" disabled selected hidden>Vui lòng chọn quận/huyện
-    </option>
+    <option value="" disabled selected hidden>Vui lòng chọn quận/huyện</option>
     \{{#each this}}
       <option>\{{name}}</option>
     \{{/each}}
 </script>
 <script id="sub-district-info" type="text/x-handlebars-template">
-    <option value="" disabled selected hidden>Vui lòng chọn phường/xã
-    </option>
+    <option value="" disabled selected hidden>Vui lòng chọn phường/xã</option>
     \{{#each this}}
       <option>\{{this}}</option>
     \{{/each}}
