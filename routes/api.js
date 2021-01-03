@@ -5,6 +5,8 @@ const checkExistEmailController = require("../controllers/api/checkExistEmailCon
 const cartApi = require("../controllers/api/cartApi");
 const pagingApi = require("../controllers/api/pagingApi");
 const getLocationApi = require("../controllers/api/getLocationApi");
+const orderApi = require("../controllers/api/orderApi");
+
 router.get("/checkExistedUsername", checkExistUsernameController.checkExistUsername);
 router.get("/get-cart", cartApi.getCartInfo);
 router.get("/get-cart/user", cartApi.getUserCartInfo);
@@ -14,4 +16,5 @@ router.get("/update-book-from-cart/user", cartApi.updateBookFromCart);
 router.get("/paging", pagingApi.paging);
 router.get("/get-city", getLocationApi.getCity);
 router.get("/get-district", getLocationApi.getDistrict);
+router.get("/order", orderApi.addOrder);
 module.exports = router;

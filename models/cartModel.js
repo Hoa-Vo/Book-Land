@@ -75,3 +75,9 @@ exports.updateBookFromUserCart = async (userId, bookId, quantity) => {
     return booksInfo;
   }
 };
+
+exports.getUserBookArr = async id => {
+  const cartCollection = await db().collection("UserCart");
+  const userCart = await cartCollection.findOne({ userId: ObjectID(id) });
+  return userCart.books;
+};

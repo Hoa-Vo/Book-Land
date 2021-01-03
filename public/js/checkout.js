@@ -1,12 +1,9 @@
-let allDistrict;
 $(document).ready(() => {
   $(".loader").css("display", "flex");
   upDateCheckoutInfo();
   updateCombobox();
 });
 function upDateCheckoutInfo() {
-  pTagContent = $("#user-info").html();
-  userID = pTagContent.split(">")[1].split("<")[0];
   $.ajax({
     url: "/api/get-cart/user",
     type: "GET",
@@ -34,6 +31,8 @@ function checkOutInfoIsValid() {
   const cityValue = $("#city").find(":selected").text();
   const districtValue = $("#district").find(":selected").text();
   const subDistrictValue = $("#sub-district").find(":selected").text();
+  const name = $("#name").val();
+  const address = $("#address").val();
   if (
     cityValue === "Vui lòng chọn tỉnh/thành phố" ||
     districtValue === "Vui lòng chọn quận/huyện" ||
@@ -49,6 +48,8 @@ function checkOutInfoIsValid() {
     if (subDistrictValue === "Vui lòng chọn phường/xã") {
       $(".sub-district-invalid").css("display", "block");
     }
+  } else {
+    orderApi(cityValue, districtValue, subDistrictValue, name, address);
   }
 }
 function updateCombobox() {
@@ -101,4 +102,19 @@ function findDistrict(value) {
       return allDistrict[i].sub_district.sort();
     }
   }
+}
+function orderApi(cityValue, districtValue, subDistrictValue, name, address) {
+  $.ajax({
+    url: "/api/order",
+    type: "GET",
+    data: {
+      userID: userID,
+      city: cityValue,
+      district: districtValue,
+      subDistrict: subDistrictValue,
+      name: name,
+      address: address,
+    },
+    success: function (res) {},
+  });
 }

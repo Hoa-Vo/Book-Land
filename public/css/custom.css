@@ -72,7 +72,49 @@
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
-
+.order-book-image {
+  height: 150px;
+}
+.orders {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 200px;
+}
+.order {
+  margin: 10px 0;
+  border-style: groove;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 17px;
+}
+.order-info {
+  margin-bottom: 20px;
+  justify-content: space-between;
+  display: flex;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+.item-title {
+  margin: 0 30px;
+}
+.item-status {
+  margin: 0 30px;
+}
+.btn-cart:not(:disabled):not(.disabled) {
+  color: white;
+}
+.day-order {
+  font-size: 15px;
+}
+.order-id {
+  color: red;
+}
 /* Safari */
 @-webkit-keyframes spin {
   0% {
