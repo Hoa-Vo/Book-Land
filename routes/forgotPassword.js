@@ -3,5 +3,7 @@ const forgotPasswordController = require("../controllers/forgotPasswordControlle
 const router = express.Router(); 
 
 router.get("/", forgotPasswordController.renderForgotPasswordPage);
+router.get("/:id", forgotPasswordController.renderEnterNewPasswordPage); 
+
 
 module.exports = router;

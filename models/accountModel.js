@@ -42,6 +42,7 @@ exports.addNewUser = async function (newUsername, plainNewPassword, newEmail) {
     email: newEmail,
     avatar_image: "notfound.jpg",
     isVerified: false,
+    isLocked: false,
   });
   console.log("New inserted user object");
 

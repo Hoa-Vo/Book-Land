@@ -4,3 +4,9 @@ exports.renderForgotPasswordPage = (req,res,next) =>
     console.log("Inside controller");
     res.render("./forgotPassword/forgotPassword", {userToShow: userToShow}); 
 }
+
+
+exports.renderEnterNewPasswordPage = (req,res,next) => 
+{
+    res.render("./forgotPassword/enterNewPassword");
+}
