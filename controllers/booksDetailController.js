@@ -11,6 +11,7 @@ exports.get = async (req, res, next) => {
     userToShow = await accountModel.getUserById(req.user._id);
     console.log(userToShow);
   }
+  book.basePrice = book.basePrice.toLocaleString("it-IT", { style: "currency", currency: "VND" });
   // Pass data to view to book detail
   res.render("bookDetailsPage/booksDetail", {
     id: book._id,

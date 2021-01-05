@@ -57,22 +57,35 @@ $(document).ready(() => {
 });
 function updateCartHtml(books) {
   try {
-    const source = $("#cart").html();
-    const template = Handlebars.compile(source);
-    $("#cart-list").html(template(books));
     let totalMoney = 0;
     for (let i = 0; i < books.length; i++) {
       totalMoney += books[i].totalPrice;
     }
-    $("#total-money").html(`<strong>Tổng cộng: </strong>${totalMoney} VND`);
-    $("#checkout-money").html(`${totalMoney} VND`);
-    $("#total-money-pay").html(`${totalMoney} VND`);
+    for (const book of books) {
+      book.totalPrice = book.totalPrice.toLocaleString("it-IT", {
+        style: "currency",
+        currency: "VND",
+      });
+    }
+    const source = $("#cart").html();
+    const template = Handlebars.compile(source);
+    $("#cart-list").html(template(books));
+    totalMoney = totalMoney.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+    $("#total-money").html(`<strong>Tổng cộng: </strong>${totalMoney} `);
+    $("#checkout-money").html(`${totalMoney}`);
+    $("#total-money-pay").html(`${totalMoney} `);
   } catch (err) {
     console.log(err);
   }
   try {
     const cartPageSource = $("#cart-page").html();
     const templateCartPage = Handlebars.compile(cartPageSource);
+    for (const book of books) {
+      book.totalPrice = book.totalPrice.toLocaleString("it-IT", {
+        style: "currency",
+        currency: "VND",
+      });
+    }
     $("#cart-table").html(templateCartPage(books));
   } catch (err) {
     console.log(err);
@@ -96,7 +109,7 @@ function updateCartApi(data) {
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
-			<span class="float-right"><strong>Total: </strong> 0 VND</span>
+			<span class="float-right"><strong>Total: </strong> 0 đ</span>
 		</li>`);
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
@@ -177,7 +190,7 @@ function getUserCartInfoApi(userID) {
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
-			<span class="float-right"><strong>Total: </strong> 0 VND</span>
+			<span class="float-right"><strong>Total: </strong> 0 đ</span>
 		</li>`);
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
@@ -207,7 +220,7 @@ function addBookToUserCart(_id) {
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
-			<span class="float-right"><strong>Total: </strong> 0 VND</span>
+			<span class="float-right"><strong>Total: </strong> 0 đ</span>
 		</li>`);
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
@@ -237,7 +250,7 @@ function removeBookFromUserCart(_id) {
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
-			<span class="float-right"><strong>Total: </strong> 0 VND</span>
+			<span class="float-right"><strong>Total: </strong> 0 đ</span>
 		</li>`);
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
@@ -268,7 +281,7 @@ function updateItemFromUserCart(_id, value) {
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
-			<span class="float-right"><strong>Total: </strong> 0 VND</span>
+			<span class="float-right"><strong>Total: </strong> 0 đ</span>
 		</li>`);
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");

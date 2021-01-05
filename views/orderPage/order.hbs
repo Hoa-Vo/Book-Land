@@ -1,42 +1,58 @@
+<link href="css/account.css" rel="stylesheet">
+<div class="nav-bar-order">
+    <h1 style="color: red; ">ĐƠN HÀNG CỦA BẠN</h1>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active order-active" id="all-order-tab" data-toggle="tab" href="#all-order" role="tab"
+                aria-controls="home" aria-selected="true">Tất cả</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="transporting-tab" data-toggle="tab" href="#transporting" role="tab"
+                aria-controls="transporting" aria-selected="false">Chờ giao hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="transported-tab" data-toggle="tab" href="#transported" role="tab"
+                aria-controls="transported" aria-selected="false">Đã giao</a>
+        </li>
+    </ul>
+</div>
 <div class="row">
-    <div class="orders">
-        <div class="order">
-            <div class="order-info">
-                <div>
-                    <a>Đơn hàng: <span class="order-id">324234234234</span></a>
-                    <p class="day-order">Đặt hàng ngày 20/11/2020 13:44:20</p>
-                </div>
-                <div>
-                    <a class="btn btn-default hvr-hover btn-cart">Quản lý đơn hàng</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="item-image"><img
-                        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/i/m/image_140322.jpg"
-                        class="order-book-image"></img> </div>
-                <div class="item-title">Sách 1</div>
-                <div class="item-quantity">Số lương: 1</div>
-                <div class="item-status"><span>Đang giao</span></div>
+    <div class="tab-content profile-tab" id="orderTabContent">
+        <div class="tab-pane fade show active" id="all-order" role="tabpanel" aria-labelledby="all-order-tab">
+            <div class="orders">
             </div>
         </div>
-        <div class="order">
-            <div class="order-info">
-                <div>
-                    <a>Đơn hàng: <span class="order-id">324234234234</span></a>
-                    <p class="day-order">Đặt hàng ngày 20/11/2020 13:44:20</p>
-                </div>
-                <div>
-                    <a class="btn btn-default hvr-hover btn-cart">Quản lý đơn hàng</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="item-image"><img
-                        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/i/m/image_140322.jpg"
-                        class="order-book-image"></img> </div>
-                <div class="item-title">Sách 1</div>
-                <div class="item-quantity">Số lương: 2</div>
-                <div class="item-status"><span>Đang giao</span></div>
-            </div>
+        <div class="tab-pane fade" id="transporting" role="tabpanel" aria-labelledby="transporting-tab">
+            Đang giao
+        </div>
+        <div class="tab-pane fade" id="transported" role="tabpanel" aria-labelledby="transported-tab">
+            Đã giao
         </div>
     </div>
 </div>
+<script src="js/order.js"></script>
+<script id="order-template" type="text/x-handlebars-template">
+    \{{#each this}}
+    <div class="order">
+        <div class="order-info">
+            <div>
+                <a style="color: #66667f;" href="/order/\{{orderId}}">Đơn hàng: <span class="order-id">\{{orderId}}</span></a>
+                <p class="day-order"><span style="color: #66667f">Ngày tạo: </span>\{{createDate}}</p>
+                <p style="color: #66667f">Trạng thái:<span style="color: red;">\{{status}}</span> </p>
+            </div>
+            <div>
+                <a href="/order/\{{orderId}}" class="btn btn-default hvr-hover btn-cart">Quản lý đơn hàng</a>
+            </div>
+        </div>
+        \{{#each books}}
+        <div class="item">
+            <div class="item-image"><img
+                src="\{{image_link}}"
+                class="order-book-image"></img> </div>
+            <div class="item-title">\{{title}}</div>
+            <div class="item-quantity">Số lượng: \{{quantity}}</div>
+        </div>
+        \{{/each}}
+    </div>
+    \{{/each}}
+</script>

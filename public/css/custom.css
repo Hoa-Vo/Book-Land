@@ -80,8 +80,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 20px 200px;
 }
+
 .order {
   margin: 10px 0;
   border-style: groove;
@@ -94,11 +94,13 @@
   margin-bottom: 20px;
   justify-content: space-between;
   display: flex;
+  border-bottom-style: groove;
 }
 .item {
   display: flex;
   justify-content: space-between;
   width: 70%;
+  margin: 10px 0;
 }
 .item-title {
   margin: 0 30px;
@@ -114,6 +116,16 @@
 }
 .order-id {
   color: red;
+}
+#orderTabContent {
+  margin: 20px 200px;
+}
+.nav-bar-order {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }
 /* Safari */
 @-webkit-keyframes spin {

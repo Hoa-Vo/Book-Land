@@ -16,16 +16,30 @@ function upDateCheckoutInfo() {
   });
 }
 function updateCheckOutHtml(books) {
-  const source = $("#checkout-info").html();
-  const template = Handlebars.compile(source);
-  $("#info-list").html(template(books));
   let totalMoney = 0;
   for (let i = 0; i < books.length; i++) {
     totalMoney += books[i].totalPrice;
   }
   console.log(totalMoney);
-  $("#total-money-pay").html(`${totalMoney} VND`);
-  $("#money-pay").html(`${totalMoney} VND`);
+  for (const book of books) {
+    book.totalPrice = book.totalPrice.toLocaleString("it-IT", {
+      style: "currency",
+      currency: "VND",
+    });
+    book.basePrice = book.basePrice.toLocaleString("it-IT", {
+      style: "currency",
+      currency: "VND",
+    });
+  }
+  const source = $("#checkout-info").html();
+  const template = Handlebars.compile(source);
+  $("#info-list").html(template(books));
+  totalMoney = totalMoney.toLocaleString("it-IT", {
+    style: "currency",
+    currency: "VND",
+  });
+  $("#total-money-pay").html(`${totalMoney}`);
+  $("#money-pay").html(`${totalMoney}`);
 }
 function checkOutInfoIsValid() {
   const cityValue = $("#city").find(":selected").text();
@@ -105,8 +119,8 @@ function findDistrict(value) {
 }
 function orderApi(cityValue, districtValue, subDistrictValue, name, address) {
   $.ajax({
-    url: "/api/order",
-    type: "GET",
+    url: "/api/add-order",
+    type: "POST",
     data: {
       userID: userID,
       city: cityValue,

@@ -78,6 +78,12 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
           }
           updatePagination(btnArr);
         }
+        for (const element of res.data.books) {
+          element.basePrice = element.basePrice.toLocaleString("it-IT", {
+            style: "currency",
+            currency: "VND",
+          });
+        }
         updateBookList(res.data.books);
         if (category_id) {
           history.pushState(

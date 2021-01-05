@@ -16,5 +16,6 @@ router.get("/update-book-from-cart/user", cartApi.updateBookFromCart);
 router.get("/paging", pagingApi.paging);
 router.get("/get-city", getLocationApi.getCity);
 router.get("/get-district", getLocationApi.getDistrict);
-router.get("/order", orderApi.addOrder);
+router.post("/add-order", orderApi.addOrder);
+router.get("/order", orderApi.getOrder);
 module.exports = router;

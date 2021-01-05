@@ -26,6 +26,7 @@ app.set("view engine", "hbs");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/bookslist", express.static(path.join(__dirname, "public")));
+app.use("/order", express.static(path.join(__dirname, "public")));
 app.use("/bookslist/search", express.static(path.join(__dirname, "public")));
 app.use(logger("dev"));
 app.use(express.json());
