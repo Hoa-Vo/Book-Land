@@ -63,3 +63,16 @@ exports.isExistsUsername = async inputUsername => {
     return false;
   }
 };
+
+exports.isExistsEmail = async inputEmail => {
+  const userCollection = await db().collection("registeredUser");
+  const userDocument = await userCollection.findOne({ email: inputEmail });
+  if(userDocument)
+  {
+    return true; 
+  }
+  else{
+    return false;
+  }
+  
+}

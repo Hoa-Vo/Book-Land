@@ -20,11 +20,12 @@ exports.sendVerifyEmail = async userid => {
   const user = await accountModel.getUserById(userid);
   console.log(user);
   const emailToSend = user.email;
+  const usernameToSend = user.name; 
   let mailOptions = {
     from: process.env.MAIL_NAME,
     to: emailToSend,
     subject: "[No reply] Xác nhận tài khoản BookLand của bạn",
-    html: `<p> Xin hãy xác nhận tài khoản của bạn qua đường dẫn localhost:3000/verify/${userid}<p>`,
+    html: `<p> Xin hãy xác nhận tài khoản: ${usernameToSend} của bạn qua đường dẫn localhost:3000/verify/${userid}<p>`,
   };
 
   //console.log("Inside mail serviceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -65,3 +66,9 @@ exports.checkExistsUsername = async inputUsername => {
 
   return result;
 };
+
+exports.checkExistsEmail = async inputEmail => 
+{
+  let result = await accountModel.isExistsEmail(inputEmail); 
+  return result; 
+}
