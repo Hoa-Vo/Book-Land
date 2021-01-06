@@ -20,7 +20,8 @@ function updateOrderHtml(data) {
     const year = date.getFullYear();
     const hour = date.getHours();
     const minute = date.getMinutes();
-    element.createDate = `${day}/${month}/${year} ${hour}h:${minute}p`;
+    const second = date.getSeconds();
+    element.createDate = `${day}/${month}/${year} ${hour}:${minute}:${second}`;
   }
   const source = $("#order-template").html();
   const template = Handlebars.compile(source);

@@ -11,7 +11,7 @@ exports.addOrder = async (req, res, next) => {
   );
 };
 
-exports.getOrder = async (req, res, next) => {
-  const data = await orderModel.getOrder(req.query.userID);
+exports.getAllOrder = async (req, res, next) => {
+  const data = await orderModel.getAllOrder(req.query.userID);
   res.json(data);
 };

@@ -2,7 +2,7 @@ const { db } = require("../database/db");
 const { ObjectID } = require("mongodb");
 const booksModel = require("./booksModel");
 const cartModel = require("./cartModel");
-exports.getOrder = async userId => {
+exports.getAllOrder = async userId => {
   const orderCollection = await db().collection("UserOrder");
   const orderInfo = await orderCollection.find({ userID: ObjectID(userId) }).toArray();
   let data = [];

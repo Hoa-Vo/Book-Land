@@ -127,6 +127,22 @@
   flex-direction: column;
   margin-top: 20px;
 }
+.order-container {
+  height: 100vh;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.user-info {
+  border-right-style: groove;
+}
+.order-btn {
+  display: flex;
+}
+.money-order {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
 /* Safari */
 @-webkit-keyframes spin {
   0% {
@@ -144,4 +160,7 @@
   100% {
     transform: rotate(360deg);
   }
+}
+p {
+  color: black;
 }
