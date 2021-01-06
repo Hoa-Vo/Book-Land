@@ -5,11 +5,13 @@
                 <h3>Thông tin tài khoản</h3>
             </div>
             <div class="user-order-info">
-                <p>Tài Khoản: {{userToShow.name}}</p>
-                <p>Email: {{userToShow.email}}</p>
+                <p><span class="main-span">Tên tài khoản: </span> {{userToShow.name}}</p>
+                <p><span class="main-span">Email: </span>{{userToShow.email}}</p>
+                <p><span class="main-span">Tên người nhận: </span> {{orderInfo.name}}</p>
+                <p><span class="main-span">Địa chỉ nhận hàng: </span> {{orderInfo.address}}</p>
             </div>
-            <div>
-                <a class="btn btn-default hvr-hover btn-cart">Hủy đơn hàng</a>
+            <div style="margin-top: 20px;">
+                <a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
             </div>
         </div>
         <div class="col-9">
@@ -20,7 +22,7 @@
                 <div>
                     <p><i style="color: red;" class="fas fa-wallet"></i> Đơn hàng: <span
                             style="color: red;">21323432FFF325345</span></p>
-                    <p> Trạng thái: <span style="color: #0062cc;">Chờ giao hàng </span></p>
+                    <p> Trạng thái: <span id="order-status" style="color: #0062cc;">Chờ giao hàng </span></p>
                 </div>
                 {{#each orderInfo.books}}
                     <div class="item">
@@ -45,10 +47,10 @@
             <div class="money-order">
                 <p><i class="fas fa-money-check-alt"></i> Tổng cộng: {{totalPrice}}</p>
             </div>
-            <div>
-                <a class="btn btn-default hvr-hover btn-cart">Hủy đơn hàng</a>
+            <div id="cancel-div">
+                <a onclick="cancelOrder()" class="btn btn-default hvr-hover btn-cart">Hủy đơn hàng</a>
             </div>
         </div>
     </div>
 </div>
-<script src="js/order-detail.js"></script>
+<script src="js/order.js"></script>

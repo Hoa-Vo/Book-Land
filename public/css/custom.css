@@ -80,6 +80,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .order {
@@ -143,6 +144,10 @@
   align-items: center;
   margin-right: 20px;
 }
+.main-span {
+  font-weight: bolder;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% {

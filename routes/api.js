@@ -18,5 +18,5 @@ router.get("/get-city", getLocationApi.getCity);
 router.get("/get-district", getLocationApi.getDistrict);
 router.post("/add-order", orderApi.addOrder);
 router.get("/order", orderApi.getAllOrder);
-
+router.delete("/order/del", orderApi.cancelOrder);
 module.exports = router;

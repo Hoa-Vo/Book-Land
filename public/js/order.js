@@ -27,3 +27,27 @@ function updateOrderHtml(data) {
   const template = Handlebars.compile(source);
   $(".orders").html(template(data));
 }
+
+function cancelOrder() {
+  $(".loader").css("display", "flex");
+  const orderId = window.location.href.split("/")[4].toLowerCase();
+  $.ajax({
+    type: "DELETE",
+    url: "/api/order/del",
+    data: {
+      orderId: orderId,
+    },
+    success: function (res) {
+      $(".loader").css("display", "none");
+      if (res) {
+        $("#cancel-div").html(
+          `<a onclick="deleteOrder()" class="btn btn-default hvr-hover btn-cart">Xóa đơn hàng</a>`
+        );
+
+        $("#order-status").html("Đã hủy");
+      } else {
+        alert("Không thể hủy đơn hàng lúc này, vui lòng thử lại sau!!!");
+      }
+    },
+  });
+}

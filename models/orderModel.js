@@ -45,6 +45,20 @@ exports.getOrderById = async id => {
     status: orderInfo.status,
     createDate: orderInfo.create_date,
     orderId: orderInfo._id,
+    address: orderInfo.address,
+    name: orderInfo.name,
   };
   return data;
+};
+
+exports.cancelOrder = async id => {
+  const orderCollection = await db().collection("UserOrder");
+  const result = await orderCollection.updateOne(
+    { _id: ObjectID(id) },
+    { $set: { status: "Đã hủy" } }
+  );
+  if (result) {
+    return true;
+  }
+  return false;
 };

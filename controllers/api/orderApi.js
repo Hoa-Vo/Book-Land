@@ -15,3 +15,8 @@ exports.getAllOrder = async (req, res, next) => {
   const data = await orderModel.getAllOrder(req.query.userID);
   res.json(data);
 };
+
+exports.cancelOrder = async (req, res, next) => {
+  const result = await orderModel.cancelOrder(req.body.orderId);
+  res.send(result);
+};
