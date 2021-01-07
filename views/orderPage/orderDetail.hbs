@@ -1,3 +1,4 @@
+<link href="css/order.css" rel="stylesheet">
 <div class="container order-container">
     <div class="row">
         <div class="col user-info">
@@ -22,7 +23,7 @@
                 <div>
                     <p><i style="color: red;" class="fas fa-wallet"></i> Đơn hàng: <span
                             style="color: red;">21323432FFF325345</span></p>
-                    <p> Trạng thái: <span id="order-status" style="color: #0062cc;">Chờ giao hàng </span></p>
+                    <p> Trạng thái: <span id="order-status" style="color: #0062cc;">{{orderInfo.status}} </span></p>
                 </div>
                 {{#each orderInfo.books}}
                     <div class="item">
@@ -36,6 +37,7 @@
                         <div class="item-quantity">
                             <p>Số lượng: {{quantity}}</p>
                         </div>
+                        <p style="display: none;" class="item-id">{{_id}}</p>
                     </div>
                 {{/each}}
             </div>
@@ -48,7 +50,11 @@
                 <p><i class="fas fa-money-check-alt"></i> Tổng cộng: {{totalPrice}}</p>
             </div>
             <div id="cancel-div">
-                <a onclick="cancelOrder()" class="btn btn-default hvr-hover btn-cart">Hủy đơn hàng</a>
+                {{#if (isAbleToCanceled orderInfo.status)}}
+                    <a onclick="addCheckout()" class="btn btn-default hvr-hover btn-cart">Mua lại</a>
+                {{else}}
+                    <a onclick="cancelOrder()" class="btn btn-default hvr-hover btn-cart">Hủy đơn hàng</a>
+                {{/if}}
             </div>
         </div>
     </div>

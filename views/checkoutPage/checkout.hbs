@@ -11,9 +11,9 @@
                     <form class="needs-validation" novalidate>
                         <div class="mb-3">
                             <label for="name">Họ và tên người nhận</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên người nhận"
-                                required>
-                            <div class="invalid-feedback"> Trường này không được trống </div>
+                            <input onfocusout="nameFocusOut()" type="text" class="form-control" id="name"
+                                placeholder="Nhập họ và tên người nhận" required>
+                            <div class="invalid-feedback name-invalid"> Trường này không được trống </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 mb-3">
@@ -32,7 +32,8 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="sub-district">Phường/Xã</label>
-                                <select disabled class="wide w-100 combo-box" id="sub-district">
+                                <select onchange="subDistrictChange()" disabled class="wide w-100 combo-box"
+                                    id="sub-district">
                                     <option value="" disabled selected hidden>Vui lòng chọn phường/xã</option>
                                 </select>
                                 <div class="invalid-feedback sub-district-invalid"> Trường này không được trống </div>
@@ -40,9 +41,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="address">Địa chỉ</label>
-                            <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ nhận hàng"
-                                required>
-                            <div class="invalid-feedback"> Trường này không được trống </div>
+                            <input onfocusout="addressFocusOut()" type="text" class="form-control" id="address"
+                                placeholder="Nhập địa chỉ nhận hàng" required>
+                            <div class="invalid-feedback address-invalid"> Trường này không được trống </div>
                         </div>
                         <hr class="mb-4">
                         <div class="custom-control custom-checkbox">

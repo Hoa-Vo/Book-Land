@@ -4,16 +4,20 @@
     <h1 style="color: red; ">ĐƠN HÀNG CỦA BẠN</h1>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active order-active" id="all-order-tab" data-toggle="tab" href="#all-order" role="tab"
-                aria-controls="home" aria-selected="true">Tất cả</a>
+            <a onclick="getAllOrder()" class="nav-link active order-active" id="all-order-tab" data-toggle="tab"
+                href="#all-order" role="tab" aria-controls="home" aria-selected="true">Tất cả</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="transporting-tab" data-toggle="tab" href="#transporting" role="tab"
-                aria-controls="transporting" aria-selected="false">Chờ giao hàng</a>
+            <a onclick="getTransportingOrder()" class="nav-link" id="transporting-tab" data-toggle="tab"
+                href="#transporting" role="tab" aria-controls="transporting" aria-selected="false">Chờ giao hàng</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="transported-tab" data-toggle="tab" href="#transported" role="tab"
-                aria-controls="transported" aria-selected="false">Đã giao</a>
+            <a onclick="getTransportedOrder()" class="nav-link" id="transported-tab" data-toggle="tab"
+                href="#transported" role="tab" aria-controls="transported" aria-selected="false">Đã giao</a>
+        </li>
+        <li class="nav-item">
+            <a onclick="getCanceledOrder()" class="nav-link" id="canceled-tab" data-toggle="tab" href="#canceled"
+                role="tab" aria-controls="canceled-tab" aria-selected="false">Đã hủy</a>
         </li>
     </ul>
 </div>
@@ -24,10 +28,16 @@
             </div>
         </div>
         <div class="tab-pane fade" id="transporting" role="tabpanel" aria-labelledby="transporting-tab">
-            Đang giao
+            <div class="orders">
+            </div>
         </div>
         <div class="tab-pane fade" id="transported" role="tabpanel" aria-labelledby="transported-tab">
-            Đã giao
+            <div class="orders">
+            </div>
+        </div>
+        <div class="tab-pane fade" id="canceled" role="tabpanel" aria-labelledby="canceled-tab">
+            <div class="orders">
+            </div>
         </div>
     </div>
 </div>

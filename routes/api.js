@@ -19,4 +19,8 @@ router.get("/get-district", getLocationApi.getDistrict);
 router.post("/add-order", orderApi.addOrder);
 router.get("/order", orderApi.getAllOrder);
 router.delete("/order/del", orderApi.cancelOrder);
+router.get("/order/transporting", orderApi.getTransportingOrder);
+router.get("/order/transported", orderApi.getTransportedOrder);
+router.get("/order/canceled", orderApi.getCanceledOrder);
+
 module.exports = router;

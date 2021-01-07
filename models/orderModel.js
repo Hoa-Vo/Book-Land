@@ -16,6 +16,7 @@ exports.getAllOrder = async userId => {
     };
     data.push(temp);
   }
+
   return data;
 };
 
@@ -34,6 +35,7 @@ exports.addOrder = async (name, userID, city, district, subDistrict, address) =>
     create_date: date,
     status: "Chờ giao hàng",
   });
+  await cartModel.deleteUserCart(userId);
 };
 
 exports.getOrderById = async id => {
@@ -61,4 +63,61 @@ exports.cancelOrder = async id => {
     return true;
   }
   return false;
+};
+
+exports.getTransportingOrder = async id => {
+  const orderCollection = await db().collection("UserOrder");
+  const orderInfo = await orderCollection
+    .find({ userID: ObjectID(id), status: "Chờ giao hàng" })
+    .toArray();
+  let data = [];
+  for (const element of orderInfo) {
+    const booksInfo = await booksModel.getCartInfo(element.books);
+    const temp = {
+      books: booksInfo,
+      status: element.status,
+      createDate: element.create_date,
+      orderId: element._id,
+    };
+    data.push(temp);
+  }
+  return data;
+};
+
+exports.getTransportedOrder = async id => {
+  const orderCollection = await db().collection("UserOrder");
+  const orderInfo = await orderCollection
+    .find({ userID: ObjectID(id), status: "Đã giao" })
+    .toArray();
+  let data = [];
+  for (const element of orderInfo) {
+    const booksInfo = await booksModel.getCartInfo(element.books);
+    const temp = {
+      books: booksInfo,
+      status: element.status,
+      createDate: element.create_date,
+      orderId: element._id,
+    };
+    data.push(temp);
+  }
+  return data;
+};
+
+exports.getCanceledOrder = async id => {
+  const orderCollection = await db().collection("UserOrder");
+  const orderInfo = await orderCollection
+    .find({ userID: ObjectID(id), status: "Đã hủy" })
+    .toArray();
+  let data = [];
+  for (const element of orderInfo) {
+    const booksInfo = await booksModel.getCartInfo(element.books);
+    const temp = {
+      books: booksInfo,
+      status: element.status,
+      createDate: element.create_date,
+      orderId: element._id,
+    };
+    data.push(temp);
+  }
+  return data;
 };

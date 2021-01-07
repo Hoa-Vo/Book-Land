@@ -19,6 +19,7 @@ const checkOutRouter = require("./routes/checkout");
 const verifyRouter = require("./routes/verify");
 const orderRouter = require("./routes/order");
 const apiRouter = require("./routes/api");
+require("./handlebars-helper/registerHelper");
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

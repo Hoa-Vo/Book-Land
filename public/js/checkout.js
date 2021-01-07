@@ -50,7 +50,9 @@ function checkOutInfoIsValid() {
   if (
     cityValue === "Vui lòng chọn tỉnh/thành phố" ||
     districtValue === "Vui lòng chọn quận/huyện" ||
-    subDistrictValue === "Vui lòng chọn phường/xã"
+    subDistrictValue === "Vui lòng chọn phường/xã" ||
+    name === "" ||
+    address === ""
   ) {
     $("html, body").animate({ scrollTop: 0 }, 500);
     if (cityValue === "Vui lòng chọn tỉnh/thành phố") {
@@ -61,6 +63,12 @@ function checkOutInfoIsValid() {
     }
     if (subDistrictValue === "Vui lòng chọn phường/xã") {
       $(".sub-district-invalid").css("display", "block");
+    }
+    if (address === "") {
+      $(".address-invalid").css("display", "block");
+    }
+    if (name === "") {
+      $(".name-invalid").css("display", "block");
     }
   } else {
     orderApi(cityValue, districtValue, subDistrictValue, name, address);
@@ -117,6 +125,29 @@ function findDistrict(value) {
     }
   }
 }
+
+function subDistrictChange() {
+  $(".address-invalid").css("display", "none");
+}
+
+function addressFocusOut() {
+  const address = $("#address").val();
+  if (address === "") {
+    $(".address-invalid").css("display", "block");
+  } else {
+    $(".address-invalid").css("display", "none");
+  }
+}
+
+function nameFocusOut() {
+  const name = $("#name").val();
+  if (name === "") {
+    $(".name-invalid").css("display", "block");
+  } else {
+    $(".name-invalid").css("display", "none");
+  }
+}
+
 function orderApi(cityValue, districtValue, subDistrictValue, name, address) {
   $.ajax({
     url: "/api/add-order",

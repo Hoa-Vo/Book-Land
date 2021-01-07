@@ -33,11 +33,16 @@ function addToCart(_id) {
     addBookToUserCart(_id);
   }
 }
-function checkIsExistInCart(books, id) {
+function checkIsExistInCart(books, id, quantity) {
   for (let i = 0; i < books.length; i++) {
     if (books[i].id == id) {
-      books[i].quantity++;
-      return books;
+      if (quantity) {
+        books[i].quantity += quantity;
+        return books;
+      } else {
+        books[i].quantity++;
+        return books;
+      }
     }
   }
   return null;
@@ -63,6 +68,10 @@ function updateCartHtml(books) {
     }
     for (const book of books) {
       book.totalPrice = book.totalPrice.toLocaleString("it-IT", {
+        style: "currency",
+        currency: "VND",
+      });
+      book.basePrice = book.basePrice.toLocaleString("it-IT", {
         style: "currency",
         currency: "VND",
       });
@@ -99,6 +108,7 @@ function isNumberKey(evt) {
 }
 function updateCartApi(data) {
   $(".loader").css("display", "flex");
+
   $.ajax({
     url: "/api/get-cart",
     type: "GET",
@@ -109,7 +119,7 @@ function updateCartApi(data) {
       if (res === "empty") {
         $("#cart-list").html(`<li>Giỏ hàng trống</li><li class="total">
 			<a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
-			<span class="float-right"><strong>Total: </strong> 0 đ</span>
+			<span class="float-right"><strong>Tổng cộng: </strong> 0 đ</span>
 		</li>`);
         $("#total-items").html("0");
         $(".cart-exist").css("display", "none");
@@ -209,12 +219,14 @@ function getUserCartInfoApi(userID) {
 }
 function addBookToUserCart(_id) {
   $(".loader").css("display", "flex");
+  const quantity = parseInt($(".quantity").val());
   $.ajax({
     url: "/api/add-book-to-cart/user",
     type: "GET",
     data: {
       userID: userID,
       bookID: _id,
+      quantity: quantity,
     },
     success: function (res) {
       if (res === "empty") {
@@ -297,4 +309,39 @@ function updateItemFromUserCart(_id, value) {
     },
     error: function (jqXHR, textStatus, err) {},
   });
+}
+
+function addToCartFromDetail(_id) {
+  const quantity = parseInt($(".quantity").val());
+  if (userID === "") {
+    let books = localStorage.getItem("books");
+    if (books !== null) {
+      let data = [];
+      data = JSON.parse(books);
+      let temp = [];
+      temp = checkIsExistInCart(data, _id, quantity);
+      if (temp) {
+        data = temp;
+      } else {
+        const book = {
+          id: _id,
+          quantity: quantity,
+        };
+        data.push(book);
+      }
+      window.localStorage.setItem("books", JSON.stringify(data));
+      updateCartApi(data);
+    } else {
+      let data = [];
+      const book = {
+        id: _id,
+        quantity: quantity,
+      };
+      data.push(book);
+      window.localStorage.setItem("books", JSON.stringify(data));
+      updateCartApi(data);
+    }
+  } else {
+    addBookToUserCart(_id);
+  }
 }
