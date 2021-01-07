@@ -22,8 +22,10 @@ exports.fetchCommentByPage = async (req,res,next)=>
   const bookId=req.query.bookId;
   const pageLimit=req.query.pageLimit;
   const page=req.query.page;
+  
   const commentsToShow=await commentModel.fetchCommentsByPage(bookId,pageLimit,page);
-  if(commentsToShow!=undefined || commentsToShow!=null){
+
+  if(commentsToShow!=undefined && commentsToShow!=null){
     const commentcount=await commentModel.commentCount(bookId);
     res.status(200).send({count: commentcount,commentlist: commentsToShow});
   }
