@@ -9,7 +9,7 @@ function resetPassword()
         // send information to server
         $.ajax(
             {
-                url: `api/forgotPassword/`,
+                url: `/api/forgotPassword/`,
                 type: "GET",
                 data: {
                     information: information
