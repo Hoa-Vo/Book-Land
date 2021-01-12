@@ -6,7 +6,9 @@ const { ObjectID } = require("mongodb");
 const bcrypt = require("bcrypt");
 require("dotenv/config");
 
-exports.sendVerifyEmail = async userid => {
+
+function sendEmail(to,subject,content)
+{
   let transport = nodemailer.createTransport(
     smtpTransport({
       service: "gmail",
@@ -17,19 +19,12 @@ exports.sendVerifyEmail = async userid => {
     })
   );
 
-  const user = await accountModel.getUserById(userid);
-  console.log(user);
-  const emailToSend = user.email;
-  const usernameToSend = user.name; 
   let mailOptions = {
     from: process.env.MAIL_NAME,
-    to: emailToSend,
-    subject: "[No reply] Xác nhận tài khoản BookLand của bạn",
-    html: `<p> Xin hãy xác nhận tài khoản: ${usernameToSend} của bạn qua đường dẫn localhost:3000/verify/${userid}<p>`,
-  };
-
-  //console.log("Inside mail serviceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-
+    to: to,
+    subject: subject,
+    html: content
+  }
   transport.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log(err);
@@ -37,7 +32,24 @@ exports.sendVerifyEmail = async userid => {
       console.log("Email sent " + info.response);
     }
   });
+}
+
+exports.sendVerifyEmail = async userid => {
+
+  const user = await accountModel.getUserById(userid);
+  console.log(user);
+  const emailToSend = user.email;
+  const usernameToSend = user.name; 
+
+  sendEmail(emailToSend,"[No reply] Xác nhận tài khoản BookLand của bạn",`<p> Xin hãy xác nhận tài khoản: ${usernameToSend} của bạn qua đường dẫn localhost:3000/verify/${userid}</p>`); 
 };
+
+exports.sendResetPasswordEmail = async userid => {
+  const user = await accountModel.getUserById(userid); 
+  console.log(`User to send reset password: ${user.name}`); 
+  sendEmail(user.email, "[No-reply] Bookland: Lấy lại mật khẩu của bạn", `<p> Vào liên kết sau để reset mật khẩu cho tài khoản ${user.name}của bạn: 
+  localhost:3000/forgotPassword/${userid} </p>`); 
+}
 
 exports.checkValidPassword = async (id, plainPassword) => {
   const userpasswordCollection = await db().collection("User-hashPassword");
@@ -51,7 +63,6 @@ exports.checkValidPassword = async (id, plainPassword) => {
 exports.registerNewuser = async (newUsername, plainNewPassword, newEmail) => {
   console.log(newUsername, plainNewPassword, newEmail);
   let res = await accountModel.addNewUser(newUsername, plainNewPassword, newEmail);
-  console.log("ressssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
   console.log(res)
   //let newuser = await accountModel.getUserByUsername(newUsername);
   this.sendVerifyEmail(res);
@@ -72,3 +83,4 @@ exports.checkExistsEmail = async inputEmail =>
   let result = await accountModel.isExistsEmail(inputEmail); 
   return result; 
 }
+

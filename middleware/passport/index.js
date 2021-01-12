@@ -22,10 +22,17 @@ passport.use(new localstrategy (
       console.log(`Inside strategy execution: id: ${idToCheckPassword}`); 
       const passwordCheck = await accoutServices.checkValidPassword(idToCheckPassword,password); 
       console.log(`Inside strategy execution: passcheck: ${passwordCheck}`); 
- 
+      // check locked
+      const lockedCheck = existUser.isLocked; 
+      console.log(`Is locked: ${lockedCheck}`);
       if(!passwordCheck)
       {
         return done(null,false, {message: 'Incorrect password'}); 
+      }
+
+      if(lockedCheck)
+      {
+        return done(null,false, {message: 'Your account has been locked. Please contact us.'})
       }
       return done(null,existUser); 
    }
