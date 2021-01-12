@@ -12,7 +12,7 @@ passport.use(new localstrategy (
       console.log(`Inside strategy execution: ${existUser}`); 
       if(existUser === null || existUser === undefined)
       {
-        return done(null,false, {message: 'User not exist '});
+        return done(null,false, {message:'Username không tồn tại!'});
       }
       // check password
       console.log(existUser);
@@ -27,12 +27,12 @@ passport.use(new localstrategy (
       console.log(`Is locked: ${lockedCheck}`);
       if(!passwordCheck)
       {
-        return done(null,false, {message: 'Incorrect password'}); 
+        return done(null,false, {message:'Sai mật khẩu!'});
       }
 
       if(lockedCheck)
       {
-        return done(null,false, {message: 'Your account has been locked. Please contact us.'})
+        return done(null,false, {message: 'Tài khoản của bạn đã bị khoá, liên hệ chúng tôi!'})
       }
       return done(null,existUser); 
    }
