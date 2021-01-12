@@ -98,6 +98,15 @@ function resetNewPassword()
                     console.log(result); 
                         if(result)
                         {
+                            const notifyElement = document.getElementById("repasswordcheck-notify"); 
+                            notifyElement.innerHTML = "Đã đổi mật khẩu của bạn sẽ, redirect bạn lại trang đăng nhập"
+
+                            setTimeout(function () {
+                                window.location.replace("/login");
+                                }
+                            , 2000);
+                            
+
                             console.log("OK");
                         }
                 }
