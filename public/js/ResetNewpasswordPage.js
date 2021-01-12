@@ -77,9 +77,33 @@ function validateRepassword()
 
 function resetNewPassword()
 {
-    console.log("Inside reset");
+    console.log(document.URL);
+    // send to api
+    console.log(document.getElementById("newpassword-box").value);
+    $.ajax(
+        {
+           
+            url: document.URL,
+            type: "POST",
+            data: {
+                newpassword: document.getElementById("newpassword-box").value, 
+            },
 
-    
+            statusCode: {
+                404: function () {
+                    console.log("not OK");
+                },
+                202: function (result)
+                {
+                    console.log(result); 
+                        if(result)
+                        {
+                            console.log("OK");
+                        }
+                }
+            }
+        }
+    )
 
     
 }

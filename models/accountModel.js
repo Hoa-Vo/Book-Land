@@ -84,3 +84,25 @@ exports.isExistsEmail = async inputEmail => {
   }
   
 }
+
+exports.changePassword = async (userid, password) =>
+{
+  const userpasswordCollection = await db().collection("User-hashPassword");
+
+   await bcrypt.hash(password, 3, (err,hashResult) => 
+   {
+     if (err) {
+       console.log(`Hash error: ${err}}`);
+       return false;
+     }
+     console.log(hashResult);
+     userpasswordCollection.updateOne({_id: ObjectID(userid)}, 
+                                     {$set: {password: hashResult}} );
+   });
+  // await userpasswordCollection.updateOne({_id: ObjectID(userid)} , {$set : {password : password}});
+
+  // await userCollection.updateOne({ _id: ObjectID(id) }, { $set: { isVerified: newVerifyStatus } });
+  return true;
+
+  
+}
