@@ -75,32 +75,19 @@ function validateRepassword()
     
 }
 
-function checkCorrectOldPassword()
-{
-    const input = document.getElementById("oldpassword-box");
-    
-    return false;
-}
 
 function changePassword()
 {
-   let checkOldPasswordResult = checkCorrectOldPassword(); 
    let newPassword = document.getElementById("newpassword-box").value; 
-
    let notifyElement = document.getElementById("repasswordcheck-notify"); 
-
-   if(!checkOldPasswordResult)
-   {
-        notifyElement.innerHTML = "Mật khẩu hiện tại bạn nhập sai!";
-        notifyElement.style = "color: red";
-   }
-   else{
+   console.log(document.getElementById("oldpassword-box").value);
        // send change password
     $.ajax(
         {
             url: document.URL,
             type: "POST",
             data: {
+                oldPassword: document.getElementById("oldpassword-box").value,
                 newPassword : newPassword
             },
  
@@ -114,22 +101,24 @@ function changePassword()
                  console.log(result); 
                  if(result)
                  {
-                     const notifyElement = document.getElementById("repasswordcheck-notify"); 
-                             notifyElement.innerHTML = "Đã đổi mật khẩu của bạn sẽ, redirect bạn lại trang chủ";
+                     
+                     notifyElement.innerHTML = "Đã đổi mật khẩu của bạn sẽ, redirect bạn lại trang chủ";
  
-                             setTimeout(function () {
-                                 window.location.replace("/login");
-                                 }
-                             , 2000);
-                             
- 
-                             console.log("OK");
+                //     setTimeout(function () {
+                //     window.location.replace("/login");
+                //             }
+                //    , 2000);
+                 }
+                 else{
+                    notifyElement = document.getElementById("repasswordcheck-notify"); 
+                    notifyElement.style = "color: red";
+                    notifyElement.innerHTML = "Mật khẩu cũ sai!";
                  }
              }
             }
         }
     )
-   }
+   
 
    
    

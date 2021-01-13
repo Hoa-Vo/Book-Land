@@ -6,6 +6,7 @@ const changepasswordController = require("../controllers/changePasswordControlle
 
 
 router.get("/", changepasswordController.renderChangePasswordPage); 
+router.post("/", changepasswordController.checkAndChange);
 
 
 module.exports = router;
