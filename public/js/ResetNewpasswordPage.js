@@ -75,6 +75,66 @@ function validateRepassword()
     
 }
 
+function checkCorrectOldPassword()
+{
+    const input = document.getElementById("oldpassword-box");
+    
+    return false;
+}
+
+function changePassword()
+{
+   let checkOldPasswordResult = checkCorrectOldPassword(); 
+   let newPassword = document.getElementById("newpassword-box").value; 
+
+   let notifyElement = document.getElementById("repasswordcheck-notify"); 
+
+   if(!checkOldPasswordResult)
+   {
+        notifyElement.innerHTML = "Mật khẩu hiện tại bạn nhập sai!";
+        notifyElement.style = "color: red";
+   }
+   else{
+       // send change password
+    $.ajax(
+        {
+            url: document.URL,
+            type: "POST",
+            data: {
+                newPassword : newPassword
+            },
+ 
+            statusCode: 
+            {
+             404: function () {
+                 console.log("not OK");
+             },
+             202: function (result)
+             {
+                 console.log(result); 
+                 if(result)
+                 {
+                     const notifyElement = document.getElementById("repasswordcheck-notify"); 
+                             notifyElement.innerHTML = "Đã đổi mật khẩu của bạn sẽ, redirect bạn lại trang chủ";
+ 
+                             setTimeout(function () {
+                                 window.location.replace("/login");
+                                 }
+                             , 2000);
+                             
+ 
+                             console.log("OK");
+                 }
+             }
+            }
+        }
+    )
+   }
+
+   
+   
+}
+
 function resetNewPassword()
 {
     console.log(document.URL);
