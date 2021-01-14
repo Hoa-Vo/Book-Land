@@ -3,7 +3,7 @@
 <!-- Basic -->
 
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +32,10 @@
 <body>
 	<!-- Start Main Top -->
 	<!-- Start Main Top -->
+	<div class="loader">
+		<div class="loader-icon"></div>
+		<p>Đang tải...</p>
+	</div>
 	<header class="main-header">
 		<!-- Start Navigation -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -66,13 +70,14 @@
 						<li class="nav-item"><a class="nav-link" href="/service">Dịch vụ</a></li>
 						<li class="dropdown">
 							{{#if userToShow}}
-								<a href="#" class="nav-link dropdown-toggle arrow"
-									data-toggle="dropdown" id="userToShow-name">{{userToShow.name}}</a>
+								<a href="/account" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"
+									id="userToShow-name">{{userToShow.name}}</a>
 								<ul class="dropdown-menu">
 									<li><a href="/account">Thông tin tài khoản</a></li>
+									<li><a href="/order">Đơn hàng</a></li>
 									<li><a href="/logout">Đăng xuất</a></li>
 									<li><a href="/changepassword">Đổi mật khẩu</a></li>
-									<li><a href = "/changeAccountInfo">Cập nhật thông tin</a></li>
+									<li><a href="/changeAccountInfo">Cập nhật thông tin</a></li>
 								</ul>
 							{{else}}
 								<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Đăng kí/Đăng
@@ -216,7 +221,7 @@
 					<a href="#" class="photo"><img src="\{{image_link}}" class="cart-thumb" alt="" /></a>
 					<div style="margin-left:8px;">
 						<h6><a href="/bookslist/\{{_id}}">\{{title}} </a></h6>
-						<p>\{{quantity}} x - <span class="price">\{{totalPrice}} VND</span></p>
+						<p>\{{quantity}} x - <span class="price">\{{totalPrice}} </span></p>
 					</div>
 				
 				</div>

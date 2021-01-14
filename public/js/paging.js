@@ -78,23 +78,13 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
           }
           updatePagination(btnArr);
         }
-        updateBookList(res.data.books);
-        if (category_id) {
-          history.pushState(
-            {},
-            "",
-            `?categoryID=${category_id}&page=${currentPage}&pagelimit=${booksPerPage}`
-          );
-        } else if (searchText) {
-          history.pushState(
-            {},
-            "",
-            `search/?bookName=${searchText}&page=${currentPage}&pagelimit=${booksPerPage}`
-          );
-        } else {
-          history.pushState({}, "", `?page=${currentPage}&pagelimit=${booksPerPage}`);
+        for (const element of res.data.books) {
+          element.basePrice = element.basePrice.toLocaleString("it-IT", {
+            style: "currency",
+            currency: "VND",
+          });
         }
-
+        updateBookList(res.data.books);
         inThisPage(currentPage);
         if (currentPage === 1) {
           $("#prevBtn").addClass("disabled");
@@ -104,6 +94,7 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
           $("#prevBtn").removeClass("disabled");
           $("#nextBtn").removeClass("disabled");
         }
+        $("html, body").animate({ scrollTop: 0 }, 600);
       } else {
         $("#book-list").html("<div id='loading'>Không tìm thấy cuốn sách nào</div>");
       }

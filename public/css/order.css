@@ -1,0 +1,92 @@
+.fa-wallet {
+  color: red;
+}
+.order-book-image {
+  height: 150px;
+}
+.orders {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+  overflow: auto;
+}
+
+.order {
+  margin: 10px 0;
+  border-style: groove;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 17px;
+}
+.order-info {
+  margin-bottom: 20px;
+  justify-content: space-between;
+  display: flex;
+  border-bottom-style: groove;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 10px 0;
+}
+.item-title {
+  margin: 0 30px;
+}
+.item-status {
+  margin: 0 30px;
+}
+.btn-cart:not(:disabled):not(.disabled) {
+  color: white;
+}
+.day-order {
+  font-size: 15px;
+}
+.order-id {
+  color: red;
+}
+#orderTabContent {
+  margin: 20px 200px;
+}
+.nav-bar-order {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.order-container {
+  height: 100vh;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.user-info {
+  border-right-style: groove;
+}
+.order-btn {
+  display: flex;
+}
+.money-order {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.main-span {
+  font-weight: bolder;
+}
+.empty-order {
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+.empty-order > p {
+  font-size: 30px;
+  font-weight: bold;
+  color: #666666;
+}
+.detail-item {
+  width: 100%;
+}

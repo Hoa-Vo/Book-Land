@@ -1,3 +1,4 @@
+const currencyFormatter = require("currency-formatter");
 const booksModel = require("../models/booksModel");
 const accountModel = require("../models/accountModel");
 
@@ -11,6 +12,7 @@ exports.get = async (req, res, next) => {
     userToShow = await accountModel.getUserById(req.user._id);
     console.log(userToShow);
   }
+  book.basePrice = currencyFormatter.format(book.basePrice, { locale: "vi-VN" });
   // Pass data to view to book detail
   res.render("bookDetailsPage/booksDetail", {
     id: book._id,

@@ -30,7 +30,7 @@
                 </div>
                 <p class="product-description"><b>Tác giả:</b> {{author}}</p>
                 <p class="product-description"><b>Nhà xuất bản:</b> {{publisher}}</p>
-                <p class="product-description"><b>Giá tiền:</b> {{basePrice}} VND</p>
+                <p class="product-description"><b>Giá tiền:</b> {{basePrice}} </p>
                 <p class="product-description"><b>Số lượng</b> </p>
                 <div class="def-number-input number-input safari_only mb-0">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
@@ -41,7 +41,8 @@
                 </div>
                 <div class="action">
                     <button class="add-to-cart btn btn-default" type="button">Mua ngay</button>
-                    <button onclick="addToCart(`{{id}}`)" class="add-to-cart btn btn-default" type="button">Thêm vào
+                    <button onclick="addToCartFromDetail(`{{id}}`)" class="add-to-cart btn btn-default"
+                        type="button">Thêm vào
                         giỏ hàng</button>
                     <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
                 </div>

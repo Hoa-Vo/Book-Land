@@ -12,7 +12,7 @@ exports.getUserCart = async id => {
   } else {
     await cartCollection.insertOne({
       userId: ObjectID(id),
-      books: [{}],
+      books: [],
     });
     const userCart = await cartCollection.findOne({ userId: ObjectID(id) });
     const books = userCart.books;
@@ -21,20 +21,34 @@ exports.getUserCart = async id => {
   }
 };
 
-exports.addBookToUserCart = async (userId, bookId) => {
+exports.addBookToUserCart = async (userId, bookId, quantity) => {
   const cartCollection = await db().collection("UserCart");
   const userCart = await cartCollection.findOne({ userId: ObjectID(userId) });
-  const isExistInCart = userCart.books.find(element => element.id === ObjectID(bookId));
+  const isExistInCart = userCart.books.find(element => element.id.toString() === bookId);
   if (isExistInCart) {
-    await cartCollection.update(
-      { userId: ObjectID(userId), "books.id": ObjectID(bookId) },
-      { $inc: { "books.$.quantity": 1 } }
-    );
+    if (quantity === "NaN") {
+      await cartCollection.update(
+        { userId: ObjectID(userId), "books.id": ObjectID(bookId) },
+        { $inc: { "books.$.quantity": 1 } }
+      );
+    } else {
+      await cartCollection.update(
+        { userId: ObjectID(userId), "books.id": ObjectID(bookId) },
+        { $inc: { "books.$.quantity": parseInt(quantity) } }
+      );
+    }
   } else {
-    await cartCollection.update(
-      { userId: ObjectID(userId) },
-      { $push: { books: { id: ObjectID(bookId), quantity: 1 } } }
-    );
+    if (quantity === "NaN") {
+      await cartCollection.update(
+        { userId: ObjectID(userId) },
+        { $push: { books: { id: ObjectID(bookId), quantity: 1 } } }
+      );
+    } else {
+      await cartCollection.update(
+        { userId: ObjectID(userId) },
+        { $push: { books: { id: ObjectID(bookId), quantity: parseInt(quantity) } } }
+      );
+    }
   }
   const userCartAfterUpdate = await cartCollection.findOne({ userId: ObjectID(userId) });
   const books = userCartAfterUpdate.books;
@@ -74,4 +88,15 @@ exports.updateBookFromUserCart = async (userId, bookId, quantity) => {
     const booksInfo = await bookModel.getCartInfo(books);
     return booksInfo;
   }
+};
+
+exports.getUserBookArr = async id => {
+  const cartCollection = await db().collection("UserCart");
+  const userCart = await cartCollection.findOne({ userId: ObjectID(id) });
+  return userCart.books;
+};
+
+exports.deleteUserCart = async id => {
+  const cartCollection = await db().collection("UserCart");
+  await cartCollection.remove({ userId: ObjectID(id) });
 };
