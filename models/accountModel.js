@@ -131,6 +131,7 @@ exports.changeAccountInfo = async accountObject =>
                              address_city : accountObject.address_city,
                              address_district : accountObject.address_district,
                              address : accountObject.address,
+                             avatar_image: accountObject.avatar_image
                            }});
     success = true;
   }

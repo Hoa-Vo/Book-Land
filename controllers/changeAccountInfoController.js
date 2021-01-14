@@ -23,20 +23,36 @@ exports.changeAccountInfo = async (req,res,next) =>
         const form = formidable.IncomingForm();
         await form.parse(req, (err,fields, files) => 
         {
-            let accountObject = {
-                id: req.user._id, 
-                email: fields.emailInput,
-                age: fields.ageInput,
-                address_city: fields.address_cityInput,
-                address_district: fields.address_districtInput,
-                address: fields.addressInput
-                
-            }
-            
+            if (err || files.userImage.type !== "image/jpeg") {
+                res.send(204, "file not image!!"); }
+            else{
+                accountService.saveImageToCloud(files)
+                .then(newImgLink => {
+                    let accountObject = {
+                        id: req.user._id, 
+                        email: fields.emailInput,
+                        age: fields.ageInput,
+                        address_city: fields.address_cityInput,
+                        address_district: fields.address_districtInput,
+                        address: fields.addressInput,
+                        avatar_image: newImgLink
+                    }
 
-            accountService.changeAccountInfomation(accountObject).then(result => {
-               res.status(202).send(result);
-            });
+                    return accountObject; 
+                })
+                .then(accountObject => {
+                    let result = accountService.changeAccountInfomation(accountObject).then(resu => {
+                        if(resu == true)
+                        {
+                            res.redirect("/");
+                        }
+                    }); 
+
+                })
+              
+            }
+          
+          
         });
     }
 }

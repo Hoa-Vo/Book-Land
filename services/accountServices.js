@@ -6,6 +6,13 @@ const { ObjectID } = require("mongodb");
 const bcrypt = require("bcrypt");
 require("dotenv/config");
 
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 
 function sendEmail(to,subject,content)
 {
@@ -82,6 +89,21 @@ exports.checkExistsEmail = async inputEmail =>
 {
   let result = await accountModel.isExistsEmail(inputEmail); 
   return result; 
+}
+
+exports.saveImageToCloud = async file => {
+    const oldPath = file.userImage.path;
+    let newImageLink; 
+    await cloudinary.uploader.upload(oldPath,  (err,result) => {
+      if(err){
+        newImageLink = null;
+      }
+      else{
+        newImageLink = result.url;
+      }
+      
+    });
+    return newImageLink;
 }
 
 exports.changeAccountInfomation = async accountObject => 
