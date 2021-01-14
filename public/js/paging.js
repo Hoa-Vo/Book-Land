@@ -10,6 +10,7 @@ let isFilterOrder = false;
 let isPaging = true;
 let isSearching = false;
 let isFilterCategory = false;
+let isFilterPublisher = false;
 $(document).ready(async () => {
   fetchData(currentPage, booksPerPage);
 });
@@ -129,47 +130,64 @@ function modifyUrl(searchText, categoryId, orderId) {
   if (searchText !== "") {
     isSearching = true;
     isFilterCategory = false;
+    isFilterPublisher = false;
   }
   if (categoryId !== "") {
     isFilterCategory = true;
     isSearching = false;
+    isFilterPublisher = false;
   }
-  if (isPaging && !isFilterCategory && !isFilterOrder && !isSearching) {
+
+  if (isPaging && !isFilterCategory && !isFilterOrder && !isSearching && isFilterPublisher) {
     window.history.pushState({}, "paging", `./?page=${currentPage}&pagelimit=${booksPerPage}`);
   }
-  if (isPaging && isFilterCategory && !isFilterOrder && !isSearching) {
+  if (isPaging && !isFilterCategory && !isFilterOrder && !isSearching && isFilterPublisher) {
+    window.history.pushState(
+      {},
+      "paging",
+      `./?publisher=${temp}&page=${currentPage}&pagelimit=${booksPerPage}`
+    );
+  }
+  if (isPaging && isFilterCategory && !isFilterOrder && !isSearching && !isFilterPublisher) {
     window.history.pushState(
       {},
       "paging",
       `./?categoryId=${categoryId}&page=${currentPage}&pagelimit=${booksPerPage}`
     );
   }
-  if (isPaging && !isFilterCategory && isFilterOrder && !isSearching) {
+  if (isPaging && !isFilterCategory && isFilterOrder && !isSearching && !isFilterPublisher) {
     window.history.pushState(
       {},
       "paging",
       `./?orderbyid=${orderId}&page=${currentPage}&pagelimit=${booksPerPage}`
     );
   }
-  if (isPaging && !isFilterCategory && !isFilterOrder && isSearching) {
+  if (isPaging && !isFilterCategory && !isFilterOrder && isSearching && !isFilterPublisher) {
     window.history.pushState(
       {},
       "paging",
       `/search/?bookName=${searchText}&page=${currentPage}&pagelimit=${booksPerPage}`
     );
   }
-  if (isPaging && !isFilterCategory && isFilterOrder && isSearching) {
+  if (isPaging && !isFilterCategory && isFilterOrder && !isFilterPublisher && isSearching) {
     window.history.pushState(
       {},
       "paging",
       `/search/?bookName=${searchText}&orderId=${orderId}&page=${currentPage}&pagelimit=${booksPerPage}`
     );
   }
-  if (isPaging && isFilterCategory && isFilterOrder && !isSearching) {
+  if (isPaging && isFilterOrder && !isSearching && isFilterCategory && !isFilterPublisher) {
     window.history.pushState(
       {},
       "paging",
       `./?categoryId=${categoryId}&orderId=${orderId}&page=${currentPage}&pagelimit=${booksPerPage}`
+    );
+  }
+  if (isPaging && isFilterOrder && isFilterPublisher && !isFilterPublisher && !isSearching) {
+    window.history.pushState(
+      {},
+      "filter",
+      `./filter?publisher=${temp}&orderId=${orderId}&page=${currentPage}&pagelimit=${booksPerPage}`
     );
   }
   isFilterOrder = false;
