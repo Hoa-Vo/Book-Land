@@ -107,29 +107,15 @@ exports.paging = async (page, pageLimit, category, searchText) => {
   const currentPage = parseInt(page);
   const limit = parseInt(pageLimit);
   const bookCollection = await db().collection("Books");
-  let totalBook;
-  let books;
-  if (category) {
-    books = await bookCollection
-      .find({ category_id: category, is_deleted: false })
-      .skip(limit * currentPage - limit)
-      .limit(limit)
-      .toArray();
-    totalBook = books.length;
-  } else if (searchText) {
-    books = await bookCollection
-      .find({ title: { $regex: searchText, $options: "i" }, is_deleted: false })
-      .toArray();
-    totalBook = books.length;
+  let data;
+  if (category !== "") {
+    data = await onlyFilterCategory(page, pageLimit, category);
+  } else if (searchText !== "") {
+    data = await onlySearchBook(page, pageLimit, searchText);
   } else {
-    books = await bookCollection
-      .find({ is_deleted: false })
-      .skip(limit * currentPage - limit)
-      .limit(limit)
-      .toArray();
-    totalBook = await bookCollection.count();
+    data = await onlyPaging(page, pageLimit);
   }
-  return { books, totalBook };
+  return data;
 };
 exports.getCartInfo = async data => {
   let arrID = [];
@@ -166,4 +152,133 @@ exports.getCartInfo = async data => {
     books[i].totalPrice = quantity * books[i].basePrice;
   }
   return books;
+};
+
+exports.filter = async (filterOp, page, pageLimit, searchText, category_id) => {
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  let data;
+  if (searchText === "" && category_id === "") {
+    data = onlyOrder(page, pageLimit, filterOp);
+  } else if (searchText !== "") {
+    data = await searchAndOrder(page, pageLimit, searchText, filterOp);
+  } else {
+    data = await categoryAndOrder(page, pageLimit, category_id, filterOp);
+  }
+  return data;
+};
+
+const searchAndOrder = async (page, pageLimit, searchText, orderId) => {
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  let books;
+  const op = parseInt(orderId);
+  if (op === 2) {
+    books = await bookCollection
+      .find({ title: { $regex: searchText, $options: "i" } })
+      .sort({ basePrice: 1 })
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+  }
+  if (op === 3) {
+    books = await bookCollection
+      .find({ title: { $regex: searchText, $options: "i" } })
+      .sort({ basePrice: -1 })
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+  }
+  const totalBook = books.length;
+  return { books, totalBook };
+};
+
+const categoryAndOrder = async (page, pageLimit, categoryId, orderId) => {
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  let books;
+  const op = parseInt(orderId);
+  if (op === 2) {
+    books = await bookCollection
+      .find({ category_id: categoryId, is_deleted: false })
+      .sort({ basePrice: 1 })
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+  }
+  if (op === 3) {
+    books = await bookCollection
+      .find({ category_id: categoryId, is_deleted: false })
+      .sort({ basePrice: -1 })
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+  }
+  const totalBook = books.length;
+  return { books, totalBook };
+};
+
+const onlyFilterCategory = async (page, pageLimit, category_id) => {
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  const books = await bookCollection
+    .find({ category_id: category_id, is_deleted: false })
+    .skip(limit * currentPage - limit)
+    .limit(limit)
+    .toArray();
+  const totalBook = books.length;
+  return { books, totalBook };
+};
+
+const onlySearchBook = async (page, pageLimit, searchText) => {
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  const books = await bookCollection
+    .find({ title: { $regex: searchText, $options: "i" }, is_deleted: false })
+    .toArray();
+  const totalBook = books.length;
+  return { books, totalBook };
+};
+
+const onlyPaging = async (page, pageLimit) => {
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  const books = await bookCollection
+    .find({ is_deleted: false })
+    .skip(limit * currentPage - limit)
+    .limit(limit)
+    .toArray();
+  const totalBook = await bookCollection.count();
+  return { books, totalBook };
+};
+const onlyOrder = async (page, pageLimit, orderId) => {
+  const currentPage = parseInt(page);
+  const limit = parseInt(pageLimit);
+  const bookCollection = await db().collection("Books");
+  let books;
+  const op = parseInt(orderId);
+  if (op === 2) {
+    books = await bookCollection
+      .find({ is_deleted: false })
+      .sort({ basePrice: 1 })
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+  }
+  if (op === 3) {
+    books = await bookCollection
+      .find({ is_deleted: false })
+      .sort({ basePrice: -1 })
+      .skip(limit * currentPage - limit)
+      .limit(limit)
+      .toArray();
+  }
+  const totalBook = books.length;
+  return { books, totalBook };
 };

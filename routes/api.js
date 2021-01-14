@@ -8,6 +8,7 @@ const forgotPasswordApiController = require("../controllers/api/forgotPasswordAp
 const changePasswordApiController = require("../controllers/api/changePassowordApiController");
 const getLocationApi = require("../controllers/api/getLocationApi");
 const orderApi = require("../controllers/api/orderApi");
+const filterApi = require("../controllers/api/filterApi");
 
 router.get("/checkExistedUsername", checkExistUsernameController.checkExistUsername);
 router.get("/checkExistedEmail", checkExistEmailController.checkExistEmail);
@@ -27,5 +28,6 @@ router.delete("/order/del", orderApi.cancelOrder);
 router.get("/order/transporting", orderApi.getTransportingOrder);
 router.get("/order/transported", orderApi.getTransportedOrder);
 router.get("/order/canceled", orderApi.getCanceledOrder);
+router.get("/filter", filterApi.getBookFilter);
 
 module.exports = router;

@@ -5,18 +5,25 @@ let maxPage = 0;
 let maxButtonPerPage = 5;
 let pageNumberBar;
 let allBtn = "";
+let isPrevNextClick = 0;
+let isFilterOrder = false;
+let isPaging = true;
+let isSearching = false;
+let isFilterCategory = false;
 $(document).ready(async () => {
   fetchData(currentPage, booksPerPage);
 });
 function prevBtnClick() {
   if (currentPage > 1) {
     currentPage--;
+    isPrevNextClick = 1;
     fetchData(currentPage, booksPerPage, 1);
     toogleActive(currentPage + 1);
   }
 }
 function nextBtnClick() {
   if (currentPage < maxPage) {
+    isPrevNextClick = 2;
     currentPage++;
     fetchData(currentPage, booksPerPage, 2);
     toogleActive(currentPage - 1);
@@ -38,9 +45,8 @@ function setPage(num) {
 async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
   $("#book-list").html("<div id='loading'>Đang tải...</div>");
   const category_id = document.getElementById("category_id").textContent;
-
   const searchText = document.getElementById("searchText").value;
-
+  modifyUrl(searchText, category_id);
   $.ajax({
     url: "/api/paging/",
     type: "GET",
@@ -118,4 +124,53 @@ function updateBookList(books) {
   const source = $("#products").html();
   const template = Handlebars.compile(source);
   $("#book-list").html(template(books));
+}
+function modifyUrl(searchText, categoryId, orderId) {
+  if (searchText !== "") {
+    isSearching = true;
+    isFilterCategory = false;
+  }
+  if (categoryId !== "") {
+    isFilterCategory = true;
+    isSearching = false;
+  }
+  if (isPaging && !isFilterCategory && !isFilterOrder && !isSearching) {
+    window.history.pushState({}, "paging", `./?page=${currentPage}&pagelimit=${booksPerPage}`);
+  }
+  if (isPaging && isFilterCategory && !isFilterOrder && !isSearching) {
+    window.history.pushState(
+      {},
+      "paging",
+      `./?categoryId=${categoryId}&page=${currentPage}&pagelimit=${booksPerPage}`
+    );
+  }
+  if (isPaging && !isFilterCategory && isFilterOrder && !isSearching) {
+    window.history.pushState(
+      {},
+      "paging",
+      `./?orderbyid=${orderId}&page=${currentPage}&pagelimit=${booksPerPage}`
+    );
+  }
+  if (isPaging && !isFilterCategory && !isFilterOrder && isSearching) {
+    window.history.pushState(
+      {},
+      "paging",
+      `/search/?bookName=${searchText}&page=${currentPage}&pagelimit=${booksPerPage}`
+    );
+  }
+  if (isPaging && !isFilterCategory && isFilterOrder && isSearching) {
+    window.history.pushState(
+      {},
+      "paging",
+      `/search/?bookName=${searchText}&orderId=${orderId}&page=${currentPage}&pagelimit=${booksPerPage}`
+    );
+  }
+  if (isPaging && isFilterCategory && isFilterOrder && !isSearching) {
+    window.history.pushState(
+      {},
+      "paging",
+      `./?categoryId=${categoryId}&orderId=${orderId}&page=${currentPage}&pagelimit=${booksPerPage}`
+    );
+  }
+  isFilterOrder = false;
 }
