@@ -26,14 +26,12 @@ exports.renderOrderDetailPage = async (req, res, next) => {
   const hour = date.getHours();
   const minute = date.getMinutes();
   const second = date.getSeconds();
-  let totalPrice = 0;
   for (const book of orderInfo.books) {
-    totalPrice += book.totalPrice;
     book.basePrice = currencyFormatter.format(book.basePrice, { locale: "vi-VN" });
   }
-  totalPrice = currencyFormatter.format(totalPrice, { locale: "vi-VN" });
-
+  const totalPrice = currencyFormatter.format(orderInfo.totalMoney, { locale: "vi-VN" });
   orderInfo.createDate = `${day}/${month}/${year} ${hour}:${minute}:${second}`;
+  orderInfo.orderId = req.params.id;
   res.render("orderPage/orderDetail", {
     userToShow: userToShow,
     orderInfo: orderInfo,

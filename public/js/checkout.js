@@ -1,3 +1,4 @@
+let totalMoney;
 $(document).ready(() => {
   $(".loader").css("display", "flex");
   upDateCheckoutInfo();
@@ -16,7 +17,7 @@ function upDateCheckoutInfo() {
   });
 }
 function updateCheckOutHtml(books) {
-  let totalMoney = 0;
+  totalMoney = 0;
   for (let i = 0; i < books.length; i++) {
     totalMoney += books[i].totalPrice;
   }
@@ -34,12 +35,12 @@ function updateCheckOutHtml(books) {
   const source = $("#checkout-info").html();
   const template = Handlebars.compile(source);
   $("#info-list").html(template(books));
-  totalMoney = totalMoney.toLocaleString("it-IT", {
+  const temp = totalMoney.toLocaleString("it-IT", {
     style: "currency",
     currency: "VND",
   });
-  $("#total-money-pay").html(`${totalMoney}`);
-  $("#money-pay").html(`${totalMoney}`);
+  $("#total-money-pay").html(`${temp}`);
+  $("#money-pay").html(`${temp}`);
 }
 function checkOutInfoIsValid() {
   const cityValue = $("#city").find(":selected").text();
@@ -147,7 +148,7 @@ function nameFocusOut() {
     $(".name-invalid").css("display", "none");
   }
 }
-
+let shippingCost = 0;
 function orderApi(cityValue, districtValue, subDistrictValue, name, address) {
   $.ajax({
     url: "/api/add-order",
@@ -159,7 +160,41 @@ function orderApi(cityValue, districtValue, subDistrictValue, name, address) {
       subDistrict: subDistrictValue,
       name: name,
       address: address,
+      shippingCost: shippingCost,
+      totalMoney: totalMoney - shippingCost,
     },
     success: function (res) {},
   });
+}
+
+function getShippingCostIndex() {
+  const arr = document.getElementsByName("shipping-option");
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i].checked) {
+      return i;
+    }
+  }
+}
+
+function freeShipCheck() {
+  $("#shipping-cost").html("0 đ");
+  shippingCost = 0;
+}
+function expressShipCheck() {
+  $("#shipping-cost").html("20.000 đ");
+  shippingCost = 20000;
+  const temp = (totalMoney - shippingCost).toLocaleString("it-IT", {
+    style: "currency",
+    currency: "VND",
+  });
+  $("#money-pay").html(temp);
+}
+function extraShipCheck() {
+  $("#shipping-cost").html("50.000 đ");
+  shippingCost = 50000;
+  const temp = (totalMoney - shippingCost).toLocaleString("it-IT", {
+    style: "currency",
+    currency: "VND",
+  });
+  $("#money-pay").html(temp);
 }

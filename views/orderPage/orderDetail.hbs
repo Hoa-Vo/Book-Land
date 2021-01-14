@@ -22,11 +22,11 @@
                 </div>
                 <div>
                     <p><i style="color: red;" class="fas fa-wallet"></i> Đơn hàng: <span
-                            style="color: red;">21323432FFF325345</span></p>
+                            style="color: red;">{{orderInfo.orderId}}</span></p>
                     <p> Trạng thái: <span id="order-status" style="color: #0062cc;">{{orderInfo.status}} </span></p>
                 </div>
                 {{#each orderInfo.books}}
-                    <div class="item">
+                    <div class="item detail-item">
                         <div class="item-image"><img src="{{image_link}}" class="order-book-image"></img> </div>
                         <div class="item-name">
                             <p>{{title}}</p>

@@ -121,22 +121,22 @@
                             </div>
                             <div class="mb-4">
                                 <div class="custom-control custom-radio">
-                                    <input id="shippingOption1" name="shipping-option" class="custom-control-input"
-                                        checked="checked" type="radio">
+                                    <input onchange="freeShipCheck()" id="shippingOption1" name="shipping-option"
+                                        class="custom-control-input" checked="checked" type="radio">
                                     <label class="custom-control-label" for="shippingOption1">Bình thường</label>
                                     <span class="float-right font-weight-bold">Miễn phí</span>
                                 </div>
                                 <div class="ml-4 mb-2 small">(3-7 ngày)</div>
                                 <div class="custom-control custom-radio">
-                                    <input id="shippingOption2" name="shipping-option" class="custom-control-input"
-                                        type="radio">
+                                    <input onchange="expressShipCheck()" id="shippingOption2" name="shipping-option"
+                                        class="custom-control-input" type="radio">
                                     <label class="custom-control-label" for="shippingOption2">Express</label>
                                     <span class="float-right font-weight-bold">20.0000 đ</span>
                                 </div>
                                 <div class="ml-4 mb-2 small">(2-4 ngày)</div>
                                 <div class="custom-control custom-radio">
-                                    <input id="shippingOption3" name="shipping-option" class="custom-control-input"
-                                        type="radio">
+                                    <input onchange="extraShipCheck()" id="shippingOption3" name="shipping-option"
+                                        class="custom-control-input" type="radio">
                                     <label class="custom-control-label" for="shippingOption3">Hỏa tốc</label>
                                     <span class="float-right font-weight-bold">50.0000 đ</span>
                                 </div>
@@ -181,7 +181,7 @@
                             </div>
                             <div class="d-flex">
                                 <h4>Phí vận chuyển</h4>
-                                <div class="ml-auto font-weight-bold"> Miễn phí </div>
+                                <div id="shipping-cost" class="ml-auto font-weight-bold"> 0 đ</div>
                             </div>
                             <hr>
                             <div class="d-flex gr-total">

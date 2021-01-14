@@ -9,7 +9,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 700px;
+  overflow: auto;
 }
 
 .order {
@@ -85,4 +86,7 @@
   font-size: 30px;
   font-weight: bold;
   color: #666666;
+}
+.detail-item {
+  width: 100%;
 }

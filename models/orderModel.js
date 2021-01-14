@@ -20,7 +20,16 @@ exports.getAllOrder = async userId => {
   return data;
 };
 
-exports.addOrder = async (name, userID, city, district, subDistrict, address) => {
+exports.addOrder = async (
+  name,
+  userID,
+  city,
+  district,
+  subDistrict,
+  address,
+  shippingCost,
+  totalMoney
+) => {
   const booksInUserCart = await cartModel.getUserBookArr(userID);
   const orderCollection = await db().collection("UserOrder");
   const date = new Date();
@@ -34,6 +43,8 @@ exports.addOrder = async (name, userID, city, district, subDistrict, address) =>
     books: booksInUserCart,
     create_date: date,
     status: "Chờ giao hàng",
+    shippingCost: parseInt(shippingCost),
+    totalMoney: parseInt(totalMoney),
   });
   await cartModel.deleteUserCart(userId);
 };
@@ -49,6 +60,7 @@ exports.getOrderById = async id => {
     orderId: orderInfo._id,
     address: orderInfo.address,
     name: orderInfo.name,
+    totalMoney: orderInfo.totalMoney,
   };
   return data;
 };

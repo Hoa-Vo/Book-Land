@@ -7,7 +7,9 @@ exports.addOrder = async (req, res, next) => {
     req.body.city,
     req.body.district,
     req.body.subDistrict,
-    req.body.address
+    req.body.address,
+    req.body.shippingCost,
+    req.body.totalMoney
   );
 };
 
