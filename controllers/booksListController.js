@@ -7,7 +7,7 @@ exports.listing = async (req, res, next) => {
   console.log(totalBooks);
   const receivedCategoryID = req.query.categoryID;
   let currentCategory = null;
-
+  const allPublisher = await booksListModel.getAllPublisher();
   let booksToShow;
   console.log(`Received with query: ${receivedCategoryID}`);
 
@@ -37,5 +37,6 @@ exports.listing = async (req, res, next) => {
     categories: categoriesListToShowInMenu,
     currentCategory: currentCategory,
     userToShow: userToShow,
+    allPublisher: allPublisher,
   });
 };

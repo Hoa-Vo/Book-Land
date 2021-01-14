@@ -29,5 +29,5 @@ router.get("/order/transporting", orderApi.getTransportingOrder);
 router.get("/order/transported", orderApi.getTransportedOrder);
 router.get("/order/canceled", orderApi.getCanceledOrder);
 router.get("/filter", filterApi.getBookFilter);
-
+router.get("/filter/publisher", filterApi.getBookFilterDuetoPublisher);
 module.exports = router;

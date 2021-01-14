@@ -54,48 +54,15 @@
 						</div>
 						<div class="brand-box">
 							<ul>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios1" value="Yes" type="radio">
-										<label for="Radios1"> Nhã Nam </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios2" value="No" type="radio">
-										<label for="Radios2"> Kim Đồng</label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios3" value="declater" type="radio">
-										<label for="Radios3"> Trẻ </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios4" value="declater" type="radio">
-										<label for="Radios4"> Văn học </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios5" value="declater" type="radio">
-										<label for="Radios5"> Phụ nữ Việt Nam </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios6" value="declater" type="radio">
-										<label for="Radios6"> Giáo dục </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios7" value="declater" type="radio">
-										<label for="Radios7"> Đại học Quốc Gia Hà Nội</label>
-									</div>
-								</li>
+								{{#each allPublisher}}
+									<li>
+										<div class="radio radio-danger">
+											<input name="survey" onchange="publisherFilter(this.id)" id="{{this}}"
+												value="declater" type="radio">
+											<label for="Radios3"> {{this}} </label>
+										</div>
+									</li>
+								{{/each}}
 							</ul>
 						</div>
 					</div>
