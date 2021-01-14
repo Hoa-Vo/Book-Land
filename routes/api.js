@@ -6,6 +6,7 @@ const cartApi = require("../controllers/api/cartApi");
 const pagingApi = require("../controllers/api/pagingApi");
 const getLocationApi = require("../controllers/api/getLocationApi");
 const orderApi = require("../controllers/api/orderApi");
+const filterApi = require("../controllers/api/filterApi");
 
 router.get("/checkExistedUsername", checkExistUsernameController.checkExistUsername);
 router.get("/get-cart", cartApi.getCartInfo);
@@ -22,5 +23,6 @@ router.delete("/order/del", orderApi.cancelOrder);
 router.get("/order/transporting", orderApi.getTransportingOrder);
 router.get("/order/transported", orderApi.getTransportedOrder);
 router.get("/order/canceled", orderApi.getCanceledOrder);
+router.get("/filter", filterApi.getBookFilter);
 
 module.exports = router;

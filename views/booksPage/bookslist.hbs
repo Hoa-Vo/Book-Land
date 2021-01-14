@@ -107,7 +107,8 @@
 						<div class="col-12 col-sm-8 text-center text-sm-left">
 							<div class="toolbar-sorter-right">
 								<span>Sắp xếp</span>
-								<select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+								<select onchange="filter()" id="basic" class="selectpicker show-tick form-control"
+									data-placeholder="$ USD">
 									<option data-display="Select">Mới nhất</option>
 									<option value="1">Phổ biến nhất</option>
 									<option value="2">Giá thấp đến cao</option>
@@ -151,6 +152,7 @@
 	</div>
 </div>
 <script src="js/paging.js"></script>
+<script src="js/filter.js"></script>
 <script id="products" type="text/x-handlebars-template">
 \{{#each this}}
 	<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
@@ -196,5 +198,3 @@
 		</a>
 	</li>
 </script>
-</div>
-</div>
