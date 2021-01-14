@@ -84,8 +84,4 @@ exports.checkExistsEmail = async inputEmail =>
   return result; 
 }
 
-exports.checkIsVerified = async inputEmailOrUsername => 
-{
-  
-}
 
