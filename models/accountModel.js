@@ -41,6 +41,9 @@ exports.addNewUser = async function (newUsername, plainNewPassword, newEmail) {
     age: 10,
     email: newEmail,
     avatar_image: "notfound.jpg",
+    address: "",
+    address_city: "",
+    address_district: "",
     isVerified: false,
     isLocked: false,
   });
@@ -107,3 +110,30 @@ exports.changePassword = async (userid, password) =>
 
   
 }
+
+exports.changeAccountInfo = async accountObject => 
+{
+  const userCollection = await db().collection("registeredUser");
+  let success = true;
+  let existsUser = await userCollection.findOne({_id: ObjectID(accountObject.id)}); 
+  if(existsUser == null || existsUser == undefined)
+  {
+    console.log(`Can't find book with ID ${accountObject.id}`);
+    success = false;
+  }
+  else{
+    userCollection.updateOne({_id: ObjectID(accountObject.id)}, 
+                           {$set: {
+                             email : accountObject.email,
+                             age : accountObject.age,
+                             email : accountObject.email,
+                             email : accountObject.email,
+                             address_city : accountObject.address_city,
+                             address_district : accountObject.address_district,
+                             address : accountObject.address,
+                             avatar_image: accountObject.avatar_image
+                           }});
+    success = true;
+  }
+  return success; 
+} 
