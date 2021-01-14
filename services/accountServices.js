@@ -109,12 +109,20 @@ exports.saveImageToCloud = async file => {
 exports.changeAccountInfomation = async accountObject => 
 {
   let willResendVerifyEmail = false; 
-
+  
   let user = await accountModel.getUserById(accountObject.id);
   if(user != undefined && user.email != accountObject.email)
   {
     willResendVerifyEmail = true;
   }
+  let oldPictureLink = user.avatar_image; 
+
+  const tokens = user.avatar_image.split("/");
+  const imageName = tokens[tokens.length - 1];
+  const imageId = imageName.split(".")[0];
+  await cloudinary.uploader.destroy(imageId, (err, result) => {
+    console.log(err, result);
+  });
   let result = await accountModel.changeAccountInfo(accountObject); 
  
   // check and resend email 
