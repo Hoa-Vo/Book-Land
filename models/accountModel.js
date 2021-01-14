@@ -18,6 +18,13 @@ exports.getUserByUsername = async name => {
   const user = await userCollection.findOne({ name: name });
   return user;
 };
+// get user by email
+exports.getUserByEmail = async email => 
+{
+  const userCollection = await db().collection("registeredUser");
+  const user = await userCollection.findOne({ email: email });
+  return user; 
+}
 // list all user
 exports.listAll = async () => {
   const userCollection = await db().collection("registeredUser");
@@ -35,6 +42,7 @@ exports.addNewUser = async function (newUsername, plainNewPassword, newEmail) {
     email: newEmail,
     avatar_image: "notfound.jpg",
     isVerified: false,
+    isLocked: false,
   });
   console.log("New inserted user object");
 
@@ -74,5 +82,27 @@ exports.isExistsEmail = async inputEmail => {
   else{
     return false;
   }
+  
+}
+
+exports.changePassword = async (userid, password) =>
+{
+  const userpasswordCollection = await db().collection("User-hashPassword");
+
+   await bcrypt.hash(password, 3, (err,hashResult) => 
+   {
+     if (err) {
+       console.log(`Hash error: ${err}}`);
+       return false;
+     }
+     console.log(hashResult);
+     userpasswordCollection.updateOne({_id: ObjectID(userid)}, 
+                                     {$set: {password: hashResult}} );
+   });
+  // await userpasswordCollection.updateOne({_id: ObjectID(userid)} , {$set : {password : password}});
+
+  // await userCollection.updateOne({ _id: ObjectID(id) }, { $set: { isVerified: newVerifyStatus } });
+  return true;
+
   
 }

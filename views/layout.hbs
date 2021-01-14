@@ -66,11 +66,13 @@
 						<li class="nav-item"><a class="nav-link" href="/service">Dịch vụ</a></li>
 						<li class="dropdown">
 							{{#if userToShow}}
-								<a href="/account" class="nav-link dropdown-toggle arrow"
+								<a href="#" class="nav-link dropdown-toggle arrow"
 									data-toggle="dropdown" id="userToShow-name">{{userToShow.name}}</a>
 								<ul class="dropdown-menu">
 									<li><a href="/account">Thông tin tài khoản</a></li>
 									<li><a href="/logout">Đăng xuất</a></li>
+									<li><a href="/changepassword">Đổi mật khẩu</a></li>
+									<li><a href = "/changeAccountInfo">Cập nhật thông tin</a></li>
 								</ul>
 							{{else}}
 								<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Đăng kí/Đăng
