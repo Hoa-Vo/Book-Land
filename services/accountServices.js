@@ -84,4 +84,29 @@ exports.checkExistsEmail = async inputEmail =>
   return result; 
 }
 
+exports.changeAccountInfomation = async accountObject => 
+{
+  let willResendVerifyEmail = false; 
+
+  let user = await accountModel.getUserById(accountObject.id);
+  if(user != undefined && user.email != accountObject.email)
+  {
+    willResendVerifyEmail = true;
+  }
+  let result = await accountModel.changeAccountInfo(accountObject); 
+ 
+  // check and resend email 
+  if(result)
+  {
+    if(willResendVerifyEmail)
+    {
+      accountModel.changeVerifyStatus(accountObject.id,false);
+      this.sendVerifyEmail(accountObject.id); 
+    }
+  }
+
+  return result; 
+  
+}
+
 

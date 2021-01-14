@@ -32,8 +32,9 @@ exports.changeAccountInfo = async (req,res,next) =>
                 address: fields.addressInput
                 
             }
+            
 
-            accountModel.changeAccountInfo(accountObject).then(result => {
+            accountService.changeAccountInfomation(accountObject).then(result => {
                res.status(202).send(result);
             });
         });
