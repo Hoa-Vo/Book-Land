@@ -20,6 +20,7 @@ const verifyRouter = require("./routes/verify");
 const apiRouter = require("./routes/api");
 const changePasswordRouter = require("./routes/changePassword");
 const forgotPasswordRouter = require("./routes/forgotPassword"); 
+const changeAccountInfoRouter = require("./routes/changeAccountInfo"); 
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -60,6 +61,7 @@ app.use("/verify", verifyRouter);
 app.use("/api", apiRouter);
 app.use("/forgotPassword", forgotPasswordRouter); 
 app.use("/changepassword", changePasswordRouter);
+app.use("/changeAccountInfo", changeAccountInfoRouter); 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
