@@ -85,22 +85,6 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
           });
         }
         updateBookList(res.data.books);
-        if (category_id) {
-          history.pushState(
-            {},
-            "",
-            `?categoryID=${category_id}&page=${currentPage}&pagelimit=${booksPerPage}`
-          );
-        } else if (searchText) {
-          history.pushState(
-            {},
-            "",
-            `search/?bookName=${searchText}&page=${currentPage}&pagelimit=${booksPerPage}`
-          );
-        } else {
-          history.pushState({}, "", `?page=${currentPage}&pagelimit=${booksPerPage}`);
-        }
-
         inThisPage(currentPage);
         if (currentPage === 1) {
           $("#prevBtn").addClass("disabled");
