@@ -47,7 +47,7 @@ function cancelOrder() {
       $(".loader").css("display", "none");
       if (res) {
         $("#cancel-div").html(
-          `<a onclick="deleteOrder()" class="btn btn-default hvr-hover btn-cart">Xóa đơn hàng</a>`
+          `<a onclick="addCheckout()" class="btn btn-default hvr-hover btn-cart">Mua lại</a>`
         );
 
         $("#order-status").html("Đã hủy");

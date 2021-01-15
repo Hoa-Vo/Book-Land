@@ -46,7 +46,7 @@ exports.addOrder = async (
     shippingCost: parseInt(shippingCost),
     totalMoney: parseInt(totalMoney),
   });
-  await cartModel.deleteUserCart(userId);
+  await cartModel.deleteUserCart(userID);
 };
 
 exports.getOrderById = async id => {
