@@ -23,7 +23,7 @@ const changePasswordRouter = require("./routes/changePassword");
 const forgotPasswordRouter = require("./routes/forgotPassword");
 require("./handlebars-helper/registerHelper");
 
-const changeAccountInfoRouter = require("./routes/changeAccountInfo"); 
+const changeAccountInfoRouter = require("./routes/changeAccountInfo");
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -66,7 +66,7 @@ app.use("/verify", verifyRouter);
 app.use("/api", apiRouter);
 app.use("/forgotPassword", forgotPasswordRouter);
 app.use("/changepassword", changePasswordRouter);
-app.use("/changeAccountInfo", changeAccountInfoRouter); 
+app.use("/changeAccountInfo", changeAccountInfoRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -81,11 +81,6 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
-});
-
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log("Listening at port= %PORT%");
 });
 
 module.exports = app;
