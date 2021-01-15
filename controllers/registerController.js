@@ -7,5 +7,5 @@ exports.renderRegisterPage = (req, res, next) => {
 
 exports.registerNewUser = async (req, res, next) => {
   await accountServices.registerNewuser(req.body.username, req.body.password, req.body.email);
-  res.redirect("/login");
+  res.redirect("/verify");
 };
