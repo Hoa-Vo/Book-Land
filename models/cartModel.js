@@ -14,10 +14,7 @@ exports.getUserCart = async id => {
       userId: ObjectID(id),
       books: [],
     });
-    const userCart = await cartCollection.findOne({ userId: ObjectID(id) });
-    const books = userCart.books;
-    const booksInfo = await bookModel.getCartInfo(books);
-    return booksInfo;
+    return [];
   }
 };
 
