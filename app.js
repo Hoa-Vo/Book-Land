@@ -21,6 +21,7 @@ const orderRouter = require("./routes/order");
 const apiRouter = require("./routes/api");
 const changePasswordRouter = require("./routes/changePassword");
 const forgotPasswordRouter = require("./routes/forgotPassword");
+const aboutUsRouter=require("./routes/aboutUs");
 require("./handlebars-helper/registerHelper");
 
 const changeAccountInfoRouter = require("./routes/changeAccountInfo");
@@ -35,7 +36,7 @@ app.use("/order", express.static(path.join(__dirname, "public")));
 app.use("/bookslist/search", express.static(path.join(__dirname, "public")));
 app.use("/forgotPassword", express.static(path.join(__dirname, "public")));
 app.use("/account", express.static(path.join(__dirname, "public")));
-
+app.use("/about-us", express.static(path.join(__dirname, "public")));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -56,6 +57,7 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/bookslist", booksListRouter);
 app.use("/account", accountRouter);
+app.use("/about-us",aboutUsRouter);
 app.get("/logout", (req, res) => {
   req.logOut();
   res.redirect("/");
