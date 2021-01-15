@@ -9,6 +9,7 @@ exports.get = async (req, res, next) => {
     name: user.name,
     email: user.email,
     avatar_image: user.avatar_image,
+    userToShow: user,
   });
 };
 
