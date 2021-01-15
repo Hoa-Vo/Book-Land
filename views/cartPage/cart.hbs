@@ -23,60 +23,14 @@
                     <a style="color: white;" href="/bookslist" class="btn btn-default hvr-hover btn-cart">XEM SÁCH</a>
                 </div>
             </div>
-        </div>
-        <div class="row my-5">
-            <div class="col-lg-6 col-sm-6">
-                <div class="coupon-box cart-exist">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control" placeholder="Nhập mã giảm giá" aria-label="Coupon code" type="text">
-                        <div class="input-group-append">
-                            <button class="btn btn-theme" type="button">Áp dụng</button>
-                        </div>
-                    </div>
+            <div style="width: 100%;" class="cart-exist">
+                <div class="col-12 d-flex shopping-box "><a href="/checkout" class="ml-auto btn hvr-hover">Thanh
+                        toán</a>
                 </div>
-            </div>
-        </div>
-        <div class="row my-5 cart-exist">
-            <div class="col-lg-8 col-sm-12"></div>
-            <div class="col-lg-4 col-sm-12">
-                <div class="order-box ">
-                    <h3>THANH TOÁN</h3>
-                    <div class="d-flex">
-                        <h4>Tổng cộng</h4>
-                        <div id="total-money-pay" class="ml-auto font-weight-bold"> </div>
-                    </div>
-                    <div class="d-flex">
-                        <h4>Giảm giá</h4>
-                        <div class="ml-auto font-weight-bold"> 0 VND </div>
-                    </div>
-                    <hr class="my-1">
-                    <div class="d-flex">
-                        <h4>Áp dụng mã giảm giá</h4>
-                        <div class="ml-auto font-weight-bold"> 0 VND </div>
-                    </div>
-                    <div class="d-flex">
-                        <h4>Thuế</h4>
-                        <div class="ml-auto font-weight-bold"> 0 VND </div>
-                    </div>
-                    <div class="d-flex">
-                        <h4>Phí vận chuyển</h4>
-                        <div class="ml-auto font-weight-bold"> 0 VND</div>
-                    </div>
-                    <hr>
-                    <div class="d-flex gr-total">
-                        <h5>Số tiền phải thanh toán</h5>
-                        <div id="checkout-money" class="ml-auto h5"></div>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-            <div class="col-12 d-flex shopping-box "><a href="/checkout" class="ml-auto btn hvr-hover">Thanh
-                    toán</a>
             </div>
         </div>
     </div>
-</div>
-<script id="cart-page" type="text/x-handlebars-template">
+    <script id="cart-page" type="text/x-handlebars-template">
     \{{#each this}}
         <tr>
             <td class="thumbnail-img">
@@ -90,12 +44,12 @@
                 </a>
             </td>
             <td class="price-pr book-info" >
-                <p>\{{basePrice}} VND</p>
+                <p>\{{sellPrice}} </p>
             </td>
             <td class="quantity-box"><input onchange="updateItemFromCart(`\{{_id}}`,this.value)" onfocusout="updateItemFromCart(`\{{_id}}`,this.value)" onkeypress="return isNumberKey(event)" type="number" size="4" value="\{{quantity}}" min="1" step="1" class="c-input-text qty text">
             </td>
             <td class="total-pr book-info">
-                <p>\{{totalPrice}} VND</p>
+                <p>\{{totalPrice}} </p>
             </td>
             <td class="remove-pr">
                 <a onclick="removeItemFromCart(`\{{_id}}`)">

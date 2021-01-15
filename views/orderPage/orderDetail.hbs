@@ -1,0 +1,63 @@
+<link href="css/order.css" rel="stylesheet">
+<div class="container order-container">
+    <div class="row">
+        <div class="col user-info">
+            <div class="title-left">
+                <h3>Thông tin tài khoản</h3>
+            </div>
+            <div class="user-order-info">
+                <p><span class="main-span">Tên tài khoản: </span> {{userToShow.name}}</p>
+                <p><span class="main-span">Email: </span>{{userToShow.email}}</p>
+                <p><span class="main-span">Tên người nhận: </span> {{orderInfo.name}}</p>
+                <p><span class="main-span">Địa chỉ nhận hàng: </span> {{orderInfo.address}}</p>
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem giỏ hàng</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div>
+                <div class="title-left">
+                    <h3>Thông tin đơn hàng</h3>
+                </div>
+                <div>
+                    <p><i style="color: red;" class="fas fa-wallet"></i> Đơn hàng: <span
+                            style="color: red;">{{orderInfo.orderId}}</span></p>
+                    <p> Trạng thái: <span id="order-status" style="color: #0062cc;">{{orderInfo.status}} </span></p>
+                </div>
+                {{#each orderInfo.books}}
+                    <div class="item detail-item">
+                        <div class="item-image"><img src="{{image_link}}" class="order-book-image"></img> </div>
+                        <div class="item-name">
+                            <p>{{title}}</p>
+                        </div>
+                        <div class="item-price">
+                            <p>Giá: {{sellPrice}}</p>
+                        </div>
+                        <div class="item-quantity">
+                            <p>Số lượng: {{quantity}}</p>
+                        </div>
+                        <p style="display: none;" class="item-id">{{_id}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col order-btn">
+            <div class="money-order">
+                <p><i class="fas fa-money-check-alt"></i> Tổng cộng: {{totalPrice}}</p>
+                <p><i class="fas fa-shipping-fast"></i> Phí ship: {{shippingCost}}</p>
+            </div>
+            <div id="cancel-div">
+                {{#if (isAbleToCanceled orderInfo.status)}}
+                    <a onclick="addCheckout()" class="btn btn-default hvr-hover btn-cart">Mua lại</a>
+                {{else}}
+                    <a onclick="cancelOrder()" class="btn btn-default hvr-hover btn-cart">Hủy đơn hàng</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/order.js"></script>

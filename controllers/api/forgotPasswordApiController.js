@@ -9,23 +9,36 @@ exports.handler = async (req,res,next) =>
     // both email and username dont exist
     if(! (checkExistsEmail || checkExistsUsername))
     {
-        res.status(202).send(false); 
+        res.status(202).send("notfound"); 
     }
-
+    let userToSend;
     if(checkExistsEmail)
     {
         console.log("Found email"); 
-        let userToSend = await accountModel.getUserByEmail(information); 
-        accountServices.sendResetPasswordEmail(userToSend._id); 
+         userToSend = await accountModel.getUserByEmail(information); 
     }
     else if(checkExistsUsername)
     {
         console.log("Found Username"); 
-        let userToSend = await accountModel.getUserByUsername(information); 
-        accountServices.sendResetPasswordEmail(userToSend._id); 
+         userToSend = await accountModel.getUserByUsername(information); 
+        
     }
-
-    res.status(202).send(true); 
+    if(userToSend.isVerified == false)
+    {
+        res.status(202).send("notverified"); 
+    }
+    else{
+        if(userToSend.isLocked == true)
+        {
+            res.status(202).send("locked");
+        }
+        else{
+            accountServices.sendResetPasswordEmail(userToSend._id); 
+            res.status(202).send("true"); 
+        }
+        
+    }
+   
     
 }
 

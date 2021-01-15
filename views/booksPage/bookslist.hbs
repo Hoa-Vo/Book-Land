@@ -54,48 +54,15 @@
 						</div>
 						<div class="brand-box">
 							<ul>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios1" value="Yes" type="radio">
-										<label for="Radios1"> Nhã Nam </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios2" value="No" type="radio">
-										<label for="Radios2"> Kim Đồng</label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios3" value="declater" type="radio">
-										<label for="Radios3"> Trẻ </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios4" value="declater" type="radio">
-										<label for="Radios4"> Văn học </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios5" value="declater" type="radio">
-										<label for="Radios5"> Phụ nữ Việt Nam </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios6" value="declater" type="radio">
-										<label for="Radios6"> Giáo dục </label>
-									</div>
-								</li>
-								<li>
-									<div class="radio radio-danger">
-										<input name="survey" id="Radios7" value="declater" type="radio">
-										<label for="Radios7"> Đại học Quốc Gia Hà Nội</label>
-									</div>
-								</li>
+								{{#each allPublisher}}
+									<li>
+										<div class="radio radio-danger">
+											<input name="survey" onchange="publisherFilter(this.id)" id="{{this}}"
+												value="declater" type="radio">
+											<label for="Radios3"> {{this}} </label>
+										</div>
+									</li>
+								{{/each}}
 							</ul>
 						</div>
 					</div>
@@ -107,7 +74,8 @@
 						<div class="col-12 col-sm-8 text-center text-sm-left">
 							<div class="toolbar-sorter-right">
 								<span>Sắp xếp</span>
-								<select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+								<select onchange="filter()" id="basic" class="selectpicker show-tick form-control"
+									data-placeholder="$ USD">
 									<option data-display="Select">Mới nhất</option>
 									<option value="1">Phổ biến nhất</option>
 									<option value="2">Giá thấp đến cao</option>
@@ -151,6 +119,7 @@
 	</div>
 </div>
 <script src="js/paging.js"></script>
+<script src="js/filter.js"></script>
 <script id="products" type="text/x-handlebars-template">
 \{{#each this}}
 	<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
@@ -173,7 +142,7 @@
 			</div>
 			<div class="why-text">
 				<h4>\{{title}}</h4>
-				<h5>\{{basePrice}} VND</h5>
+				<h5>\{{sellPrice}}</h5>
 			</div>
 		</div>
 	</div>
@@ -196,5 +165,3 @@
 		</a>
 	</li>
 </script>
-</div>
-</div>

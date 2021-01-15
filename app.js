@@ -17,9 +17,13 @@ const accountRouter = require("./routes/account");
 const cartRouter = require("./routes/cart");
 const checkOutRouter = require("./routes/checkout");
 const verifyRouter = require("./routes/verify");
+const orderRouter = require("./routes/order");
 const apiRouter = require("./routes/api");
 const changePasswordRouter = require("./routes/changePassword");
-const forgotPasswordRouter = require("./routes/forgotPassword"); 
+const forgotPasswordRouter = require("./routes/forgotPassword");
+require("./handlebars-helper/registerHelper");
+
+const changeAccountInfoRouter = require("./routes/changeAccountInfo");
 require("./database/db");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -27,6 +31,7 @@ app.set("view engine", "hbs");
 
 app.use(express.static("public"));
 app.use("/bookslist", express.static(path.join(__dirname, "public")));
+app.use("/order", express.static(path.join(__dirname, "public")));
 app.use("/bookslist/search", express.static(path.join(__dirname, "public")));
 app.use("/forgotPassword", express.static(path.join(__dirname, "public")));
 app.use(logger("dev"));
@@ -55,11 +60,13 @@ app.get("/logout", (req, res) => {
 });
 app.use("/cart", cartRouter);
 app.use("/checkout", checkOutRouter);
+app.use("/order", orderRouter);
 app.use("/cart", cartRouter);
 app.use("/verify", verifyRouter);
 app.use("/api", apiRouter);
-app.use("/forgotPassword", forgotPasswordRouter); 
+app.use("/forgotPassword", forgotPasswordRouter);
 app.use("/changepassword", changePasswordRouter);
+app.use("/changeAccountInfo", changeAccountInfoRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -74,11 +81,6 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
-});
-
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log("Listening at port= %PORT%");
 });
 
 module.exports = app;
