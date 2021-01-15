@@ -51,8 +51,8 @@
         <div class="classic-tabs border rounded px-4 pt-1" style="margin-top: 1rem;">
             <ul class="nav tabs-primary nav-justified" id="advancedTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" id="info-tab" data-toggle="tab" href="#recommendation" role="tab" aria-controls="info"
-                        aria-selected="false">Chúng tôi đề xuất</a>
+                    <a class="nav-link" id="info-tab" data-toggle="tab" href="#recommend" role="tab" aria-controls="info"
+                        aria-selected="true">Chúng tôi đề xuất</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews"
@@ -62,14 +62,24 @@
             </ul>
             <div class="tab-content" id="advancedTabContent">
                
-                <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
-                    <h4>Thường được mua cùng </h4>
+                <div class="tab-pane fade show active" id="recommend" role="tabpanel" aria-labelledby="info-tab">
+                    <h3>Thường được mua cùng </h3>
                     
-                    <h4>Cùng thể loại </h4>
+                    <h3>Cùng thể loại </h4>
                     {{#if categoryRecommendation}}
+                    <div class= "row flex-row flex-nowrap">
                         {{#each categoryRecommendation }}
-                            <h5>{{title}}</h5> 
+                            <div class="col-2">
+                                <a href="/bookslist/{{_id}}">
+                                <img style="height: 200px; width: 120px" src="{{image_link}}"/>
+                                <h5>{{title}}</h5> 
+                            </a>
+                            </div>
+                            
+                            
                         {{/each}}
+                    </div>
+                        
 
                     {{/if}}
                     

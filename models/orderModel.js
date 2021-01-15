@@ -134,3 +134,9 @@ exports.getCanceledOrder = async id => {
   }
   return data;
 };
+
+exports.getOrdersWithBookId = async id => 
+{
+  const orderCollection = await db().collection("UserOrder");
+  const orderList = orderCollection.find({books})
+}

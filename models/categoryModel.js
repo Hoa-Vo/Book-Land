@@ -16,3 +16,25 @@ exports.checkExistsCategoryID = async (categoryId) =>
     }
     return true;
 }
+
+exports.checkExistCategoryName = async (categoryName) => 
+{
+    const categoriesCollection = await db().collection("Category"); 
+    const found = await categoryCollection.findOne({name: categoryName}); 
+
+    if(found!= null && found!= undefined)
+    {
+        return true;
+    }
+    return false;
+}
+
+exports.addNewCategory = async (categoryName) => 
+{
+    const categoriesCollection = await db().collection("Category"); 
+    const newInserted = await categoriesCollection.inserOne({
+        name: categoryName
+    });
+
+    return newInserted.insertedId;
+}
