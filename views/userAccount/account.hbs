@@ -1,7 +1,6 @@
 <link href="css/account.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
 <div class="container emp-profile">
-    <form method="POST" action="/account" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -27,15 +26,12 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Sửa thông tin" />
+                <a href = "/changeAccountInfo"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Sửa thông tin" /></a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="profile-work">
-                    <p>Tài khoản</p>
-                    <a href="">Địa chỉ nhận hàng</a><br />
-                </div>
+               
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
@@ -69,6 +65,5 @@
                 </div>
             </div>
         </div>
-    </form>
 </div>
 <script src="js/previewImage.js"></script>
