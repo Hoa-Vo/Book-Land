@@ -30,11 +30,14 @@ exports.renderOrderDetailPage = async (req, res, next) => {
     book.basePrice = currencyFormatter.format(book.basePrice, { locale: "vi-VN" });
   }
   const totalPrice = currencyFormatter.format(orderInfo.totalMoney, { locale: "vi-VN" });
+  const shippingCost = currencyFormatter.format(orderInfo.shippingCost, { locale: "vi-VN" });
+  console.log(shippingCost);
   orderInfo.createDate = `${day}/${month}/${year} ${hour}:${minute}:${second}`;
   orderInfo.orderId = req.params.id;
   res.render("orderPage/orderDetail", {
     userToShow: userToShow,
     orderInfo: orderInfo,
     totalPrice: totalPrice,
+    shippingCost: shippingCost,
   });
 };

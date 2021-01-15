@@ -86,7 +86,7 @@ async function fetchData(currentPage, booksPerPage, isPrevNextClick) {
           updatePagination(btnArr);
         }
         for (const element of res.data.books) {
-          element.basePrice = element.basePrice.toLocaleString("it-IT", {
+          element.sellPrice = element.sellPrice.toLocaleString("it-IT", {
             style: "currency",
             currency: "VND",
           });

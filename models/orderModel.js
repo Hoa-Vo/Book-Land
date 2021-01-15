@@ -61,6 +61,7 @@ exports.getOrderById = async id => {
     address: orderInfo.address,
     name: orderInfo.name,
     totalMoney: orderInfo.totalMoney,
+    shippingCost: orderInfo.shippingCost,
   };
   return data;
 };

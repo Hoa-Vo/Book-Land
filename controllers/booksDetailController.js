@@ -12,12 +12,12 @@ exports.get = async (req, res, next) => {
     userToShow = await accountModel.getUserById(req.user._id);
     console.log(userToShow);
   }
-  book.basePrice = currencyFormatter.format(book.basePrice, { locale: "vi-VN" });
+  book.sellPrice = currencyFormatter.format(book.sellPrice, { locale: "vi-VN" });
   // Pass data to view to book detail
   res.render("bookDetailsPage/booksDetail", {
     id: book._id,
     title: book.title,
-    basePrice: book.basePrice,
+    basePrice: book.sellPrice,
     publisher: book.publisher,
     author: book.author,
     imageLink: book.image_link,

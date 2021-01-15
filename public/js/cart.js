@@ -71,7 +71,7 @@ function updateCartHtml(books) {
         style: "currency",
         currency: "VND",
       });
-      book.basePrice = book.basePrice.toLocaleString("it-IT", {
+      book.sellPrice = book.sellPrice.toLocaleString("it-IT", {
         style: "currency",
         currency: "VND",
       });

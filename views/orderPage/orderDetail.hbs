@@ -32,7 +32,7 @@
                             <p>{{title}}</p>
                         </div>
                         <div class="item-price">
-                            <p>Giá: {{basePrice}}</p>
+                            <p>Giá: {{sellPrice}}</p>
                         </div>
                         <div class="item-quantity">
                             <p>Số lượng: {{quantity}}</p>
@@ -48,6 +48,7 @@
         <div class="col order-btn">
             <div class="money-order">
                 <p><i class="fas fa-money-check-alt"></i> Tổng cộng: {{totalPrice}}</p>
+                <p><i class="fas fa-shipping-fast"></i> Phí ship: {{shippingCost}}</p>
             </div>
             <div id="cancel-div">
                 {{#if (isAbleToCanceled orderInfo.status)}}

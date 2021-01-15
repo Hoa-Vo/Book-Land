@@ -161,10 +161,11 @@ function orderApi(cityValue, districtValue, subDistrictValue, name, address) {
       name: name,
       address: address,
       shippingCost: shippingCost,
-      totalMoney: totalMoney - shippingCost,
+      totalMoney: totalMoney + shippingCost,
     },
     success: function (res) {},
   });
+  window.location.href = "./order";
 }
 
 function getShippingCostIndex() {
@@ -183,7 +184,7 @@ function freeShipCheck() {
 function expressShipCheck() {
   $("#shipping-cost").html("20.000 đ");
   shippingCost = 20000;
-  const temp = (totalMoney - shippingCost).toLocaleString("it-IT", {
+  const temp = (totalMoney + shippingCost).toLocaleString("it-IT", {
     style: "currency",
     currency: "VND",
   });
@@ -192,7 +193,7 @@ function expressShipCheck() {
 function extraShipCheck() {
   $("#shipping-cost").html("50.000 đ");
   shippingCost = 50000;
-  const temp = (totalMoney - shippingCost).toLocaleString("it-IT", {
+  const temp = (totalMoney + shippingCost).toLocaleString("it-IT", {
     style: "currency",
     currency: "VND",
   });

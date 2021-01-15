@@ -127,7 +127,7 @@ exports.getCartInfo = async data => {
   for (let i = 0; i < books.length; i++) {
     const quantity = getQuantityAtIndex(data, books[i]._id);
     books[i].quantity = quantity;
-    books[i].totalPrice = quantity * books[i].basePrice;
+    books[i].totalPrice = quantity * books[i].sellPrice;
   }
   return books;
 };
@@ -149,7 +149,7 @@ exports.getCartInfo = async data => {
   for (let i = 0; i < books.length; i++) {
     const quantity = getQuantityAtIndex(data, books[i]._id);
     books[i].quantity = quantity;
-    books[i].totalPrice = quantity * books[i].basePrice;
+    books[i].totalPrice = quantity * books[i].sellPrice;
   }
   return books;
 };
@@ -192,7 +192,7 @@ const searchAndOrder = async (page, pageLimit, searchText, orderId) => {
   if (op === 2) {
     books = await bookCollection
       .find({ title: { $regex: searchText, $options: "i" } })
-      .sort({ basePrice: 1 })
+      .sort({ sellPrice: 1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
@@ -200,7 +200,7 @@ const searchAndOrder = async (page, pageLimit, searchText, orderId) => {
   if (op === 3) {
     books = await bookCollection
       .find({ title: { $regex: searchText, $options: "i" } })
-      .sort({ basePrice: -1 })
+      .sort({ sellPrice: -1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
@@ -218,7 +218,7 @@ const categoryAndOrder = async (page, pageLimit, categoryId, orderId) => {
   if (op === 2) {
     books = await bookCollection
       .find({ category_id: categoryId, is_deleted: false })
-      .sort({ basePrice: 1 })
+      .sort({ sellPrice: 1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
@@ -226,7 +226,7 @@ const categoryAndOrder = async (page, pageLimit, categoryId, orderId) => {
   if (op === 3) {
     books = await bookCollection
       .find({ category_id: categoryId, is_deleted: false })
-      .sort({ basePrice: -1 })
+      .sort({ sellPrice: -1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
@@ -280,7 +280,7 @@ const onlyOrder = async (page, pageLimit, orderId) => {
   if (op === 2) {
     books = await bookCollection
       .find({ is_deleted: false })
-      .sort({ basePrice: 1 })
+      .sort({ sellPrice: 1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
@@ -288,7 +288,7 @@ const onlyOrder = async (page, pageLimit, orderId) => {
   if (op === 3) {
     books = await bookCollection
       .find({ is_deleted: false })
-      .sort({ basePrice: -1 })
+      .sort({ sellPrice: -1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
@@ -303,7 +303,7 @@ const onlyFilterPublisher = async (page, pageLimit, publisher) => {
   const bookCollection = await db().collection("Books");
   const books = await bookCollection
     .find({ publisher: publisher, is_deleted: false })
-    .sort({ basePrice: -1 })
+    .sort({ sellPrice: -1 })
     .skip(limit * currentPage - limit)
     .limit(limit)
     .toArray();
@@ -320,7 +320,7 @@ const orderAndFilterPublisher = async (page, pageLimit, orderId, publisher) => {
   if (op === 2) {
     books = await bookCollection
       .find({ publisher: publisher, is_deleted: false })
-      .sort({ basePrice: 1 })
+      .sort({ sellPrice: 1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
@@ -328,7 +328,7 @@ const orderAndFilterPublisher = async (page, pageLimit, orderId, publisher) => {
   if (op === 3) {
     books = await bookCollection
       .find({ publisher: publisher, is_deleted: false })
-      .sort({ basePrice: -1 })
+      .sort({ sellPrice: -1 })
       .skip(limit * currentPage - limit)
       .limit(limit)
       .toArray();
