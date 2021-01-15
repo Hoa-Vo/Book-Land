@@ -2,6 +2,17 @@ const { db } = require("../database/db");
 const { ObjectID } = require("mongodb");
 const fs = require("fs");
 const path = require("path");
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage({}) });
+const { v4: uuidv4 } = require("uuid");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+require("dotenv/config");
+
 exports.list = async () => {
   const bookCollection = await db().collection("Books");
   const books = await bookCollection.find({ is_deleted: false }).toArray();

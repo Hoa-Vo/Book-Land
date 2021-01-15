@@ -34,6 +34,8 @@ app.use("/bookslist", express.static(path.join(__dirname, "public")));
 app.use("/order", express.static(path.join(__dirname, "public")));
 app.use("/bookslist/search", express.static(path.join(__dirname, "public")));
 app.use("/forgotPassword", express.static(path.join(__dirname, "public")));
+app.use("/account", express.static(path.join(__dirname, "public")));
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -82,5 +84,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+app.listen(5000);
 
 module.exports = app;

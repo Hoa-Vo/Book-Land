@@ -1,15 +1,26 @@
 const accountModel = require("../models/accountModel");
 const formidable = require("formidable");
-
+const booksListModel=require("../models/booksModel");
 exports.get = async (req, res, next) => {
-  const id = req.user._id;
-  const user = await accountModel.getUserById(id);
-  res.render("userAccount/account", {
-    id: user._id,
-    name: user.name,
-    email: user.email,
-    avatar_image: user.avatar_image,
-  });
+  let userToShow=null;
+  if(req.user)
+  {
+    userToShow=await accountModel.getUserById(req.user._id);
+    const id = req.user._id;
+    const user = await accountModel.getUserById(id);
+    res.render("userAccount/account", {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      avatar_image: user.avatar_image,
+      userToShow:userToShow,
+    });
+  }
+  else
+    {
+      res.redirect("/login");
+    }
+  
 };
 
 exports.editUserAvatar = async (req, res, next) => {
