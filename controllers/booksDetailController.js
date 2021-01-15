@@ -1,6 +1,7 @@
 const currencyFormatter = require("currency-formatter");
 const booksModel = require("../models/booksModel");
 const accountModel = require("../models/accountModel");
+const bookSevices = require("../services/booksService"); 
 
 exports.get = async (req, res, next) => {
   // Get books from model
@@ -13,6 +14,8 @@ exports.get = async (req, res, next) => {
     console.log(userToShow);
   }
   book.sellPrice = currencyFormatter.format(book.sellPrice, { locale: "vi-VN" });
+
+  let categoryRecommendation = await bookSevices.getRecommendWithSameCategory(book.category_id, 5);
   // Pass data to view to book detail
   res.render("bookDetailsPage/booksDetail", {
     id: book._id,
@@ -22,5 +25,6 @@ exports.get = async (req, res, next) => {
     author: book.author,
     imageLink: book.image_link,
     userToShow: userToShow,
+    categoryRecommendation: categoryRecommendation
   });
 };
