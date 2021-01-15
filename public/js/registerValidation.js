@@ -1,10 +1,11 @@
 let OKemail, OKusername,OKpassword = false; 
 let OKemailSyntax = false; 
+let OKrepassword = false;
 let buttonElement = document.getElementById("register-button");
 
 window.onload = function(){
   console.log("Inside onload");
-  OKemail, OKusername,OKpassword, OKemailSyntax = false; 
+  OKemail, OKusername,OKpassword, OKrepassword, OKemailSyntax = false; 
 };
 
 function validateEmail(mail) 
@@ -18,7 +19,7 @@ function validateEmail(mail)
 
 let updateStatusRegisterButton = () => 
 {
-  let valueSet = !(OKemail && OKemailSyntax && OKusername && OKpassword); 
+  let valueSet = !(OKemail && OKemailSyntax && OKusername && OKpassword && OKrepassword); 
   buttonElement.disabled = valueSet;
   if(valueSet)
   {
@@ -42,7 +43,15 @@ function checkPassword()
     notifyElement.innerHTML = "&#10005 Mật khẩu không được để trống";
     notifyElement.style = "color:red "; 
   }
+  else if(passwordString.length < 8)
+  {
+    OKpassword = false; 
+    updateStatusRegisterButton(); 
+    notifyElement.innerHTML = "&#10005 Mật khẩu dài ít nhất 8 kí tự";
+    notifyElement.style = "color:red "; 
+  }
   else{
+    checkRepassword();
     notifyElement.innerHTML = "";
     OKpassword = true; 
     updateStatusRegisterButton();
@@ -57,12 +66,12 @@ function checkRepassword() {
   if (passwordString === repasswordString && passwordString != "") {
     notifyElement.innerHTML = "&#10003";
     notifyElement.style = "color:#006400 "; 
-    OKpassword = true;
+    OKrepassword = true;
     updateStatusRegisterButton();
   }
   else if(passwordString == "")
   {
-    OKpassword = false; 
+    OKrepassword = false; 
     updateStatusRegisterButton(); 
     notifyElement = document.getElementById("passwordcheck-notify"); 
     notifyElement.innerHTML = "&#10005 Mật khẩu không được để trống";
@@ -70,7 +79,7 @@ function checkRepassword() {
   else{
    notifyElement.innerHTML = "&#10005 Phải trùng với mật khẩu";
    notifyElement.style = "color:red "; 
-   OKpassword = false;
+   OKrepassword = false;
    updateStatusRegisterButton(); 
   }
 }
