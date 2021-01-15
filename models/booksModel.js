@@ -98,6 +98,15 @@ exports.listByCategory = async categoryId => {
   return books;
 };
 
+// list by category with limit
+exports.listByCategoryWithLimit = async (categoryId,amount) =>
+{
+  const bookCollection = await db().collection("Books");
+  const books = await bookCollection.find({ category_id: categoryId, is_deleted: false }).limit(amount).toArray();
+
+  return books;
+}
+
 exports.saveImage = async (file, imageName) => {
   var rawData = fs.readFileSync(oldPath);
   fs.writeFileSync(imagePath, rawData);
