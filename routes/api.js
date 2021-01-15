@@ -9,6 +9,7 @@ const changePasswordApiController = require("../controllers/api/changePassowordA
 const getLocationApi = require("../controllers/api/getLocationApi");
 const orderApi = require("../controllers/api/orderApi");
 const filterApi = require("../controllers/api/filterApi");
+const verifyApi = require("../controllers/api/verifyApi");
 
 router.get("/checkExistedUsername", checkExistUsernameController.checkExistUsername);
 router.get("/checkExistedEmail", checkExistEmailController.checkExistEmail);
@@ -30,4 +31,5 @@ router.get("/order/transported", orderApi.getTransportedOrder);
 router.get("/order/canceled", orderApi.getCanceledOrder);
 router.get("/filter", filterApi.getBookFilter);
 router.get("/filter/publisher", filterApi.getBookFilterDuetoPublisher);
+router.post("/verify", verifyApi.verifyUser);
 module.exports = router;

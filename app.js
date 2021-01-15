@@ -21,7 +21,7 @@ const orderRouter = require("./routes/order");
 const apiRouter = require("./routes/api");
 const changePasswordRouter = require("./routes/changePassword");
 const forgotPasswordRouter = require("./routes/forgotPassword");
-const aboutUsRouter=require("./routes/aboutUs");
+const aboutUsRouter = require("./routes/aboutUs");
 require("./handlebars-helper/registerHelper");
 
 const changeAccountInfoRouter = require("./routes/changeAccountInfo");
@@ -54,10 +54,11 @@ app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
+app.use("/verify", verifyRouter);
 app.use("/register", registerRouter);
 app.use("/bookslist", booksListRouter);
 app.use("/account", accountRouter);
-app.use("/about-us",aboutUsRouter);
+app.use("/about-us", aboutUsRouter);
 app.get("/logout", (req, res) => {
   req.logOut();
   res.redirect("/");

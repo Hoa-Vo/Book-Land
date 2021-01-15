@@ -6,3 +6,7 @@ exports.verifyEndpoint = async (req, res, next) => {
   console.log("OK verified email with id: " + id);
   res.redirect("/");
 };
+
+exports.renderVerifyPage = async (req, res, next) => {
+  res.render("verifyPage/verify");
+};
