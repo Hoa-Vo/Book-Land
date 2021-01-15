@@ -7,12 +7,7 @@
                 <div class="profile-img">
                     <!-- Avatar -->
                     <img id="previewImg" src="{{avatar_image}}" alt="" />
-                    <div style="cursor: pointer;" class="file btn btn-lg btn-primary">
-                        Đổi ảnh
-                        <input style="cursor: pointer; height: 100%" onchange="previewImage(event)" type="file"
-                            name="avatarImageInput" />
-                        <input type="hidden" name="IdToChangeAvatar" value="{{id}}" />
-                    </div>
+                   
                 </div>
             </div>
             <div class="col-md-6">
@@ -28,19 +23,11 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                 aria-controls="home" aria-selected="true">Thông tin tài khoản</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">Giỏ hàng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">Sản phẩm yêu thích</a>
-                        </li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Lưu avatar" />
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Sửa thông tin" />
             </div>
         </div>
         <div class="row">
@@ -48,11 +35,6 @@
                 <div class="profile-work">
                     <p>Tài khoản</p>
                     <a href="">Địa chỉ nhận hàng</a><br />
-                    <a href="">Phương thức thanh toán</a><br />
-                    <a href="">Mã giảm giá</a><br />
-                    <p>Đơn hàng</p>
-                    <a href="">Đơn hàng đã hủy</a><br />
-                    <a href="">Đơn hàng đổi trả</a><br />
                 </div>
             </div>
             <div class="col-md-8">
@@ -82,71 +64,8 @@
                                 <p>{{email}}</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Số điện thoại</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>090 694 7217</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Nghề nghiệp</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Nhân viên văn phòng</p>
-                            </div>
-                        </div>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Experience</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Hourly Rate</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>10$/hr</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Total Projects</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>230</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>English Level</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Availability</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>6 months</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Your Bio</label><br />
-                                <p>Your detail description</p>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
