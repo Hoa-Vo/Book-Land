@@ -48,14 +48,14 @@ exports.sendVerifyEmail = async userid => {
   const emailToSend = user.email;
   const usernameToSend = user.name; 
 
-  sendEmail(emailToSend,"[No reply] Xác nhận tài khoản BookLand của bạn",`<p> Xin hãy xác nhận tài khoản: ${usernameToSend} của bạn qua đường dẫn localhost:3000/verify/${userid}</p>`); 
+  sendEmail(emailToSend,"[No reply] Xác nhận tài khoản BookLand của bạn",`<p> Xin hãy xác nhận tài khoản: ${usernameToSend} của bạn qua đường dẫn ${process.env.DOMAIN_NAME}/verify/${userid}</p>`); 
 };
 
 exports.sendResetPasswordEmail = async userid => {
   const user = await accountModel.getUserById(userid); 
   console.log(`User to send reset password: ${user.name}`); 
   sendEmail(user.email, "[No-reply] Bookland: Lấy lại mật khẩu của bạn", `<p> Vào liên kết sau để reset mật khẩu cho tài khoản ${user.name}của bạn: 
-  localhost:3000/forgotPassword/${userid} </p>`); 
+  ${process.env.DOMAIN_NAME}/forgotPassword/${userid} </p>`); 
 }
 
 exports.checkValidPassword = async (id, plainPassword) => {
