@@ -138,7 +138,7 @@ function modifyUrl(searchText, categoryId, orderId) {
     isFilterPublisher = false;
   }
 
-  if (isPaging && !isFilterCategory && !isFilterOrder && !isSearching && isFilterPublisher) {
+  if (isPaging && !isFilterCategory && !isFilterOrder && !isSearching && !isFilterPublisher) {
     window.history.pushState({}, "paging", `./?page=${currentPage}&pagelimit=${booksPerPage}`);
   }
   if (isPaging && !isFilterCategory && !isFilterOrder && !isSearching && isFilterPublisher) {
