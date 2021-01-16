@@ -128,7 +128,7 @@ function findDistrict(value) {
 }
 
 function subDistrictChange() {
-  $(".address-invalid").css("display", "none");
+  $(".sub-district-invalid").css("display", "none");
 }
 
 function addressFocusOut() {
