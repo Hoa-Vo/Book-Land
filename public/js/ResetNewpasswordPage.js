@@ -104,10 +104,10 @@ function changePassword()
                      
                      notifyElement.innerHTML = "Đã đổi mật khẩu của bạn sẽ, redirect bạn lại trang chủ";
  
-                //     setTimeout(function () {
-                //     window.location.replace("/login");
-                //             }
-                //    , 2000);
+                    setTimeout(function () {
+                     window.location.replace("/");
+                             }
+                    , 2000);
                  }
                  else{
                     notifyElement = document.getElementById("repasswordcheck-notify"); 
