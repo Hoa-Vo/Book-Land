@@ -29,12 +29,11 @@ exports.getUserByUsername = async name => {
   return user;
 };
 // get user by email
-exports.getUserByEmail = async email => 
-{
+exports.getUserByEmail = async email => {
   const userCollection = await db().collection("registeredUser");
   const user = await userCollection.findOne({ email: email });
-  return user; 
-}
+  return user;
+};
 // list all user
 exports.listAll = async () => {
   const userCollection = await db().collection("registeredUser");
@@ -50,7 +49,8 @@ exports.addNewUser = async function (newUsername, plainNewPassword, newEmail) {
     name: newUsername,
     age: 10,
     email: newEmail,
-    avatar_image: "notfound.jpg",
+    avatar_image:
+      "https://res.cloudinary.com/hoavo1620/image/upload/v1610757704/Cach-Lam-Avatar-Dang-Hot_1_hvoas2.jpg",
     address: "",
     address_city: "",
     address_district: "",
@@ -88,62 +88,54 @@ exports.isExistsUsername = async inputUsername => {
 exports.isExistsEmail = async inputEmail => {
   const userCollection = await db().collection("registeredUser");
   const userDocument = await userCollection.findOne({ email: inputEmail });
-  if(userDocument)
-  {
-    return true; 
-  }
-  else{
+  if (userDocument) {
+    return true;
+  } else {
     return false;
   }
-  
-}
+};
 
-
-exports.changePassword = async (userid, password) =>
-{
+exports.changePassword = async (userid, password) => {
   const userpasswordCollection = await db().collection("User-hashPassword");
 
-   await bcrypt.hash(password, 3, (err,hashResult) => 
-   {
-     if (err) {
-       console.log(`Hash error: ${err}}`);
-       return false;
-     }
-     console.log(hashResult);
-     userpasswordCollection.updateOne({_id: ObjectID(userid)}, 
-                                     {$set: {password: hashResult}} );
-   });
+  await bcrypt.hash(password, 3, (err, hashResult) => {
+    if (err) {
+      console.log(`Hash error: ${err}}`);
+      return false;
+    }
+    console.log(hashResult);
+    userpasswordCollection.updateOne({ _id: ObjectID(userid) }, { $set: { password: hashResult } });
+  });
   // await userpasswordCollection.updateOne({_id: ObjectID(userid)} , {$set : {password : password}});
 
   // await userCollection.updateOne({ _id: ObjectID(id) }, { $set: { isVerified: newVerifyStatus } });
   return true;
+};
 
-  
-}
-
-exports.changeAccountInfo = async accountObject => 
-{
+exports.changeAccountInfo = async accountObject => {
   const userCollection = await db().collection("registeredUser");
   let success = true;
-  let existsUser = await userCollection.findOne({_id: ObjectID(accountObject.id)}); 
-  if(existsUser == null || existsUser == undefined)
-  {
+  let existsUser = await userCollection.findOne({ _id: ObjectID(accountObject.id) });
+  if (existsUser == null || existsUser == undefined) {
     console.log(`Can't find book with ID ${accountObject.id}`);
     success = false;
-  }
-  else{
-    userCollection.updateOne({_id: ObjectID(accountObject.id)}, 
-                           {$set: {
-                             email : accountObject.email,
-                             age : accountObject.age,
-                             email : accountObject.email,
-                             email : accountObject.email,
-                             address_city : accountObject.address_city,
-                             address_district : accountObject.address_district,
-                             address : accountObject.address,
-                             avatar_image: accountObject.avatar_image
-                           }});
+  } else {
+    userCollection.updateOne(
+      { _id: ObjectID(accountObject.id) },
+      {
+        $set: {
+          email: accountObject.email,
+          age: accountObject.age,
+          email: accountObject.email,
+          email: accountObject.email,
+          address_city: accountObject.address_city,
+          address_district: accountObject.address_district,
+          address: accountObject.address,
+          avatar_image: accountObject.avatar_image,
+        },
+      }
+    );
     success = true;
   }
-  return success; 
-} 
+  return success;
+};

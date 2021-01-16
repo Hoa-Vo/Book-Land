@@ -13,9 +13,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
-function sendEmail(to,subject,content)
-{
+function sendEmail(to, subject, content) {
   let transport = nodemailer.createTransport(
     smtpTransport({
       service: "gmail",
@@ -30,8 +28,8 @@ function sendEmail(to,subject,content)
     from: process.env.MAIL_NAME,
     to: to,
     subject: subject,
-    html: content
-  }
+    html: content,
+  };
   transport.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log(err);
@@ -42,21 +40,28 @@ function sendEmail(to,subject,content)
 }
 
 exports.sendVerifyEmail = async userid => {
-
   const user = await accountModel.getUserById(userid);
   console.log(user);
   const emailToSend = user.email;
-  const usernameToSend = user.name; 
+  const usernameToSend = user.name;
 
-  sendEmail(emailToSend,"[No reply] Xác nhận tài khoản BookLand của bạn",`<p> Xin hãy xác nhận tài khoản: ${usernameToSend} của bạn qua đường dẫn ${process.env.DOMAIN_NAME}/verify/${userid}</p>`); 
+  sendEmail(
+    emailToSend,
+    "[No reply] Xác nhận tài khoản BookLand của bạn",
+    `<p> Xin hãy xác nhận tài khoản: ${usernameToSend} của bạn qua đường dẫn ${process.env.DOMAIN_NAME}/verify/${userid}</p>`
+  );
 };
 
 exports.sendResetPasswordEmail = async userid => {
-  const user = await accountModel.getUserById(userid); 
-  console.log(`User to send reset password: ${user.name}`); 
-  sendEmail(user.email, "[No-reply] Bookland: Lấy lại mật khẩu của bạn", `<p> Vào liên kết sau để reset mật khẩu cho tài khoản ${user.name}của bạn: 
-  ${process.env.DOMAIN_NAME}/forgotPassword/${userid} </p>`); 
-}
+  const user = await accountModel.getUserById(userid);
+  console.log(`User to send reset password: ${user.name}`);
+  sendEmail(
+    user.email,
+    "[No-reply] Bookland: Lấy lại mật khẩu của bạn",
+    `<p> Vào liên kết sau để reset mật khẩu cho tài khoản ${user.name}của bạn  
+  ${process.env.DOMAIN_NAME}/forgotPassword/${userid} </p>`
+  );
+};
 
 exports.checkValidPassword = async (id, plainPassword) => {
   const userpasswordCollection = await db().collection("User-hashPassword");
@@ -70,7 +75,7 @@ exports.checkValidPassword = async (id, plainPassword) => {
 exports.registerNewuser = async (newUsername, plainNewPassword, newEmail) => {
   console.log(newUsername, plainNewPassword, newEmail);
   let res = await accountModel.addNewUser(newUsername, plainNewPassword, newEmail);
-  console.log(res)
+  console.log(res);
   //let newuser = await accountModel.getUserByUsername(newUsername);
   this.sendVerifyEmail(res);
 };
@@ -85,37 +90,32 @@ exports.checkExistsUsername = async inputUsername => {
   return result;
 };
 
-exports.checkExistsEmail = async inputEmail => 
-{
-  let result = await accountModel.isExistsEmail(inputEmail); 
-  return result; 
-}
+exports.checkExistsEmail = async inputEmail => {
+  let result = await accountModel.isExistsEmail(inputEmail);
+  return result;
+};
 
 exports.saveImageToCloud = async file => {
-    const oldPath = file.userImage.path;
-    let newImageLink; 
-    await cloudinary.uploader.upload(oldPath,  (err,result) => {
-      if(err){
-        newImageLink = null;
-      }
-      else{
-        newImageLink = result.url;
-      }
-      
-    });
-    return newImageLink;
-}
+  const oldPath = file.userImage.path;
+  let newImageLink;
+  await cloudinary.uploader.upload(oldPath, (err, result) => {
+    if (err) {
+      newImageLink = null;
+    } else {
+      newImageLink = result.url;
+    }
+  });
+  return newImageLink;
+};
 
-exports.changeAccountInfomation = async accountObject => 
-{
-  let willResendVerifyEmail = false; 
-  
+exports.changeAccountInfomation = async accountObject => {
+  let willResendVerifyEmail = false;
+
   let user = await accountModel.getUserById(accountObject.id);
-  if(user != undefined && user.email != accountObject.email)
-  {
+  if (user != undefined && user.email != accountObject.email) {
     willResendVerifyEmail = true;
   }
-  let oldPictureLink = user.avatar_image; 
+  let oldPictureLink = user.avatar_image;
 
   const tokens = user.avatar_image.split("/");
   const imageName = tokens[tokens.length - 1];
@@ -123,20 +123,15 @@ exports.changeAccountInfomation = async accountObject =>
   await cloudinary.uploader.destroy(imageId, (err, result) => {
     console.log(err, result);
   });
-  let result = await accountModel.changeAccountInfo(accountObject); 
- 
-  // check and resend email 
-  if(result)
-  {
-    if(willResendVerifyEmail)
-    {
-      accountModel.changeVerifyStatus(accountObject.id,false);
-      this.sendVerifyEmail(accountObject.id); 
+  let result = await accountModel.changeAccountInfo(accountObject);
+
+  // check and resend email
+  if (result) {
+    if (willResendVerifyEmail) {
+      accountModel.changeVerifyStatus(accountObject.id, false);
+      this.sendVerifyEmail(accountObject.id);
     }
   }
 
-  return result; 
-  
-}
-
-
+  return result;
+};
